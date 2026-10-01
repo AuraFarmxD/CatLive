@@ -1,1 +1,239 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
+body {
+    font-family: 'Courier New', monospace;
+    background: #ffffff;
+    color: #000000;
+    line-height: 1.7;
+    font-size: 15px;
+    text-align: center;
+    padding: 0 0 40px;
+}
+
+/* ШАПКА */
+header {
+    background: #000000;
+    border-bottom: 3px solid #00cc33;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    text-align: left;
+}
+
+.logo {
+    font-size: 20px;
+    color: #00cc33;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+nav { display: flex; gap: 25px; }
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 900;
+    transition: color 0.3s;
+}
+
+nav a:hover { color: #00cc33; }
+
+/* БАННЕР */
+.hero {
+    text-align: center;
+    padding: 70px 20px 50px;
+    background: #ffffff;
+}
+
+.hero h1 {
+    font-size: 52px;
+    color: #000000;
+    letter-spacing: 6px;
+    margin-bottom: 15px;
+    font-weight: 900;
+}
+
+.subtitle {
+    color: #00cc33;
+    font-size: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    font-weight: 900;
+}
+
+.hero-desc {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #333;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* КНИГА — ЧЁРНЫЙ БЛОК С ЗЕЛЁНОЙ РАМКОЙ */
+.book {
+    background: #000000;
+    color: #ffffff;
+    max-width: 950px;
+    margin: 30px auto;
+    padding: 60px 70px;
+    border: 6px solid #00cc33;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0, 204, 51, 0.5);
+    text-align: center;
+}
+
+.book h2 {
+    color: #00cc33;
+    font-size: 34px;
+    font-weight: 900;
+    margin: 50px 0 25px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    border-bottom: 3px solid #00cc33;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.book h2:first-child { margin-top: 0; }
+
+.book h3 {
+    color: #00cc33;
+    font-size: 22px;
+    font-weight: 900;
+    margin: 35px 0 15px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.book p {
+    color: #ffffff;
+    margin-bottom: 14px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.book ul, .book ol {
+    color: #ffffff;
+    margin: 14px auto 20px;
+    max-width: 750px;
+    text-align: left;
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.book li {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.book strong { color: #00cc33; font-weight: 900; }
+
+/* О ПРОЕКТЕ */
+#about {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    text-align: center;
+}
+
+#about h2 {
+    color: #000000;
+    font-size: 34px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+#about p {
+    color: #333;
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#about strong { color: #00cc33; font-weight: 900; }
+
+/* ПОИСК */
+.search-block {
+    background: #000000;
+    color: #ffffff;
+    border: 6px solid #00cc33;
+    border-radius: 8px;
+    padding: 35px;
+    text-align: center;
+    max-width: 700px;
+    margin: 40px auto;
+    box-shadow: 0 0 50px rgba(0, 204, 51, 0.5);
+}
+
+.search-block h2 {
+    color: #00cc33;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+input {
+    padding: 12px 18px;
+    width: 60%;
+    min-width: 240px;
+    background: #000000;
+    border: 2px solid #00cc33;
+    border-radius: 4px;
+    color: #00cc33;
+    font-size: 15px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    outline: none;
+    text-align: center;
+}
+
+input:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 204, 51, 0.7);
+}
+
+input::placeholder { color: #00cc33; opacity: 0.6; }
+
+button {
+    padding: 12px 25px;
+    background: #00cc33;
+    color: #000000;
+    border: 2px solid #00cc33;
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: 'Courier New', monospace;
+    font-weight: 900;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.3s;
+    letter-spacing: 2px;
+}
+
+button:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+}
+
+/* ФУТЕР */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #000000;
+    font-size: 13px;
+    font-weight: 900;
+    margin-top: 20px;
+}
