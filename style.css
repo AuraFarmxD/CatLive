@@ -2,18 +2,18 @@
 
 body {
     font-family: 'Courier New', monospace;
-    background: #ffffff;
-    color: #000000;
+    background: #808080;
+    color: #ffffff;
     line-height: 1.7;
     font-size: 15px;
     text-align: center;
     padding: 0 0 40px;
 }
 
-/* ШАПКА */
+/* ===== ШАПКА (БЕЛАЯ) ===== */
 header {
-    background: #000000;
-    border-bottom: 3px solid #00cc33;
+    background: #ffffff;
+    border-bottom: 2px solid #00cc33;
     padding: 18px 40px;
     display: flex;
     align-items: center;
@@ -26,7 +26,7 @@ header {
 
 .logo {
     font-size: 20px;
-    color: #00cc33;
+    color: #000000;
     font-weight: 900;
     letter-spacing: 2px;
 }
@@ -34,7 +34,7 @@ header {
 nav { display: flex; gap: 25px; }
 
 nav a {
-    color: #ffffff;
+    color: #000000;
     text-decoration: none;
     font-size: 14px;
     letter-spacing: 1px;
@@ -44,11 +44,11 @@ nav a {
 
 nav a:hover { color: #00cc33; }
 
-/* БАННЕР */
+/* ===== БАННЕР ===== */
 .hero {
     text-align: center;
-    padding: 70px 20px 50px;
-    background: #ffffff;
+    padding: 60px 20px 40px;
+    background: #808080;
 }
 
 .hero h1 {
@@ -57,6 +57,7 @@ nav a:hover { color: #00cc33; }
     letter-spacing: 6px;
     margin-bottom: 15px;
     font-weight: 900;
+    text-shadow: 0 0 10px #00cc33;
 }
 
 .subtitle {
@@ -70,21 +71,21 @@ nav a:hover { color: #00cc33; }
 .hero-desc {
     max-width: 700px;
     margin: 0 auto;
-    color: #333;
+    color: #000000;
     font-size: 16px;
     font-weight: 700;
 }
 
-/* КНИГА — ЧЁРНЫЙ БЛОК С ЗЕЛЁНОЙ РАМКОЙ */
+/* ===== КНИГА (ЧЁРНЫЙ БЛОК С ТОНКОЙ ЗЕЛЁНОЙ РАМКОЙ) ===== */
 .book {
     background: #000000;
     color: #ffffff;
     max-width: 950px;
     margin: 30px auto;
     padding: 60px 70px;
-    border: 6px solid #00cc33;
-    border-radius: 8px;
-    box-shadow: 0 0 50px rgba(0, 204, 51, 0.5);
+    border: 3px solid #00cc33;
+    border-radius: 6px;
+    box-shadow: 0 0 30px rgba(0, 204, 51, 0.4);
     text-align: center;
 }
 
@@ -95,7 +96,7 @@ nav a:hover { color: #00cc33; }
     margin: 50px 0 25px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    border-bottom: 3px solid #00cc33;
+    border-bottom: 2px solid #00cc33;
     padding-bottom: 15px;
     text-align: center;
 }
@@ -136,7 +137,7 @@ nav a:hover { color: #00cc33; }
 
 .book strong { color: #00cc33; font-weight: 900; }
 
-/* О ПРОЕКТЕ */
+/* ===== О ПРОЕКТЕ ===== */
 #about {
     max-width: 900px;
     margin: 40px auto;
@@ -154,7 +155,7 @@ nav a:hover { color: #00cc33; }
 }
 
 #about p {
-    color: #333;
+    color: #000000;
     margin-bottom: 12px;
     font-size: 16px;
     font-weight: 700;
@@ -162,17 +163,17 @@ nav a:hover { color: #00cc33; }
 
 #about strong { color: #00cc33; font-weight: 900; }
 
-/* ПОИСК */
+/* ===== ПОИСК ===== */
 .search-block {
     background: #000000;
     color: #ffffff;
-    border: 6px solid #00cc33;
-    border-radius: 8px;
+    border: 3px solid #00cc33;
+    border-radius: 6px;
     padding: 35px;
     text-align: center;
     max-width: 700px;
     margin: 40px auto;
-    box-shadow: 0 0 50px rgba(0, 204, 51, 0.5);
+    box-shadow: 0 0 30px rgba(0, 204, 51, 0.4);
 }
 
 .search-block h2 {
@@ -228,7 +229,7 @@ button:hover {
     border-color: #ffffff;
 }
 
-/* ФУТЕР */
+/* ===== ФУТЕР ===== */
 footer {
     text-align: center;
     padding: 30px;
