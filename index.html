@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Всё о котиках</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">🐱 Всё о котиках</div>
+        <nav>
+            <a href="#">Породы</a>
+            <a href="#">Уход</a>
+            <a href="#">Питание</a>
+            <a href="#">Здоровье</a>
+            <a href="#">Факты</a>
+        </nav>
+        <button class="cta">Подписаться</button>
+    </header>
+
+    <main>
+        <h1 class="page-title">Свежие статьи о котиках</h1>
+
+        <div class="cards" id="cards"></div>
+
+        <section class="search-block">
+            <h2>Поиск по сайту</h2>
+            <input type="text" id="searchInput" placeholder="Найти статью...">
+            <button onclick="checkCode()">Найти</button>
+        </section>
+    </main>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">✕</span>
+            <img id="modalImg" src="" alt="Кот">
+            <h2 id="modalTitle"></h2>
+            <p id="modalText"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Всё о котиках. Все права защищены.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
