@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecureLab — Сетевая безопасность</title>
+    <title>SecureLab — Гипер-безопасность</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +11,6 @@
     <header>
         <div class="logo">> SecureLab_</div>
         <nav>
-            <a href="#chapters">Главы</a>
             <a href="#about">О книге</a>
             <a href="#search">Поиск</a>
         </nav>
@@ -19,19 +18,171 @@
 
     <main>
         <section class="hero">
-            <h1>$ СЕТЕВАЯ БЕЗОПАСНОСТЬ</h1>
-            <p class="subtitle">// От физического уровня до приложений</p>
-            <p class="hero-desc">Полное руководство по модели OSI, стеку TCP/IP и практическим уязвимостям. Только факты, реальные атаки и защита.</p>
+            <h1>$ ГИПЕР-БЕЗОПАСНОСТЬ</h1>
+            <p class="subtitle">// Полное руководство по защите</p>
+            <p class="hero-desc">Современные методы защиты: от паролей до аппаратной безопасности. Всё, что нужно знать, чтобы не стать жертвой.</p>
         </section>
 
-        <section id="chapters">
-            <h2>Содержание</h2>
-            <div class="chapter-list" id="chapterList"></div>
+        <section class="book">
+            <h2>Глава 1. Пароли и аутентификация</h2>
+            <p>Слабый пароль — это <strong>открытая дверь</strong>. По статистике, более <strong>80% взломов</strong> происходят из-за слабых или повторно используемых паролей.</p>
+
+            <h3>Правила надёжного пароля</h3>
+            <ul>
+                <li>Минимум <strong>16 символов</strong>.</li>
+                <li>Заглавные и строчные буквы.</li>
+                <li>Цифры и специальные символы.</li>
+                <li><strong>Никогда не повторять</strong> пароли на разных сайтах.</li>
+                <li>Не использовать личные данные (дата рождения, имя).</li>
+            </ul>
+
+            <h3>Двухфакторная аутентификация (2FA)</h3>
+            <p>2FA добавляет <strong>второй слой защиты</strong> — даже если пароль украден, злоумышленник не войдёт.</p>
+            <ul>
+                <li><strong>SMS-код</strong> — самый слабый вариант (можно перехватить).</li>
+                <li><strong>Приложение (Google Authenticator, Authy)</strong> — надёжно.</li>
+                <li><strong>Аппаратный ключ (YubiKey)</strong> — максимальная защита.</li>
+            </ul>
+
+            <h3>Менеджеры паролей</h3>
+            <p>Используй <strong>Bitwarden</strong>, <strong>KeePass</strong> или <strong>1Password</strong>. Храни все пароли в одном месте с <strong>мастер-паролем</strong> и 2FA.</p>
+
+            <h2>Глава 2. Защита сети</h2>
+            <p>Любая сеть — <strong>потенциальная цель</strong>. Wi-Fi, домашний роутер, мобильный интернет — всё требует защиты.</p>
+
+            <h3>Защита Wi-Fi</h3>
+            <ul>
+                <li>Используй <strong>WPA3</strong> (или WPA2, если роутер старый).</li>
+                <li>Смени <strong>пароль роутера</strong> с заводского.</li>
+                <li>Отключи <strong>WPS</strong> — он уязвим.</li>
+                <li>Обновляй <strong>прошивку роутера</strong>.</li>
+                <li>Разделяй сети: <strong>гостевая</strong> и <strong>основная</strong>.</li>
+            </ul>
+
+            <h3>VPN</h3>
+            <p>VPN <strong>шифрует трафик</strong> и скрывает IP. Используй <strong>ProtonVPN</strong>, <strong>Mullvad</strong> или <strong>Cloudflare WARP</strong>. <strong>Не доверяй бесплатным VPN</strong> — они продают данные.</p>
+
+            <h3>Публичный Wi-Fi</h3>
+            <p>В кафе, аэропорту, отеле — <strong>никогда не входи в банк</strong> и не вводи пароли без VPN. Открытые сети легко перехватываются.</p>
+
+            <h2>Глава 3. Защита устройства</h2>
+            <p>Даже с идеальными паролями — <strong>заражённое устройство</strong> всё сломает.</p>
+
+            <h3>Операционная система</h3>
+            <ul>
+                <li><strong>Обновляй</strong> Windows, macOS, Linux — патчи закрывают уязвимости.</li>
+                <li>Включи <strong>автоматические обновления</strong>.</li>
+                <li>Используй <strong>лицензионное ПО</strong> — пиратка часто содержит вирусы.</li>
+            </ul>
+
+            <h3>Антивирус</h3>
+            <p>Windows Defender встроен и <strong>достаточно хорош</strong>. Для параноиков — <strong>Kaspersky</strong>, <strong>Bitdefender</strong>, <strong>ESET</strong>.</p>
+
+            <h3>Шифрование диска</h3>
+            <p>Если ноутбук украдут — данные останутся зашифрованными.</p>
+            <ul>
+                <li><strong>BitLocker</strong> — Windows Pro.</li>
+                <li><strong>FileVault</strong> — macOS.</li>
+                <li><strong>LUKS</strong> — Linux.</li>
+            </ul>
+
+            <h2>Глава 4. Защита данных</h2>
+            <p>Данные — <strong>новая нефть</strong>. Защищай их серьёзно.</p>
+
+            <h3>Резервные копии</h3>
+            <p>Правило <strong>3-2-1</strong>:</p>
+            <ul>
+                <li><strong>3 копии</strong> данных.</li>
+                <li><strong>2 разных носителя</strong>.</li>
+                <li><strong>1 копия</strong> — вне дома (облако, сейф).</li>
+            </ul>
+
+            <h3>Облачные хранилища</h3>
+            <p>Для важных данных используй <strong>шифрованные</strong> сервисы: <strong>ProtonDrive</strong>, <strong>Sync.com</strong>, <strong>Tresorit</strong>. Не храни пароли и документы в Google Drive без шифрования.</p>
+
+            <h3>Фишинг</h3>
+            <p>Фишинг — <strong>главная угроза</strong>. Правила:</p>
+            <ul>
+                <li>Проверяй <strong>адрес отправителя</strong>.</li>
+                <li>Не переходи по <strong>подозрительным ссылкам</strong>.</li>
+                <li>Не открывай <strong>вложения</strong> от незнакомых.</li>
+                <li>Используй <strong>антифишинг</strong> в браузере.</li>
+            </ul>
+
+            <h2>Глава 5. Аппаратная безопасность</h2>
+            <p>Даже самое защищённое ПО не спасёт, если <strong>устройство физически украдено</strong>.</p>
+
+            <h3>Аппаратные ключи</h3>
+            <p><strong>YubiKey</strong>, <strong>Nitrokey</strong> — физические ключи для 2FA. Даже с паролем без ключа злоумышленник не войдёт.</p>
+
+            <h3>Аппаратные кошельки</h3>
+            <p>Для крипты — <strong>Ledger</strong> или <strong>Trezor</strong>. Никогда не храни крупные суммы на бирже или в горячем кошельке.</p>
+
+            <h3>Физическая защита</h3>
+            <ul>
+                <li><strong>Пароль BIOS/UEFI</strong> — защита от загрузки с флешки.</li>
+                <li><strong>Kensington замок</strong> — от кражи ноутбука.</li>
+                <li><strong>Приватный экран</strong> — от подглядывания.</li>
+            </ul>
+
+            <h2>Глава 6. Приватность</h2>
+            <p>Приватность — <strong>не паранойя</strong>, а необходимость.</p>
+
+            <h3>Браузер</h3>
+            <ul>
+                <li><strong>Firefox</strong> с настройками приватности.</li>
+                <li><strong>Brave</strong> — блокирует рекламу и трекеры.</li>
+                <li><strong>Tor Browser</strong> — максимальная анонимность.</li>
+            </ul>
+
+            <h3>Поисковик</h3>
+            <ul>
+                <li><strong>DuckDuckGo</strong> — не отслеживает.</li>
+                <li><strong>Startpage</strong> — анонимный Google.</li>
+                <li><strong>Brave Search</strong> — свой индекс.</li>
+            </ul>
+
+            <h3>Мессенджеры</h3>
+            <ul>
+                <li><strong>Signal</strong> — эталон шифрования.</li>
+                <li><strong>Telegram</strong> — только секретные чаты.</li>
+                <li><strong>WhatsApp</strong> — шифрование, но метаданные у Meta.</li>
+            </ul>
+
+            <h3>Почта</h3>
+            <ul>
+                <li><strong>ProtonMail</strong> — шифрованная.</li>
+                <li><strong>Tutanota</strong> — анонимная.</li>
+                <li><strong>Mailfence</strong> — европейская.</li>
+            </ul>
+
+            <h2>Глава 7. Социальная инженерия</h2>
+            <p>Самый <strong>опасный взлом</strong> — тот, где взламывают <strong>тебя, а не технику</strong>.</p>
+
+            <h3>Основные приёмы</h3>
+            <ul>
+                <li><strong>Претекстинг</strong> — злоумышленник притворяется другим.</li>
+                <li><strong>Фишинг</strong> — поддельные письма.</li>
+                <li><strong>Вишинг</strong> — звонок от «банка».</li>
+                <li><strong>Смишинг</strong> — SMS-фишинг.</li>
+            </ul>
+
+            <h3>Как защититься</h3>
+            <ul>
+                <li><strong>Никогда</strong> не сообщай пароли и коды по телефону.</li>
+                <li><strong>Перезвони</strong> в банк по официальному номеру.</li>
+                <li><strong>Проверяй</strong> любую информацию.</li>
+                <li><strong>Не доверяй</strong> незнакомцам.</li>
+            </ul>
+
+            <h2>Заключение</h2>
+            <p>Безопасность — это <strong>не продукт, а процесс</strong>. Постоянно учись, обновляйся, следи за новостями. Один слабый элемент — и вся защита рухнет.</p>
+            <p><strong>Будь параноиком. Будь в безопасности.</strong></p>
         </section>
 
         <section id="about">
             <h2>О проекте</h2>
-            <p>Этот сайт — образовательный материал по кибербезопасности. Все техники и уязвимости описаны для защиты систем и обучения специалистов.</p>
+            <p>Этот сайт — образовательный материал по кибербезопасности. Все техники описаны для защиты систем и обучения специалистов.</p>
             <p><strong>Не используйте эти знания во вред.</strong></p>
         </section>
 
@@ -43,193 +194,10 @@
     </main>
 
     <footer>
-        <p>© 2026 SecureLab — Сетевая безопасность</p>
+        <p>© 2026 SecureLab — Гипер-безопасность</p>
     </footer>
 
     <script>
-        // ===== ГЛАВЫ =====
-        var chapters = [
-            {
-                title: "Глава 1. Модель OSI",
-                content: `
-<h2>Глава 1. Модель OSI</h2>
-<p>Модель OSI — это абстрактная семиуровневая структура, описывающая, как данные передаются по сети. В реальности используется стек TCP/IP из 4 уровней, но OSI помогает понять теорию.</p>
-
-<h3>Уровень 1: Физический</h3>
-<p><strong>Суть:</strong> передача необработанного потока битов (0 и 1) по физической среде (медь, оптоволокно, радиоэфир).</p>
-<p><strong>Векторы атак:</strong> физическое подключение к кабелю (прослушка), глушение радиосигнала Wi-Fi (Jamming), кража жёстких дисков или серверов, уничтожение инфраструктуры.</p>
-<p><strong>Методы защиты:</strong> экранирование кабелей, строгий контроль физического доступа в серверные помещения (биометрия, камеры), использование защищённых контейнеров.</p>
-
-<h3>Уровень 2: Канальный (Data Link)</h3>
-<p><strong>Суть:</strong> организация передачи данных внутри одной локальной сети (LAN) с использованием физических адресов — MAC-адресов. Данные здесь называются кадрами (фреймами).</p>
-<p><strong>Векторы атак:</strong></p>
-<ul>
-<li><strong>ARP-spoofing (отравление ARP-кэша):</strong> злоумышленник посылает ложные ARP-ответы в сеть, заявляя, что его MAC-адрес принадлежит шлюзу роутера. В результате весь трафик жертвы идёт через хакера (Man-in-the-Middle).</li>
-<li><strong>MAC-flooding:</strong> переполнение таблицы коммутатора вымышленными MAC-адресами. Свитч переходит в режим хаба (Fail-open) и транслирует трафик на все порты.</li>
-</ul>
-<p><strong>Методы защиты:</strong> Dynamic ARP Inspection (DAI), Port Security (привязка портов к MAC), статические ARP-таблицы для критических узлов.</p>
-
-<h3>Уровень 3: Сетевой (Network)</h3>
-<p><strong>Суть:</strong> маршрутизация данных между различными сетями. Главный элемент — IP-адрес. Данные инкапсулируются в пакеты.</p>
-<p><strong>Векторы атак:</strong> IP-спуфинг (подмена IP отправителя), ICMP-flood, некорректная маршрутизация.</p>
-<p><strong>Методы защиты:</strong> ACL на маршрутизаторах, фильтрация входящего трафика (Ingress/Egress filtering).</p>
-
-<h3>Уровень 4: Транспортный (Transport)</h3>
-<p><strong>Суть:</strong> сквозная доставка данных между процессами. Протоколы TCP (с гарантией доставки) и UDP (без гарантии). Используются порты (80, 443).</p>
-<p><strong>Векторы атак:</strong></p>
-<ul>
-<li><strong>SYN-flood:</strong> атакующий отправляет тысячи SYN-пакетов, но игнорирует ответы. Память сервера переполняется полуоткрытыми соединениями.</li>
-<li><strong>Сканирование портов:</strong> определение открытых портов (TCP SYN, FIN-сканирование).</li>
-</ul>
-<p><strong>Методы защиты:</strong> SYN Cookies, таймауты для полуоткрытых соединений, Stateful Inspection.</p>
-
-<h3>Уровни 5–6: Сеансовый и Представительский</h3>
-<p><strong>Суть:</strong> управление сессиями, кодирование, сжатие и шифрование данных (TLS/SSL).</p>
-<p><strong>Векторы атак:</strong> фиксация сессии, атаки на TLS (Heartbleed, POODLE), перехват токенов.</p>
-<p><strong>Методы защиты:</strong> TLS 1.3, строгая конфигурация шифров, запрет downgrade-атак.</p>
-
-<h3>Уровень 7: Прикладной (Application)</h3>
-<p><strong>Суть:</strong> взаимодействие сетевых программ (браузеры, почта) с пользователем. Протоколы: HTTP, FTP, DNS, SSH.</p>
-<p><strong>Векторы атак:</strong> SQL-инъекции, XSS, уязвимости логики, DNS-амплификация, брутфорс.</p>
-<p><strong>Методы защиты:</strong> WAF, аудит кода (SAST/DAST), валидация и экранирование входящих данных.</p>
-`
-            },
-            {
-                title: "Глава 1.2. Стек TCP/IP",
-                content: `
-<h2>Глава 1.2. Стек TCP/IP</h2>
-<p>В реальном мире модель OSI — абстракция. Сети построены на 4-слойном стеке TCP/IP:</p>
-<ol>
-<li><strong>Прикладной (Application):</strong> объединяет 5, 6 и 7 уровни OSI.</li>
-<li><strong>Транспортный (Transport):</strong> соответствует 4 уровню OSI.</li>
-<li><strong>Межсетевой (Internet):</strong> соответствует 3 уровню OSI.</li>
-<li><strong>Сетевой доступ (Network Access):</strong> объединяет 1 и 2 уровни OSI.</li>
-</ol>
-
-<h3>Анатомия TCP-пакета</h3>
-<p>Важнейшая часть TCP-заголовка — <strong>флаги</strong>:</p>
-<ul>
-<li><strong>SYN (Synchronize):</strong> инициализация соединения.</li>
-<li><strong>ACK (Acknowledgment):</strong> подтверждение получения.</li>
-<li><strong>FIN (Finish):</strong> корректное завершение.</li>
-<li><strong>RST (Reset):</strong> экстренный разрыв.</li>
-<li><strong>PSH (Push):</strong> немедленно передать данные.</li>
-<li><strong>URG (Urgent):</strong> приоритетные данные.</li>
-</ul>
-
-<h3>Трёхэтапное рукопожатие (Three-Way Handshake)</h3>
-<ol>
-<li>Клиент → Сервер: пакет SYN, Sequence Number = X.</li>
-<li>Сервер → Клиент: пакет SYN-ACK, Ack = X+1, Seq = Y.</li>
-<li>Клиент → Сервер: пакет ACK, Ack = Y+1.</li>
-</ol>
-<p>После этого соединение установлено.</p>
-
-<h3>Stealth SYN-сканирование (Nmap)</h3>
-<p>Сканер отправляет SYN на порт:</p>
-<ul>
-<li><strong>Порт открыт:</strong> сервер отвечает SYN-ACK → сканер отправляет RST. Соединение не фиксируется в логах.</li>
-<li><strong>Порт закрыт:</strong> сервер отвечает RST-ACK.</li>
-<li><strong>Порт зафильтрован:</strong> ответа нет или приходит ICMP-ошибка.</li>
-</ul>
-`
-            },
-            {
-                title: "Глава 2.1. DNS",
-                content: `
-<h2>Глава 2.1. DNS — Телефонная книга Интернета</h2>
-<p>DNS транслирует доменные имена в IP-адреса. Например, <code>google.com</code> → <code>142.250.180.14</code>.</p>
-
-<h3>Уязвимость: DNS Spoofing</h3>
-<p>По умолчанию DNS работает по UDP, который не проверяет подлинность отправителя. Хакер перехватывает запрос и отправляет поддельный ответ быстрее реального DNS.</p>
-<p>В результате в кэш записывается ложная связка: <code>bank.com</code> → IP хакера.</p>
-
-<h3>Уязвимость: DNS Amplification</h3>
-<p>Злоумышленник посылает DNS-серверу запрос с подменённым IP жертвы.</p>
-<ul>
-<li>Запрос: 60 байт.</li>
-<li>Ответ: 4000 байт.</li>
-<li>Коэффициент усиления: ~70x.</li>
-</ul>
-
-<h3>Защита:</h3>
-<ul>
-<li><strong>DNSSEC</strong> — криптографические подписи.</li>
-<li><strong>DoH / DoT</strong> — шифрование DNS-запросов.</li>
-</ul>
-`
-            },
-            {
-                title: "Глава 2.2. HTTP vs HTTPS",
-                content: `
-<h2>Глава 2.2. HTTP против HTTPS</h2>
-<p>HTTP передаёт данные в открытом виде. Любой на пути трафика может прочитать куки, пароли, сообщения (Wireshark).</p>
-<p>HTTPS — это HTTP поверх SSL/TLS.</p>
-
-<h3>TLS-рукопожатие:</h3>
-<ol>
-<li><strong>Client Hello:</strong> клиент отправляет поддерживаемые версии TLS и шифры.</li>
-<li><strong>Server Hello + Certificate:</strong> сервер выбирает параметры и отправляет сертификат с открытым ключом.</li>
-<li><strong>Проверка сертификата:</strong> клиент сверяет подпись с доверенными CA.</li>
-<li><strong>Дешифрация:</strong> сервер расшифровывает ключ сессии.</li>
-<li><strong>Симметричное шифрование:</strong> все данные шифруются AES.</li>
-</ol>
-
-<h3>Защита:</h3>
-<p><strong>HSTS</strong> — заголовок, запрещающий браузеру использовать HTTP. Защищает от SSL Strip.</p>
-`
-            },
-            {
-                title: "Глава 2.3. ARP и DHCP",
-                content: `
-<h2>Глава 2.3. ARP и DHCP — локальные угрозы</h2>
-<p>Внутри локальной сети доверие по умолчанию — главная ошибка. ARP и DHCP не проверяют подлинность.</p>
-
-<h3>DHCP Spoofing</h3>
-<p>Когда устройство подключается, оно отправляет DHCP Discover: «Дайте IP и укажите шлюз!»</p>
-<p>Хакер запускает поддельный DHCP-сервер и отвечает быстрее настоящего роутера. Устройство получает:</p>
-<ul>
-<li>Легитимный IP.</li>
-<li>Шлюз = IP хакера.</li>
-<li>DNS = IP хакера.</li>
-</ul>
-<p>Теперь жертва полностью подконтрольна.</p>
-
-<h3>Защита:</h3>
-<p><strong>DHCP Snooping</strong> — функция коммутатора, которая делит порты на доверенные и недоверенные. DHCP-ответы с недоверенных портов блокируются.</p>
-`
-            }
-        ];
-
-        // ===== СПИСОК ГЛАВ =====
-        var chapterList = document.getElementById("chapterList");
-        chapters.forEach(function(ch, index) {
-            var btn = document.createElement("div");
-            btn.className = "chapter-btn";
-            btn.innerHTML = "<span>" + ch.title + "</span><span class='arrow'>▶</span>";
-            btn.onclick = function() { openChapter(index); };
-            chapterList.appendChild(btn);
-        });
-
-        // ===== ОТКРЫТИЕ ГЛАВЫ (МОДАЛЬНОЕ ОКНО) =====
-        function openChapter(index) {
-            var modal = document.getElementById("chapterModal");
-            var body = document.getElementById("chapterBody");
-            body.innerHTML = chapters[index].content;
-            modal.classList.add("active");
-            document.body.style.overflow = "hidden";
-        }
-
-        function closeChapter() {
-            document.getElementById("chapterModal").classList.remove("active");
-            document.body.style.overflow = "";
-        }
-
-        document.addEventListener("keydown", function(e) {
-            if (e.key === "Escape") closeChapter();
-        });
-
-        // ===== ПОИСК =====
         function checkCode() {
             var input = document.getElementById("searchInput").value.trim();
             var secretCode = "DOTL.NET";
@@ -242,14 +210,6 @@
             }
         }
     </script>
-
-    <!-- МОДАЛЬНОЕ ОКНО ГЛАВЫ -->
-    <div class="chapter-modal" id="chapterModal" onclick="if(event.target===this)closeChapter()">
-        <div class="chapter-modal-content">
-            <span class="chapter-close" onclick="closeChapter()">✕</span>
-            <div id="chapterBody"></div>
-        </div>
-    </div>
-
+    <script src="script.js"></script>
 </body>
 </html>
