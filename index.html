@@ -3,98 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Всё о котиках</title>
+    <title>SecureLab — Сетевая безопасность</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/640px-Cat_August_2010-4.jpg" alt="Котик" class="header-img">
-        <h1>🐱 Всё о котиках</h1>
-        <p>Жизнь, породы, уход и интересные факты о наших любимцах</p>
+        <div class="logo">> SecureLab_</div>
+        <nav>
+            <a href="#chapters">Главы</a>
+            <a href="#about">О книге</a>
+            <a href="#search">Поиск</a>
+        </nav>
     </header>
 
     <main>
-        <section>
-            <h2>Галерея котиков</h2>
-            <div class="gallery">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/640px-Cat03.jpg" alt="Кот 1">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/640px-Cat_November_2010-1a.jpg" alt="Кот 2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/640px-Felis_catus-cat_on_snow.jpg" alt="Кот 3">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Cat_poster_1.jpg/640px-Cat_poster_1.jpg" alt="Кот 4">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Cat_November_2010-1.jpg/640px-Cat_November_2010-1.jpg" alt="Кот 5">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/640px-Cat_August_2010-4.jpg" alt="Кот 6">
-            </div>
+        <section class="hero">
+            <h1>$ СЕТЕВАЯ БЕЗОПАСНОСТЬ</h1>
+            <p class="subtitle">// От физического уровня до приложений</p>
+            <p class="hero-desc">Полное руководство по модели OSI, стеку TCP/IP и практическим уязвимостям. Только факты, реальные атаки и защита.</p>
         </section>
 
-        <section>
-            <h2>Факт из Википедии</h2>
-            <article id="wikiFact">
-                <p>Загрузка факта...</p>
-            </article>
+        <section id="chapters">
+            <h2>Содержание</h2>
+            <div class="chapter-list" id="chapterList"></div>
         </section>
 
-        <section>
-            <h2>Случайный факт</h2>
-            <article id="randomFact">
-                <p>Загрузка факта...</p>
-            </article>
-            <button onclick="randomFact()">Показать другой факт</button>
+        <section id="about">
+            <h2>О проекте</h2>
+            <p>Этот сайт — образовательный материал по кибербезопасности. Все техники и уязвимости описаны для защиты систем и обучения специалистов.</p>
+            <p><strong>Не используйте эти знания во вред.</strong></p>
         </section>
 
-        <section>
-            <h2>Интересные статьи</h2>
-            <article>
-                <h3>Как выбрать котёнка</h3>
-                <p>Первое, на что стоит обратить внимание — здоровье и характер. Здоровый котёнок активен, любопытен и с чистым взглядом...</p>
-            </article>
-            <article>
-                <h3>Уход за шерстью</h3>
-                <p>Расчёсывание — не только гигиена, но и способ укрепить связь с питомцем. Для длинношёрстных пород — каждый день...</p>
-            </article>
-            <article>
-                <h3>Интересные породы кошек</h3>
-                <p>Мейн-кун, сфинкс, бенгальская, шотландская вислоухая — каждая порода уникальна...</p>
-            </article>
-        </section>
-
-        <section>
-            <h2>Поиск по сайту</h2>
-            <input type="text" id="searchInput" placeholder="Найти статью...">
+        <section id="search" class="search-block">
+            <h2>Поиск по книге</h2>
+            <input type="text" id="searchInput" placeholder="Введите запрос...">
             <button onclick="checkCode()">Найти</button>
         </section>
     </main>
 
     <footer>
-        <p>© 2026 Всё о котиках. Все права защищены.</p>
+        <p>© 2026 SecureLab — Сетевая безопасность</p>
     </footer>
 
     <script>
-        async function loadWikiFact() {
-            try {
-                var response = await fetch("https://ru.wikipedia.org/api/rest_v1/page/summary/Кошка");
-                var data = await response.json();
-                document.getElementById("wikiFact").innerHTML = "<p>" + data.extract + "</p>";
-            } catch (e) {
-                document.getElementById("wikiFact").innerHTML = "<p>Не удалось загрузить факт.</p>";
-            }
-        }
+        // ===== ГЛАВЫ =====
+        var chapters = [
+            {
+                title: "Глава 1. Модель OSI",
+                content: `
+<h2>Глава 1. Модель OSI</h2>
+<p>Модель OSI — это абстрактная семиуровневая структура, описывающая, как данные передаются по сети. В реальности используется стек TCP/IP из 4 уровней, но OSI помогает понять теорию.</p>
 
-        var facts = [
-            "Кошки спят около 16 часов в сутки.",
-            "У кошек 32 мышцы в каждом ухе.",
-            "Кошки не чувствуют сладкого вкуса.",
-            "Сердце кошки бьётся в 2 раза быстрее человеческого.",
-            "Кошки могут издавать около 100 разных звуков.",
-            "Усы кошки — это орган осязания.",
-            "Кошки видят в темноте в 6 раз лучше человека.",
-            "Нос кошки уникален, как отпечаток пальца."
+<h3>Уровень 1: Физический</h3>
+<p><strong>Суть:</strong> передача необработанного потока битов (0 и 1) по физической среде (медь, оптоволокно, радиоэфир).</p>
+<p><strong>Векторы атак:</strong> физическое подключение к кабелю (прослушка), глушение радиосигнала Wi-Fi (Jamming), кража жёстких дисков или серверов, уничтожение инфраструктуры.</p>
+<p><strong>Методы защиты:</strong> экранирование кабелей, строгий контроль физического доступа в серверные помещения (биометрия, камеры), использование защищённых контейнеров.</p>
+
+<h3>Уровень 2: Канальный (Data Link)</h3>
+<p><strong>Суть:</strong> организация передачи данных внутри одной локальной сети (LAN) с использованием физических адресов — MAC-адресов. Данные здесь называются кадрами (фреймами).</p>
+<p><strong>Векторы атак:</strong></p>
+<ul>
+<li><strong>ARP-spoofing (отравление ARP-кэша):</strong> злоумышленник посылает ложные ARP-ответы в сеть, заявляя, что его MAC-адрес принадлежит шлюзу роутера. В результате весь трафик жертвы идёт через хакера (Man-in-the-Middle).</li>
+<li><strong>MAC-flooding:</strong> переполнение таблицы коммутатора вымышленными MAC-адресами. Свитч переходит в режим хаба (Fail-open) и транслирует трафик на все порты.</li>
+</ul>
+<p><strong>Методы защиты:</strong> Dynamic ARP Inspection (DAI), Port Security (привязка портов к MAC), статические ARP-таблицы для критических узлов.</p>
+
+<h3>Уровень 3: Сетевой (Network)</h3>
+<p><strong>Суть:</strong> маршрутизация данных между различными сетями. Главный элемент — IP-адрес. Данные инкапсулируются в пакеты.</p>
+<p><strong>Векторы атак:</strong> IP-спуфинг (подмена IP отправителя), ICMP-flood, некорректная маршрутизация.</p>
+<p><strong>Методы защиты:</strong> ACL на маршрутизаторах, фильтрация входящего трафика (Ingress/Egress filtering).</p>
+
+<h3>Уровень 4: Транспортный (Transport)</h3>
+<p><strong>Суть:</strong> сквозная доставка данных между процессами. Протоколы TCP (с гарантией доставки) и UDP (без гарантии). Используются порты (80, 443).</p>
+<p><strong>Векторы атак:</strong></p>
+<ul>
+<li><strong>SYN-flood:</strong> атакующий отправляет тысячи SYN-пакетов, но игнорирует ответы. Память сервера переполняется полуоткрытыми соединениями.</li>
+<li><strong>Сканирование портов:</strong> определение открытых портов (TCP SYN, FIN-сканирование).</li>
+</ul>
+<p><strong>Методы защиты:</strong> SYN Cookies, таймауты для полуоткрытых соединений, Stateful Inspection.</p>
+
+<h3>Уровни 5–6: Сеансовый и Представительский</h3>
+<p><strong>Суть:</strong> управление сессиями, кодирование, сжатие и шифрование данных (TLS/SSL).</p>
+<p><strong>Векторы атак:</strong> фиксация сессии, атаки на TLS (Heartbleed, POODLE), перехват токенов.</p>
+<p><strong>Методы защиты:</strong> TLS 1.3, строгая конфигурация шифров, запрет downgrade-атак.</p>
+
+<h3>Уровень 7: Прикладной (Application)</h3>
+<p><strong>Суть:</strong> взаимодействие сетевых программ (браузеры, почта) с пользователем. Протоколы: HTTP, FTP, DNS, SSH.</p>
+<p><strong>Векторы атак:</strong> SQL-инъекции, XSS, уязвимости логики, DNS-амплификация, брутфорс.</p>
+<p><strong>Методы защиты:</strong> WAF, аудит кода (SAST/DAST), валидация и экранирование входящих данных.</p>
+`
+            },
+            {
+                title: "Глава 1.2. Стек TCP/IP",
+                content: `
+<h2>Глава 1.2. Стек TCP/IP</h2>
+<p>В реальном мире модель OSI — абстракция. Сети построены на 4-слойном стеке TCP/IP:</p>
+<ol>
+<li><strong>Прикладной (Application):</strong> объединяет 5, 6 и 7 уровни OSI.</li>
+<li><strong>Транспортный (Transport):</strong> соответствует 4 уровню OSI.</li>
+<li><strong>Межсетевой (Internet):</strong> соответствует 3 уровню OSI.</li>
+<li><strong>Сетевой доступ (Network Access):</strong> объединяет 1 и 2 уровни OSI.</li>
+</ol>
+
+<h3>Анатомия TCP-пакета</h3>
+<p>Важнейшая часть TCP-заголовка — <strong>флаги</strong>:</p>
+<ul>
+<li><strong>SYN (Synchronize):</strong> инициализация соединения.</li>
+<li><strong>ACK (Acknowledgment):</strong> подтверждение получения.</li>
+<li><strong>FIN (Finish):</strong> корректное завершение.</li>
+<li><strong>RST (Reset):</strong> экстренный разрыв.</li>
+<li><strong>PSH (Push):</strong> немедленно передать данные.</li>
+<li><strong>URG (Urgent):</strong> приоритетные данные.</li>
+</ul>
+
+<h3>Трёхэтапное рукопожатие (Three-Way Handshake)</h3>
+<ol>
+<li>Клиент → Сервер: пакет SYN, Sequence Number = X.</li>
+<li>Сервер → Клиент: пакет SYN-ACK, Ack = X+1, Seq = Y.</li>
+<li>Клиент → Сервер: пакет ACK, Ack = Y+1.</li>
+</ol>
+<p>После этого соединение установлено.</p>
+
+<h3>Stealth SYN-сканирование (Nmap)</h3>
+<p>Сканер отправляет SYN на порт:</p>
+<ul>
+<li><strong>Порт открыт:</strong> сервер отвечает SYN-ACK → сканер отправляет RST. Соединение не фиксируется в логах.</li>
+<li><strong>Порт закрыт:</strong> сервер отвечает RST-ACK.</li>
+<li><strong>Порт зафильтрован:</strong> ответа нет или приходит ICMP-ошибка.</li>
+</ul>
+`
+            },
+            {
+                title: "Глава 2.1. DNS",
+                content: `
+<h2>Глава 2.1. DNS — Телефонная книга Интернета</h2>
+<p>DNS транслирует доменные имена в IP-адреса. Например, <code>google.com</code> → <code>142.250.180.14</code>.</p>
+
+<h3>Уязвимость: DNS Spoofing</h3>
+<p>По умолчанию DNS работает по UDP, который не проверяет подлинность отправителя. Хакер перехватывает запрос и отправляет поддельный ответ быстрее реального DNS.</p>
+<p>В результате в кэш записывается ложная связка: <code>bank.com</code> → IP хакера.</p>
+
+<h3>Уязвимость: DNS Amplification</h3>
+<p>Злоумышленник посылает DNS-серверу запрос с подменённым IP жертвы.</p>
+<ul>
+<li>Запрос: 60 байт.</li>
+<li>Ответ: 4000 байт.</li>
+<li>Коэффициент усиления: ~70x.</li>
+</ul>
+
+<h3>Защита:</h3>
+<ul>
+<li><strong>DNSSEC</strong> — криптографические подписи.</li>
+<li><strong>DoH / DoT</strong> — шифрование DNS-запросов.</li>
+</ul>
+`
+            },
+            {
+                title: "Глава 2.2. HTTP vs HTTPS",
+                content: `
+<h2>Глава 2.2. HTTP против HTTPS</h2>
+<p>HTTP передаёт данные в открытом виде. Любой на пути трафика может прочитать куки, пароли, сообщения (Wireshark).</p>
+<p>HTTPS — это HTTP поверх SSL/TLS.</p>
+
+<h3>TLS-рукопожатие:</h3>
+<ol>
+<li><strong>Client Hello:</strong> клиент отправляет поддерживаемые версии TLS и шифры.</li>
+<li><strong>Server Hello + Certificate:</strong> сервер выбирает параметры и отправляет сертификат с открытым ключом.</li>
+<li><strong>Проверка сертификата:</strong> клиент сверяет подпись с доверенными CA.</li>
+<li><strong>Дешифрация:</strong> сервер расшифровывает ключ сессии.</li>
+<li><strong>Симметричное шифрование:</strong> все данные шифруются AES.</li>
+</ol>
+
+<h3>Защита:</h3>
+<p><strong>HSTS</strong> — заголовок, запрещающий браузеру использовать HTTP. Защищает от SSL Strip.</p>
+`
+            },
+            {
+                title: "Глава 2.3. ARP и DHCP",
+                content: `
+<h2>Глава 2.3. ARP и DHCP — локальные угрозы</h2>
+<p>Внутри локальной сети доверие по умолчанию — главная ошибка. ARP и DHCP не проверяют подлинность.</p>
+
+<h3>DHCP Spoofing</h3>
+<p>Когда устройство подключается, оно отправляет DHCP Discover: «Дайте IP и укажите шлюз!»</p>
+<p>Хакер запускает поддельный DHCP-сервер и отвечает быстрее настоящего роутера. Устройство получает:</p>
+<ul>
+<li>Легитимный IP.</li>
+<li>Шлюз = IP хакера.</li>
+<li>DNS = IP хакера.</li>
+</ul>
+<p>Теперь жертва полностью подконтрольна.</p>
+
+<h3>Защита:</h3>
+<p><strong>DHCP Snooping</strong> — функция коммутатора, которая делит порты на доверенные и недоверенные. DHCP-ответы с недоверенных портов блокируются.</p>
+`
+            }
         ];
 
-        function randomFact() {
-            var r = Math.floor(Math.random() * facts.length);
-            document.getElementById("randomFact").innerHTML = "<p>" + facts[r] + "</p>";
+        // ===== СПИСОК ГЛАВ =====
+        var chapterList = document.getElementById("chapterList");
+        chapters.forEach(function(ch, index) {
+            var btn = document.createElement("div");
+            btn.className = "chapter-btn";
+            btn.innerHTML = "<span>" + ch.title + "</span><span class='arrow'>▶</span>";
+            btn.onclick = function() { openChapter(index); };
+            chapterList.appendChild(btn);
+        });
+
+        // ===== ОТКРЫТИЕ ГЛАВЫ (МОДАЛЬНОЕ ОКНО) =====
+        function openChapter(index) {
+            var modal = document.getElementById("chapterModal");
+            var body = document.getElementById("chapterBody");
+            body.innerHTML = chapters[index].content;
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden";
         }
 
+        function closeChapter() {
+            document.getElementById("chapterModal").classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") closeChapter();
+        });
+
+        // ===== ПОИСК =====
         function checkCode() {
             var input = document.getElementById("searchInput").value.trim();
             var secretCode = "DOTL.NET";
@@ -106,12 +241,15 @@
                 alert("По запросу \"" + input + "\" ничего не найдено.");
             }
         }
-
-        window.onload = function() {
-            loadWikiFact();
-            randomFact();
-        };
     </script>
-    <script src="script.js"></script>
+
+    <!-- МОДАЛЬНОЕ ОКНО ГЛАВЫ -->
+    <div class="chapter-modal" id="chapterModal" onclick="if(event.target===this)closeChapter()">
+        <div class="chapter-modal-content">
+            <span class="chapter-close" onclick="closeChapter()">✕</span>
+            <div id="chapterBody"></div>
+        </div>
+    </div>
+
 </body>
 </html>
