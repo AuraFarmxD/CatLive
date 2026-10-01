@@ -6,6 +6,7 @@ body {
     color: #d0d0d0;
     line-height: 1.6;
     font-size: 15px;
+    text-align: center;
 }
 
 /* ШАПКА */
@@ -19,12 +20,13 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    text-align: left;
 }
 
 .logo {
     font-size: 20px;
     color: #00ff41;
-    font-weight: bold;
+    font-weight: 900;
     letter-spacing: 2px;
     text-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
 }
@@ -50,18 +52,20 @@ nav a:hover { color: #00ff41; text-shadow: 0 0 8px rgba(0, 255, 65, 0.8); }
 }
 
 .hero h1 {
-    font-size: 44px;
+    font-size: 52px;
     color: #00ff41;
-    letter-spacing: 6px;
+    letter-spacing: 8px;
     margin-bottom: 15px;
-    text-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+    text-shadow: 0 0 25px rgba(0, 255, 65, 0.7);
+    font-weight: 900;
     font-family: 'Courier New', monospace;
 }
 
 .subtitle {
     color: #666;
-    font-size: 16px;
+    font-size: 17px;
     margin-bottom: 20px;
+    letter-spacing: 2px;
 }
 
 .hero-desc {
@@ -78,20 +82,37 @@ main {
     padding: 40px 20px;
 }
 
-section { margin-bottom: 50px; }
+section { margin-bottom: 60px; }
 
 h2 {
     color: #00ff41;
-    font-size: 24px;
-    border-bottom: 2px solid #00ff41;
-    padding-bottom: 10px;
-    margin-bottom: 25px;
-    letter-spacing: 3px;
+    font-size: 32px;
+    font-weight: 900;
+    border-bottom: 3px solid #00ff41;
+    padding-bottom: 12px;
+    margin-bottom: 30px;
+    letter-spacing: 4px;
     text-transform: uppercase;
+    display: inline-block;
+    text-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+}
+
+h3 {
+    color: #00ff41;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
 }
 
 /* СПИСОК ГЛАВ */
-.chapter-list { display: flex; flex-direction: column; gap: 15px; }
+.chapter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 700px;
+    margin: 0 auto;
+}
 
 .chapter-btn {
     display: flex;
@@ -99,48 +120,61 @@ h2 {
     justify-content: space-between;
     background: #111;
     border: 1px solid #333;
-    border-left: 4px solid #00ff41;
-    padding: 20px 25px;
+    border-left: 5px solid #00ff41;
+    padding: 22px 28px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 18px;
     color: #d0d0d0;
     transition: all 0.3s ease;
     font-family: 'Courier New', monospace;
+    font-weight: 700;
+    text-align: left;
+    letter-spacing: 1px;
 }
 
 .chapter-btn:hover {
     border-color: #00ff41;
     background: #0a1a0a;
     transform: translateX(10px);
-    box-shadow: -5px 0 20px rgba(0, 255, 65, 0.4);
+    box-shadow: -6px 0 25px rgba(0, 255, 65, 0.5);
     color: #00ff41;
 }
 
 .chapter-btn .arrow {
     color: #00ff41;
-    font-size: 16px;
+    font-size: 18px;
     transition: transform 0.3s;
 }
 
 .chapter-btn:hover .arrow { transform: translateX(5px); }
 
 /* О ПРОЕКТЕ */
-#about p { color: #999; margin-bottom: 12px; font-size: 15px; }
-#about strong { color: #00ff41; }
+#about p {
+    color: #999;
+    margin-bottom: 12px;
+    font-size: 16px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#about strong { color: #00ff41; font-weight: 900; }
 
 /* ПОИСК */
 .search-block {
     background: #111;
     border: 1px solid #333;
-    border-left: 4px solid #00ff41;
+    border-left: 5px solid #00ff41;
     border-radius: 4px;
-    padding: 25px;
+    padding: 30px;
     text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px;
 }
 
 .search-block h2 {
     border: none;
     margin-bottom: 20px;
+    display: block;
 }
 
 input {
@@ -155,6 +189,7 @@ input {
     font-family: 'Courier New', monospace;
     outline: none;
     transition: border 0.3s;
+    text-align: center;
 }
 
 input:focus {
@@ -172,7 +207,7 @@ button {
     border-radius: 4px;
     font-size: 15px;
     font-family: 'Courier New', monospace;
-    font-weight: bold;
+    font-weight: 900;
     cursor: pointer;
     margin-left: 10px;
     transition: all 0.3s;
@@ -200,7 +235,7 @@ footer {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.92);
     z-index: 1000;
     justify-content: center;
     align-items: flex-start;
@@ -216,10 +251,11 @@ footer {
     border-radius: 6px;
     max-width: 900px;
     width: 100%;
-    padding: 40px 50px;
+    padding: 50px 60px;
     position: relative;
-    box-shadow: 0 0 50px rgba(0, 255, 65, 0.3);
+    box-shadow: 0 0 60px rgba(0, 255, 65, 0.4);
     animation: slideIn 0.3s ease;
+    text-align: left;
 }
 
 @keyframes slideIn {
@@ -230,11 +266,12 @@ footer {
 .chapter-close {
     position: absolute;
     top: 15px; right: 20px;
-    font-size: 26px;
+    font-size: 28px;
     color: #666;
     cursor: pointer;
     transition: color 0.3s, transform 0.3s;
     line-height: 1;
+    font-weight: 900;
 }
 
 .chapter-close:hover {
@@ -244,33 +281,39 @@ footer {
 
 #chapterBody h2 {
     color: #00ff41;
-    font-size: 26px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #00ff41;
-    padding-bottom: 10px;
+    font-size: 34px;
+    font-weight: 900;
+    margin-bottom: 25px;
+    border-bottom: 3px solid #00ff41;
+    padding-bottom: 12px;
+    letter-spacing: 3px;
+    text-align: center;
 }
 
 #chapterBody h3 {
     color: #00ff41;
-    font-size: 19px;
-    margin: 25px 0 12px;
-    letter-spacing: 1px;
+    font-size: 22px;
+    font-weight: 900;
+    margin: 30px 0 14px;
+    letter-spacing: 2px;
+    border-left: 4px solid #00ff41;
+    padding-left: 12px;
 }
 
 #chapterBody p {
     color: #c0c0c0;
     margin-bottom: 14px;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 #chapterBody ul, #chapterBody ol {
-    margin: 12px 0 18px 30px;
+    margin: 12px 0 20px 30px;
     color: #c0c0c0;
 }
 
-#chapterBody li { margin-bottom: 8px; font-size: 15px; }
+#chapterBody li { margin-bottom: 8px; font-size: 16px; }
 
-#chapterBody strong { color: #00ff41; }
+#chapterBody strong { color: #00ff41; font-weight: 900; }
 
 #chapterBody code {
     background: #1a1a1a;
