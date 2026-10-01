@@ -1,325 +1,190 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureLab — Сетевая безопасность</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-body {
-    font-family: 'Courier New', monospace;
-    background: #0a0a0a;
-    color: #d0d0d0;
-    line-height: 1.6;
-    font-size: 15px;
-    text-align: center;
-}
+    <header>
+        <div class="logo">> SecureLab_</div>
+        <nav>
+            <a href="#ch1">Главы</a>
+            <a href="#about">О книге</a>
+            <a href="#search">Поиск</a>
+        </nav>
+    </header>
 
-/* ШАПКА */
-header {
-    background: #000;
-    border-bottom: 2px solid #00ff41;
-    padding: 18px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    text-align: left;
-}
+    <main>
+        <section class="hero">
+            <h1>$ СЕТЕВАЯ БЕЗОПАСНОСТЬ</h1>
+            <p class="subtitle">// От физического уровня до приложений</p>
+            <p class="hero-desc">Полное руководство по модели OSI, стеку TCP/IP и практическим уязвимостям. Только факты, реальные атаки и защита.</p>
+        </section>
 
-.logo {
-    font-size: 20px;
-    color: #00ff41;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
-}
+        <section id="ch1" class="book">
+            <h2>Глава 1. Модель OSI</h2>
+            <p>Модель OSI — это абстрактная семиуровневая структура, описывающая, как данные передаются по сети. В реальности используется стек TCP/IP из 4 уровней, но OSI помогает понять теорию.</p>
 
-nav { display: flex; gap: 25px; }
+            <h3>Уровень 1: Физический</h3>
+            <p><strong>Суть:</strong> передача необработанного потока битов (0 и 1) по физической среде (медь, оптоволокно, радиоэфир).</p>
+            <p><strong>Векторы атак:</strong> физическое подключение к кабелю (прослушка), глушение радиосигнала Wi-Fi (Jamming), кража жёстких дисков или серверов, уничтожение инфраструктуры.</p>
+            <p><strong>Методы защиты:</strong> экранирование кабелей, строгий контроль физического доступа в серверные помещения (биометрия, камеры), использование защищённых контейнеров.</p>
 
-nav a {
-    color: #d0d0d0;
-    text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-}
+            <h3>Уровень 2: Канальный (Data Link)</h3>
+            <p><strong>Суть:</strong> организация передачи данных внутри одной локальной сети (LAN) с использованием физических адресов — MAC-адресов. Данные здесь называются кадрами (фреймами).</p>
+            <p><strong>Векторы атак:</strong></p>
+            <ul>
+                <li><strong>ARP-spoofing:</strong> ложные ARP-ответы, чтобы трафик жертвы шёл через хакера (Man-in-the-Middle).</li>
+                <li><strong>MAC-flooding:</strong> переполнение таблицы коммутатора вымышленными MAC-адресами. Свитч переходит в режим хаба (Fail-open).</li>
+            </ul>
+            <p><strong>Методы защиты:</strong> Dynamic ARP Inspection (DAI), Port Security, статические ARP-таблицы.</p>
 
-nav a:hover { color: #00ff41; text-shadow: 0 0 8px rgba(0, 255, 65, 0.8); }
+            <h3>Уровень 3: Сетевой (Network)</h3>
+            <p><strong>Суть:</strong> маршрутизация данных между различными сетями. Главный элемент — IP-адрес. Данные инкапсулируются в пакеты.</p>
+            <p><strong>Векторы атак:</strong> IP-спуфинг (подмена IP отправителя), ICMP-flood, некорректная маршрутизация.</p>
+            <p><strong>Методы защиты:</strong> ACL на маршрутизаторах, фильтрация входящего трафика (Ingress/Egress filtering).</p>
 
-/* БАННЕР */
-.hero {
-    text-align: center;
-    padding: 80px 20px 60px;
-    background: #000;
-    border-bottom: 1px solid #1a1a1a;
-}
+            <h3>Уровень 4: Транспортный (Transport)</h3>
+            <p><strong>Суть:</strong> сквозная доставка данных между процессами. Протоколы TCP (с гарантией доставки) и UDP (без гарантии). Используются порты (80, 443).</p>
+            <p><strong>Векторы атак:</strong></p>
+            <ul>
+                <li><strong>SYN-flood:</strong> атакующий отправляет тысячи SYN-пакетов, но игнорирует ответы. Память сервера переполняется полуоткрытыми соединениями.</li>
+                <li><strong>Сканирование портов:</strong> определение открытых портов (TCP SYN, FIN-сканирование).</li>
+            </ul>
+            <p><strong>Методы защиты:</strong> SYN Cookies, таймауты для полуоткрытых соединений, Stateful Inspection.</p>
 
-.hero h1 {
-    font-size: 52px;
-    color: #00ff41;
-    letter-spacing: 8px;
-    margin-bottom: 15px;
-    text-shadow: 0 0 25px rgba(0, 255, 65, 0.7);
-    font-weight: 900;
-    font-family: 'Courier New', monospace;
-}
+            <h3>Уровни 5–6: Сеансовый и Представительский</h3>
+            <p><strong>Суть:</strong> управление сессиями, кодирование, сжатие и шифрование данных (TLS/SSL).</p>
+            <p><strong>Векторы атак:</strong> фиксация сессии, атаки на TLS (Heartbleed, POODLE), перехват токенов.</p>
+            <p><strong>Методы защиты:</strong> TLS 1.3, строгая конфигурация шифров, запрет downgrade-атак.</p>
 
-.subtitle {
-    color: #666;
-    font-size: 17px;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-}
+            <h3>Уровень 7: Прикладной (Application)</h3>
+            <p><strong>Суть:</strong> взаимодействие сетевых программ (браузеры, почта) с пользователем. Протоколы: HTTP, FTP, DNS, SSH.</p>
+            <p><strong>Векторы атак:</strong> SQL-инъекции, XSS, уязвимости логики, DNS-амплификация, брутфорс.</p>
+            <p><strong>Методы защиты:</strong> WAF, аудит кода (SAST/DAST), валидация и экранирование входящих данных.</p>
 
-.hero-desc {
-    max-width: 700px;
-    margin: 0 auto;
-    color: #aaa;
-    font-size: 16px;
-}
+            <h2>Глава 1.2. Стек TCP/IP</h2>
+            <p>В реальном мире модель OSI — абстракция. Сети построены на 4-слойном стеке TCP/IP:</p>
+            <ol>
+                <li><strong>Прикладной (Application):</strong> объединяет 5, 6 и 7 уровни OSI.</li>
+                <li><strong>Транспортный (Transport):</strong> соответствует 4 уровню OSI.</li>
+                <li><strong>Межсетевой (Internet):</strong> соответствует 3 уровню OSI.</li>
+                <li><strong>Сетевой доступ (Network Access):</strong> объединяет 1 и 2 уровни OSI.</li>
+            </ol>
 
-/* ОСНОВНОЙ БЛОК */
-main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
+            <h3>Анатомия TCP-пакета</h3>
+            <p>Важнейшая часть TCP-заголовка — <strong>флаги</strong>:</p>
+            <ul>
+                <li><strong>SYN (Synchronize):</strong> инициализация соединения.</li>
+                <li><strong>ACK (Acknowledgment):</strong> подтверждение получения.</li>
+                <li><strong>FIN (Finish):</strong> корректное завершение.</li>
+                <li><strong>RST (Reset):</strong> экстренный разрыв.</li>
+                <li><strong>PSH (Push):</strong> немедленно передать данные.</li>
+                <li><strong>URG (Urgent):</strong> приоритетные данные.</li>
+            </ul>
 
-section { margin-bottom: 60px; }
+            <h3>Трёхэтапное рукопожатие</h3>
+            <ol>
+                <li>Клиент → Сервер: пакет SYN, Sequence Number = X.</li>
+                <li>Сервер → Клиент: пакет SYN-ACK, Ack = X+1, Seq = Y.</li>
+                <li>Клиент → Сервер: пакет ACK, Ack = Y+1.</li>
+            </ol>
+            <p>После этого соединение установлено.</p>
 
-h2 {
-    color: #00ff41;
-    font-size: 32px;
-    font-weight: 900;
-    border-bottom: 3px solid #00ff41;
-    padding-bottom: 12px;
-    margin-bottom: 30px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    display: inline-block;
-    text-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
-}
+            <h3>Stealth SYN-сканирование (Nmap)</h3>
+            <ul>
+                <li><strong>Порт открыт:</strong> сервер отвечает SYN-ACK → сканер отправляет RST. Соединение не фиксируется в логах.</li>
+                <li><strong>Порт закрыт:</strong> сервер отвечает RST-ACK.</li>
+                <li><strong>Порт зафильтрован:</strong> ответа нет или приходит ICMP-ошибка.</li>
+            </ul>
 
-h3 {
-    color: #00ff41;
-    font-size: 22px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
+            <h2>Глава 2.1. DNS</h2>
+            <p>DNS транслирует доменные имена в IP-адреса. Например, <strong>google.com</strong> → <strong>142.250.180.14</strong>.</p>
 
-/* СПИСОК ГЛАВ */
-.chapter-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 700px;
-    margin: 0 auto;
-}
+            <h3>Уязвимость: DNS Spoofing</h3>
+            <p>По умолчанию DNS работает по UDP, который не проверяет подлинность отправителя. Хакер перехватывает запрос и отправляет поддельный ответ быстрее реального DNS.</p>
+            <p>В результате в кэш записывается ложная связка: <strong>bank.com</strong> → IP хакера.</p>
 
-.chapter-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #111;
-    border: 1px solid #333;
-    border-left: 5px solid #00ff41;
-    padding: 22px 28px;
-    cursor: pointer;
-    font-size: 18px;
-    color: #d0d0d0;
-    transition: all 0.3s ease;
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    text-align: left;
-    letter-spacing: 1px;
-}
+            <h3>Уязвимость: DNS Amplification</h3>
+            <p>Злоумышленник посылает DNS-серверу запрос с подменённым IP жертвы.</p>
+            <ul>
+                <li>Запрос: 60 байт.</li>
+                <li>Ответ: 4000 байт.</li>
+                <li>Коэффициент усиления: ~70x.</li>
+            </ul>
 
-.chapter-btn:hover {
-    border-color: #00ff41;
-    background: #0a1a0a;
-    transform: translateX(10px);
-    box-shadow: -6px 0 25px rgba(0, 255, 65, 0.5);
-    color: #00ff41;
-}
+            <h3>Защита DNS</h3>
+            <ul>
+                <li><strong>DNSSEC</strong> — криптографические подписи.</li>
+                <li><strong>DoH / DoT</strong> — шифрование DNS-запросов.</li>
+            </ul>
 
-.chapter-btn .arrow {
-    color: #00ff41;
-    font-size: 18px;
-    transition: transform 0.3s;
-}
+            <h2>Глава 2.2. HTTP против HTTPS</h2>
+            <p>HTTP передаёт данные в открытом виде. Любой на пути трафика может прочитать куки, пароли, сообщения (Wireshark).</p>
+            <p>HTTPS — это HTTP поверх SSL/TLS.</p>
 
-.chapter-btn:hover .arrow { transform: translateX(5px); }
+            <h3>TLS-рукопожатие</h3>
+            <ol>
+                <li><strong>Client Hello:</strong> клиент отправляет поддерживаемые версии TLS и шифры.</li>
+                <li><strong>Server Hello + Certificate:</strong> сервер выбирает параметры и отправляет сертификат с открытым ключом.</li>
+                <li><strong>Проверка сертификата:</strong> клиент сверяет подпись с доверенными CA.</li>
+                <li><strong>Дешифрация:</strong> сервер расшифровывает ключ сессии.</li>
+                <li><strong>Симметричное шифрование:</strong> все данные шифруются AES.</li>
+            </ol>
 
-/* О ПРОЕКТЕ */
-#about p {
-    color: #999;
-    margin-bottom: 12px;
-    font-size: 16px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-#about strong { color: #00ff41; font-weight: 900; }
+            <h3>Защита HTTPS</h3>
+            <p><strong>HSTS</strong> — заголовок, запрещающий браузеру использовать HTTP. Защищает от SSL Strip.</p>
 
-/* ПОИСК */
-.search-block {
-    background: #111;
-    border: 1px solid #333;
-    border-left: 5px solid #00ff41;
-    border-radius: 4px;
-    padding: 30px;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 40px;
-}
+            <h2>Глава 2.3. ARP и DHCP</h2>
+            <p>Внутри локальной сети доверие по умолчанию — главная ошибка. ARP и DHCP не проверяют подлинность.</p>
 
-.search-block h2 {
-    border: none;
-    margin-bottom: 20px;
-    display: block;
-}
+            <h3>DHCP Spoofing</h3>
+            <p>Когда устройство подключается, оно отправляет DHCP Discover: «Дайте IP и укажите шлюз!»</p>
+            <p>Хакер запускает поддельный DHCP-сервер и отвечает быстрее настоящего роутера. Устройство получает:</p>
+            <ul>
+                <li>Легитимный IP.</li>
+                <li>Шлюз = IP хакера.</li>
+                <li>DNS = IP хакера.</li>
+            </ul>
+            <p>Теперь жертва полностью подконтрольна.</p>
 
-input {
-    padding: 12px 18px;
-    width: 60%;
-    min-width: 240px;
-    background: #000;
-    border: 2px solid #333;
-    border-radius: 4px;
-    color: #00ff41;
-    font-size: 15px;
-    font-family: 'Courier New', monospace;
-    outline: none;
-    transition: border 0.3s;
-    text-align: center;
-}
+            <h3>Защита</h3>
+            <p><strong>DHCP Snooping</strong> — функция коммутатора, которая делит порты на доверенные и недоверенные. DHCP-ответы с недоверенных портов блокируются.</p>
+        </section>
 
-input:focus {
-    border-color: #00ff41;
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-}
+        <section id="about">
+            <h2>О проекте</h2>
+            <p>Этот сайт — образовательный материал по кибербезопасности. Все техники и уязвимости описаны для защиты систем и обучения специалистов.</p>
+            <p><strong>Не используйте эти знания во вред.</strong></p>
+        </section>
 
-input::placeholder { color: #444; }
+        <section id="search" class="search-block">
+            <h2>Поиск по книге</h2>
+            <input type="text" id="searchInput" placeholder="Введите запрос...">
+            <button onclick="checkCode()">Найти</button>
+        </section>
+    </main>
 
-button {
-    padding: 12px 25px;
-    background: transparent;
-    color: #00ff41;
-    border: 2px solid #00ff41;
-    border-radius: 4px;
-    font-size: 15px;
-    font-family: 'Courier New', monospace;
-    font-weight: 900;
-    cursor: pointer;
-    margin-left: 10px;
-    transition: all 0.3s;
-    letter-spacing: 2px;
-}
+    <footer>
+        <p>© 2026 SecureLab — Сетевая безопасность</p>
+    </footer>
 
-button:hover {
-    background: #00ff41;
-    color: #000;
-    box-shadow: 0 0 25px rgba(0, 255, 65, 0.6);
-}
-
-/* ФУТЕР */
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #444;
-    font-size: 13px;
-    border-top: 1px solid #1a1a1a;
-}
-
-/* МОДАЛЬНОЕ ОКНО ГЛАВЫ */
-.chapter-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.92);
-    z-index: 1000;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 40px 20px;
-    overflow-y: auto;
-}
-
-.chapter-modal.active { display: flex; }
-
-.chapter-modal-content {
-    background: #0a0a0a;
-    border: 2px solid #00ff41;
-    border-radius: 6px;
-    max-width: 900px;
-    width: 100%;
-    padding: 50px 60px;
-    position: relative;
-    box-shadow: 0 0 60px rgba(0, 255, 65, 0.4);
-    animation: slideIn 0.3s ease;
-    text-align: left;
-}
-
-@keyframes slideIn {
-    from { transform: translateY(-30px); opacity: 0; }
-    to   { transform: translateY(0);     opacity: 1; }
-}
-
-.chapter-close {
-    position: absolute;
-    top: 15px; right: 20px;
-    font-size: 28px;
-    color: #666;
-    cursor: pointer;
-    transition: color 0.3s, transform 0.3s;
-    line-height: 1;
-    font-weight: 900;
-}
-
-.chapter-close:hover {
-    color: #00ff41;
-    transform: rotate(90deg);
-}
-
-#chapterBody h2 {
-    color: #00ff41;
-    font-size: 34px;
-    font-weight: 900;
-    margin-bottom: 25px;
-    border-bottom: 3px solid #00ff41;
-    padding-bottom: 12px;
-    letter-spacing: 3px;
-    text-align: center;
-}
-
-#chapterBody h3 {
-    color: #00ff41;
-    font-size: 22px;
-    font-weight: 900;
-    margin: 30px 0 14px;
-    letter-spacing: 2px;
-    border-left: 4px solid #00ff41;
-    padding-left: 12px;
-}
-
-#chapterBody p {
-    color: #c0c0c0;
-    margin-bottom: 14px;
-    font-size: 16px;
-}
-
-#chapterBody ul, #chapterBody ol {
-    margin: 12px 0 20px 30px;
-    color: #c0c0c0;
-}
-
-#chapterBody li { margin-bottom: 8px; font-size: 16px; }
-
-#chapterBody strong { color: #00ff41; font-weight: 900; }
-
-#chapterBody code {
-    background: #1a1a1a;
-    color: #00ff41;
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-}
+    <script>
+        function checkCode() {
+            var input = document.getElementById("searchInput").value.trim();
+            var secretCode = "DOTL.NET";
+            if (input === secretCode) {
+                window.location.href = "secret.html";
+            } else if (input === "") {
+                alert("Введите запрос.");
+            } else {
+                alert("По запросу \"" + input + "\" ничего не найдено.");
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
