@@ -7,45 +7,111 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
-        <div class="logo">🐱 Всё о котиках</div>
-        <nav>
-            <a href="#">Породы</a>
-            <a href="#">Уход</a>
-            <a href="#">Питание</a>
-            <a href="#">Здоровье</a>
-            <a href="#">Факты</a>
-        </nav>
-        <button class="cta">Подписаться</button>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/640px-Cat_August_2010-4.jpg" alt="Котик" class="header-img">
+        <h1>🐱 Всё о котиках</h1>
+        <p>Жизнь, породы, уход и интересные факты о наших любимцах</p>
     </header>
 
     <main>
-        <h1 class="page-title">Свежие статьи о котиках</h1>
+        <section>
+            <h2>Галерея котиков</h2>
+            <div class="gallery">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/640px-Cat03.jpg" alt="Кот 1">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/640px-Cat_November_2010-1a.jpg" alt="Кот 2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/640px-Felis_catus-cat_on_snow.jpg" alt="Кот 3">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Cat_poster_1.jpg/640px-Cat_poster_1.jpg" alt="Кот 4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Cat_November_2010-1.jpg/640px-Cat_November_2010-1.jpg" alt="Кот 5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/640px-Cat_August_2010-4.jpg" alt="Кот 6">
+            </div>
+        </section>
 
-        <div class="cards" id="cards"></div>
+        <section>
+            <h2>Факт из Википедии</h2>
+            <article id="wikiFact">
+                <p>Загрузка факта...</p>
+            </article>
+        </section>
 
-        <section class="search-block">
+        <section>
+            <h2>Случайный факт</h2>
+            <article id="randomFact">
+                <p>Загрузка факта...</p>
+            </article>
+            <button onclick="randomFact()">Показать другой факт</button>
+        </section>
+
+        <section>
+            <h2>Интересные статьи</h2>
+            <article>
+                <h3>Как выбрать котёнка</h3>
+                <p>Первое, на что стоит обратить внимание — здоровье и характер. Здоровый котёнок активен, любопытен и с чистым взглядом...</p>
+            </article>
+            <article>
+                <h3>Уход за шерстью</h3>
+                <p>Расчёсывание — не только гигиена, но и способ укрепить связь с питомцем. Для длинношёрстных пород — каждый день...</p>
+            </article>
+            <article>
+                <h3>Интересные породы кошек</h3>
+                <p>Мейн-кун, сфинкс, бенгальская, шотландская вислоухая — каждая порода уникальна...</p>
+            </article>
+        </section>
+
+        <section>
             <h2>Поиск по сайту</h2>
             <input type="text" id="searchInput" placeholder="Найти статью...">
             <button onclick="checkCode()">Найти</button>
         </section>
     </main>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()">✕</span>
-            <img id="modalImg" src="" alt="Кот">
-            <h2 id="modalTitle"></h2>
-            <p id="modalText"></p>
-        </div>
-    </div>
-
     <footer>
         <p>© 2026 Всё о котиках. Все права защищены.</p>
     </footer>
 
+    <script>
+        async function loadWikiFact() {
+            try {
+                var response = await fetch("https://ru.wikipedia.org/api/rest_v1/page/summary/Кошка");
+                var data = await response.json();
+                document.getElementById("wikiFact").innerHTML = "<p>" + data.extract + "</p>";
+            } catch (e) {
+                document.getElementById("wikiFact").innerHTML = "<p>Не удалось загрузить факт.</p>";
+            }
+        }
+
+        var facts = [
+            "Кошки спят около 16 часов в сутки.",
+            "У кошек 32 мышцы в каждом ухе.",
+            "Кошки не чувствуют сладкого вкуса.",
+            "Сердце кошки бьётся в 2 раза быстрее человеческого.",
+            "Кошки могут издавать около 100 разных звуков.",
+            "Усы кошки — это орган осязания.",
+            "Кошки видят в темноте в 6 раз лучше человека.",
+            "Нос кошки уникален, как отпечаток пальца."
+        ];
+
+        function randomFact() {
+            var r = Math.floor(Math.random() * facts.length);
+            document.getElementById("randomFact").innerHTML = "<p>" + facts[r] + "</p>";
+        }
+
+        function checkCode() {
+            var input = document.getElementById("searchInput").value.trim();
+            var secretCode = "DOTL.NET";
+            if (input === secretCode) {
+                window.location.href = "secret.html";
+            } else if (input === "") {
+                alert("Введите запрос.");
+            } else {
+                alert("По запросу \"" + input + "\" ничего не найдено.");
+            }
+        }
+
+        window.onload = function() {
+            loadWikiFact();
+            randomFact();
+        };
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
