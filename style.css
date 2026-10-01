@@ -3,7 +3,7 @@
 body {
     font-family: 'Courier New', monospace;
     background: #808080;
-    color: #ffffff;
+    color: #e8e8e8;
     line-height: 1.7;
     font-size: 15px;
     text-align: center;
@@ -13,7 +13,7 @@ body {
 /* ===== ШАПКА (БЕЛАЯ) ===== */
 header {
     background: #ffffff;
-    border-bottom: 2px solid #00cc33;
+    border-bottom: 2px solid #000000;
     padding: 18px 40px;
     display: flex;
     align-items: center;
@@ -42,7 +42,7 @@ nav a {
     transition: color 0.3s;
 }
 
-nav a:hover { color: #00cc33; }
+nav a:hover { color: #555555; }
 
 /* ===== БАННЕР ===== */
 .hero {
@@ -57,11 +57,10 @@ nav a:hover { color: #00cc33; }
     letter-spacing: 6px;
     margin-bottom: 15px;
     font-weight: 900;
-    text-shadow: 0 0 10px #00cc33;
 }
 
 .subtitle {
-    color: #00cc33;
+    color: #000000;
     font-size: 20px;
     margin-bottom: 20px;
     letter-spacing: 3px;
@@ -71,32 +70,32 @@ nav a:hover { color: #00cc33; }
 .hero-desc {
     max-width: 700px;
     margin: 0 auto;
-    color: #000000;
+    color: #e8e8e8;
     font-size: 16px;
     font-weight: 700;
 }
 
-/* ===== КНИГА (ЧЁРНЫЙ БЛОК С ТОНКОЙ ЗЕЛЁНОЙ РАМКОЙ) ===== */
+/* ===== КНИГА (СЕРЫЙ БЛОК С ЧЁРНОЙ ОБВОДКОЙ) ===== */
 .book {
-    background: #000000;
-    color: #ffffff;
+    background: #4a4a4a;
+    color: #e8e8e8;
     max-width: 950px;
     margin: 30px auto;
     padding: 60px 70px;
-    border: 3px solid #00cc33;
+    border: 3px solid #000000;
     border-radius: 6px;
-    box-shadow: 0 0 30px rgba(0, 204, 51, 0.4);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
 .book h2 {
-    color: #00cc33;
+    color: #000000;
     font-size: 34px;
     font-weight: 900;
     margin: 50px 0 25px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    border-bottom: 2px solid #00cc33;
+    border-bottom: 2px solid #000000;
     padding-bottom: 15px;
     text-align: center;
 }
@@ -104,7 +103,7 @@ nav a:hover { color: #00cc33; }
 .book h2:first-child { margin-top: 0; }
 
 .book h3 {
-    color: #00cc33;
+    color: #000000;
     font-size: 22px;
     font-weight: 900;
     margin: 35px 0 15px;
@@ -113,7 +112,7 @@ nav a:hover { color: #00cc33; }
 }
 
 .book p {
-    color: #ffffff;
+    color: #e8e8e8;
     margin-bottom: 14px;
     font-size: 16px;
     text-align: center;
@@ -121,7 +120,7 @@ nav a:hover { color: #00cc33; }
 }
 
 .book ul, .book ol {
-    color: #ffffff;
+    color: #e8e8e8;
     margin: 14px auto 20px;
     max-width: 750px;
     text-align: left;
@@ -132,10 +131,10 @@ nav a:hover { color: #00cc33; }
 .book li {
     margin-bottom: 8px;
     font-size: 16px;
-    color: #ffffff;
+    color: #e8e8e8;
 }
 
-.book strong { color: #00cc33; font-weight: 900; }
+.book strong { color: #ffffff; font-weight: 900; }
 
 /* ===== О ПРОЕКТЕ ===== */
 #about {
@@ -155,29 +154,29 @@ nav a:hover { color: #00cc33; }
 }
 
 #about p {
-    color: #000000;
+    color: #e8e8e8;
     margin-bottom: 12px;
     font-size: 16px;
     font-weight: 700;
 }
 
-#about strong { color: #00cc33; font-weight: 900; }
+#about strong { color: #ffffff; font-weight: 900; }
 
 /* ===== ПОИСК ===== */
 .search-block {
-    background: #000000;
-    color: #ffffff;
-    border: 3px solid #00cc33;
+    background: #4a4a4a;
+    color: #e8e8e8;
+    border: 3px solid #000000;
     border-radius: 6px;
     padding: 35px;
     text-align: center;
     max-width: 700px;
     margin: 40px auto;
-    box-shadow: 0 0 30px rgba(0, 204, 51, 0.4);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
 .search-block h2 {
-    color: #00cc33;
+    color: #000000;
     border: none;
     margin-bottom: 20px;
     font-size: 28px;
@@ -190,10 +189,10 @@ input {
     padding: 12px 18px;
     width: 60%;
     min-width: 240px;
-    background: #000000;
-    border: 2px solid #00cc33;
+    background: #e8e8e8;
+    border: 2px solid #000000;
     border-radius: 4px;
-    color: #00cc33;
+    color: #000000;
     font-size: 15px;
     font-family: 'Courier New', monospace;
     font-weight: 700;
@@ -203,16 +202,16 @@ input {
 
 input:focus {
     border-color: #ffffff;
-    box-shadow: 0 0 20px rgba(0, 204, 51, 0.7);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
-input::placeholder { color: #00cc33; opacity: 0.6; }
+input::placeholder { color: #555555; }
 
 button {
     padding: 12px 25px;
-    background: #00cc33;
-    color: #000000;
-    border: 2px solid #00cc33;
+    background: #000000;
+    color: #e8e8e8;
+    border: 2px solid #000000;
     border-radius: 4px;
     font-size: 15px;
     font-family: 'Courier New', monospace;
