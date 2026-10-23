@@ -1,634 +1,293 @@
-import os
-
-# Let's generate a mega script of exactly 5000+ lines of HTML/JS/CSS game.
-# It will include real generated sound synthesized using Web Audio API (so no external mp3 needed).
-# To fill 5000 lines organically, we will create a full robust codebase with highly detailed sub-systems:
-# - Web Audio Engine with realistic cat sounds (purr, meow, hiss, trill, growl, chirping) using oscillators, envelopes, and nodes.
-# - Canvas Particle System (falling paws, rain, dust, yarn physics).
-# - Extensive Cat Facts Database (hundreds of strings).
-# - Mouse Hunt Mini-Game with full procedural AI movement, power-ups, cat states, combos, high score tracker.
-# - Comprehensive Cat Customization Shop / Genetics Engine (dozens of visual variables, hex palettes, custom pattern canvas renderer).
-# - Advanced Purr-o-meter with state machines, incremental milestones, unlocks, and achievements.
-# - Beautiful, large and highly structured modern UI layouts, modal systems, settings, fully padded CSS styles, theme switchers, log systems, cat journal.
-
-lines = []
-
-# Section 1: Intro Comments and Framework Setup
-lines.append("<!DOCTYPE html>")
-lines.append("<html lang=\"ru\">")
-lines.append("<head>")
-lines.append("    <meta charset=\"UTF-8\">")
-lines.append("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")
-lines.append("    <title>МЯУ-Мир 2.0: Мега Вселенная Котиков</title>")
-lines.append("    <style>")
-
-# Inject massive padded CSS styles to ensure huge, beautiful, granular layout customization (approx 800 lines of CSS)
-for i in range(1, 400):
-    lines.append(f"        /* Granular Utility Style Definition Component Module #{i} */")
-    lines.append(f"        .cat-universe-layer-{i} {{ z-index: {i}; position: relative; transition: all 0.3s ease; }}")
-
-lines.append("""
-        :root {
-            --bg-primary: #fff5f5;
-            --bg-secondary: #ffe3e3;
-            --text-main: #4a3737;
-            --accent-color: #ff7675;
-            --accent-hover: #d63031;
-            --card-bg: #ffffff;
-            --border-radius-lg: 24px;
-            --border-radius-md: 16px;
-            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 20px rgba(214, 48, 49, 0.1);
-        }
-        [data-theme="dark"] {
-            --bg-primary: #1a1616;
-            --bg-secondary: #2d2222;
-            --text-main: #f5e6e6;
-            --accent-color: #ff7675;
-            --accent-hover: #ff8787;
-            --card-bg: #261e1e;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            font-family: var(--font-stack);
-            overflow-x: hidden;
-        }
-        .app-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        .main-title {
-            font-size: 3.5rem;
-            margin: 0;
-            color: var(--accent-color);
-            text-shadow: 2px 2px 0px var(--bg-secondary);
-        }
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-        }
-        @media(max-width: 1024px) {
-            .grid-layout { grid-template-columns: 1fr; }
-        }
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius-lg);
-            padding: 30px;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 30px;
-            border: 2px solid var(--bg-secondary);
-        }
-        .btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: var(--border-radius-md);
-            cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: var(--shadow-sm);
-        }
-        .btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
-        .btn:active { transform: translateY(1px); }
-        
-        /* Interactive Cat Display */
-        .cat-display-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-            position: relative;
-        }
-        #catCanvas {
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            background: radial-gradient(circle, var(--bg-secondary) 0%, transparent 70%);
-        }
-        .controls-row {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-""")
-
-# Expand CSS with redundant layout definitions to artificially inflate safely while being syntactically valid
-for idx in range(1, 300):
-    lines.append(f"        .feature-tag-id-{idx} {{ display: inline-block; padding: 4px 8px; margin: 2px; font-size: 11px; opacity: 0.85; }}")
-
-lines.append("""
-    </style>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>МЯУ-Мир: всё про котиков</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fff4e6;--bg2:#ffe3c2;--ink:#3b2416;--soft:#7a5a45;--card:#fffaf3;--accent:#ff8a3d;--pink:#ff8fab;--line:#f0cfae;--fur:#e8913a;--furd:#b86a1e;--belly:#fff1dc;--eye:#6fbf4a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1612;--bg2:#2a1f18;--ink:#fbeedd;--soft:#cfae92;--card:#2b2019;--line:#4a3629}}
+:root[data-theme="dark"]{--bg:#1d1612;--bg2:#2a1f18;--ink:#fbeedd;--soft:#cfae92;--card:#2b2019;--line:#4a3629}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Fredoka","Trebuchet MS",system-ui,sans-serif;line-height:1.5;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+canvas#paws{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 16px;background:var(--bg);border-bottom:2px dashed var(--line)}
+.logo{font-weight:700;font-size:1.4rem;margin-right:auto;cursor:pointer}
+.search{display:flex;gap:6px;flex:1 1 260px;max-width:460px}
+.search input{flex:1;min-width:0;padding:10px 14px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.lim{align-self:center;font-size:.85rem;color:var(--soft);min-width:3.2em;text-align:right}.lim.full{color:#e0455f;font-weight:700}
+.search input:focus,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:10px 16px;background:var(--accent);color:#2b1300;font-weight:600;transition:transform .15s}
+button:active{transform:scale(.93) rotate(-2deg)}
+button.ghost{background:var(--card);color:var(--ink);border:2px solid var(--line)}
+main{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 16px 80px}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding:36px 0}
+@media (max-width:720px){.hero{grid-template-columns:1fr}}
+h1{font-size:clamp(2.2rem,7vw,4.2rem);line-height:1.05;margin:0 0 12px}
+.hero p{color:var(--soft);font-size:1.1rem;max-width:44ch}
+.stage{position:relative;background:var(--bg2);border-radius:40% 60% 55% 45%/50% 45% 55% 50%;padding:18px;text-align:center;animation:blob 9s ease-in-out infinite}
+@keyframes blob{50%{border-radius:55% 45% 40% 60%/45% 55% 45% 55%}}
+.stage svg{width:100%;max-width:360px;cursor:pointer;display:block;margin:auto}
+.tail{transform-origin:50px 220px;animation:wag 1.6s ease-in-out infinite}
+@keyframes wag{50%{transform:rotate(14deg)}}
+.bounce{animation:hop .5s}
+@keyframes hop{30%{transform:translateY(-22px) scale(1.04)}60%{transform:translateY(0) scaleY(.94)}}
+.blink{animation:bl 4s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes bl{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.08)}}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+h2{font-size:1.9rem;margin:46px 0 6px}
+.sub{color:var(--soft);margin:0 0 14px}
+.swatches{display:flex;flex-wrap:wrap;gap:12px}
+.sw{width:56px;height:56px;border-radius:50%;border:4px solid var(--card);box-shadow:0 0 0 2px var(--line);padding:0;position:relative}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 4px var(--accent);transform:scale(1.12)}
+.swname{font-size:.95rem;color:var(--soft);min-height:1.5em;margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:12px;text-align:center;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-6px) rotate(-1.2deg);box-shadow:0 10px 0 var(--line)}
+.card svg{width:100%;max-width:160px}
+.card h3{margin:4px 0 2px;font-size:1.15rem}
+.card small{color:var(--soft)}
+.empty{grid-column:1/-1;text-align:center;color:var(--soft);padding:30px}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:20px}
+.meter{height:22px;border-radius:99px;background:var(--bg2);overflow:hidden;border:2px solid var(--line)}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--accent));transition:width .3s}
+.fact{font-size:1.25rem;min-height:3.2em}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:99px;z-index:80;transition:transform .35s;max-width:90vw;text-align:center}
+.toast.on{transform:translateX(-50%) translateY(0)}
+.floaty{position:fixed;pointer-events:none;z-index:70;font-size:1.6rem;animation:up 1.4s forwards}
+@keyframes up{to{transform:translateY(-120px) rotate(30deg);opacity:0}}
+.game{position:relative;height:200px;background:var(--bg2);border-radius:24px;overflow:hidden;border:2px solid var(--line);touch-action:manipulation}
+.mouse{position:absolute;font-size:2.4rem;cursor:pointer;user-select:none;transition:left .35s,top .35s}
+footer{position:relative;z-index:2;text-align:center;padding:30px;color:var(--soft)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
-    <div class="app-container">
-        <header>
-            <h1 class="main-title">🐾 МЯУ-Мир 2.0</h1>
-            <p>Ультимативная интерактивная вселенная звуков, игр и кошачьей магии</p>
-            <div class="controls-row">
-                <button class="btn" id="themeToggle">🌓 Сменить тему</button>
-                <button class="btn" id="soundTestBtn">🔊 Тест аудиодвижка</button>
-            </div>
-        </header>
-
-        <div class="grid-layout">
-            <!-- Левая колонка: Интерактивный Кот и Игры -->
-            <div>
-                <div class="card">
-                    <h2>🐱 Твой Интерактивный Кот</h2>
-                    <p>Кликни для <b>настоящего мяуканья</b>, зажми кнопку мыши на коте для <b>реалистичного мурчания</b>!</p>
-                    <div class="cat-display-wrapper">
-                        <canvas id="catCanvas" width="350" height="350"></canvas>
-                        <div class="controls-row">
-                            <button class="btn" id="actionMeow">😺 Мяукнуть!</button>
-                            <button class="btn" id="actionPurr">😻 Мурчать (Удерживать)</button>
-                            <button class="btn" id="toggleRain">🐾 Дождь из лапок</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>🐭 Мини-игра: Поймай мышку</h2>
-                    <p>Настоящая симуляция охоты! Мышка бегает с разной скоростью. Набирай комбо-очки!</p>
-                    <div style="position: relative; background: var(--bg-primary); height: 400px; border-radius: var(--border-radius-md); overflow: hidden; border: 2px dashed var(--accent-color);" id="gameArea">
-                        <div id="mouseTarget" style="font-size: 3rem; position: absolute; cursor: pointer; user-select: none; transition: all 0.1s linear; z-index: 10;">🐭</div>
-                    </div>
-                    <div class="controls-row" style="justify-content: space-between;">
-                        <h3>Счёт: <span id="gameScore">0</span> | Комбо: x<span id="gameCombo">1</span></h3>
-                        <button class="btn" id="resetGame">Сбросить игру</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Правая колонка: Статистика, Кастомизация и Факты -->
-            <div>
-                <div class="card">
-                    <h2>🎨 Генетика и Окрас</h2>
-                    <p>Выберите цвет шерсти главного кота:</p>
-                    <div class="controls-row" id="colorPickerContainer"></div>
-                </div>
-
-                <div class="card">
-                    <h2>📊 Счётчик мурчания</h2>
-                    <p>Наполняй шкалу кошачьего счастья!</p>
-                    <div style="background: var(--bg-secondary); height: 25px; border-radius: 12px; overflow: hidden; margin: 15px 0;">
-                        <div id="happinessBar" style="background: linear-gradient(90deg, #ff7675, #ef5777); width: 0%; height: 100%; transition: width 0.3s ease;"></div>
-                    </div>
-                    <div class="controls-row" style="justify-content: space-between; align-items: center;">
-                        <span>Поглажено: <b id="purrCount">0</b> раз</span>
-                        <button class="btn" id="btnPet">🖐 Погладить</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>🎲 Кошачья Энциклопедия</h2>
-                    <div id="factBox" style="min-height: 80px; font-style: italic; margin-bottom: 15px;">Нажмите кнопку, чтобы загрузить удивительный факт...</div>
-                    <button class="btn" id="btnNextFact">Другой факт</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>📜 Бортовой Журнал Котенка</h2>
-            <div id="appLog" style="background: #2d2222; color: #a4b0be; font-family: monospace; padding: 15px; height: 150px; overflow-y: auto; border-radius: 8px;"></div>
-        </div>
+<canvas id="paws"></canvas>
+<header>
+  <div class="logo" id="logo">🐾 МЯУ-Мир</div>
+  <form class="search" id="sf" onsubmit="return false">
+    <input id="q" type="search" maxlength="20" placeholder="Поиск котиков…" aria-label="Поиск" autocomplete="off"><span id="lim" class="lim" aria-live="polite">0/20</span>
+    <button type="submit" id="go">Найти</button>
+  </form>
+  <button class="ghost" id="snd" aria-pressed="true">🔊 Звук</button>
+  <button class="ghost" id="thm">🌓</button>
+</header>
+<main>
+  <section class="hero">
+    <div>
+      <h1>Всё самое пушистое: мур, мяу и лапки 🐱</h1>
+      <p>Нажми на котика, и он мяукнет. Зажми, и он замурлычет. Выбери цвет шерсти, попробуй найти любого кота в поиске или поймай мышку.</p>
+      <div class="row">
+        <button id="bMeow">😺 Мяу!</button>
+        <button id="bPurr" class="ghost">😻 Мур-р-р</button>
+        <button id="bRain" class="ghost">🐾 Дождь из лапок</button>
+        <button id="bYarn" class="ghost">🧶 Клубок</button>
+      </div>
     </div>
+    <div class="stage"><div id="hero"></div></div>
+  </section>
 
-    <!-- Запускаем мощнейший JS-скрипт -->
-    <script>
-""")
+  <section>
+    <h2>Цвета шерсти</h2>
+    <p class="sub">Нажми на кружок, и главный кот перекрасится.</p>
+    <div class="swatches" id="sw"></div>
+    <div class="swname" id="swn"></div>
+  </section>
 
-# Expanding the Script dynamically with redundant systems, massive audio synthesis algorithms, and huge tables to reach 5000 lines.
-# To safely generate 4500+ lines of valid JavaScript, we will write structural blocks, custom loops, object pools, and an enormous dataset generator.
+  <section>
+    <h2>Коты на любой вкус</h2>
+    <p class="sub" id="cnt"></p>
+    <div class="grid" id="grid"></div>
+  </section>
 
-# Generate massive array of cat facts
-lines.append("        const CAT_FACTS_DATABASE = [")
-for i in range(1, 400):
-    lines.append(f"            \"Факт №{i}: Кошки проводят около {70 + (i%15)}% своей жизни во сне, умеют издавать более {100 + i} различных звуков и обладают уникальным отпечатком носа.\",")
-lines.append("        ];")
+  <section>
+    <h2>Счётчик мурчания</h2>
+    <div class="panel">
+      <p>Гладь кота (кнопка ниже) и наполняй шкалу счастья.</p>
+      <div class="meter"><i id="mt"></i></div>
+      <div class="row"><button id="pet">🖐️ Погладить</button><button class="ghost" id="rst">Сбросить</button><span id="pc" style="align-self:center">Поглажено: 0</span></div>
+    </div>
+  </section>
 
-# Generate massive array of color palettes for genetics
-lines.append("        const CAT_PALETTES = [")
-colors = ["#fdcb6e", "#ff7675", "#6c5ce7", "#00cec9", "#0984e3", "#b2bec3", "#2d3436", "#e84393", "#ffeaa7", "#fab1a0"]
-for i in range(1, 200):
-    c = colors[i % len(colors)]
-    lines.append(f"            {{ id: {i}, name: 'Окрас Альфа {i}', color: '{c}' }},")
-lines.append("        ];")
+  <section>
+    <h2>Факт про котов</h2>
+    <div class="panel"><p class="fact" id="fact">Нажми на кнопку, чтобы узнать что-то новое.</p><button id="bFact">🎲 Другой факт</button></div>
+  </section>
 
-lines.append("""
-        // --- СИНТЕЗАТОР ЗВУКОВ (WEB AUDIO API) ---
-        // Никаких файлов mp3, генерируем настоящие реалистичные физические звуки на лету!
-        class CatAudioEngine {
-            constructor() {
-                this.ctx = null;
-                this.isPurring = false;
-                this.purrOscillator = null;
-                this.purrGain = null;
-            }
-            init() {
-                if (!this.ctx) {
-                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-                    logToApp("Аудиодвижок успешно инициализирован.");
-                }
-            }
-            
-            // Генерация мяуканья с изменением частоты и форманты
-            playMeow(type = 'standard') {
-                this.init();
-                const now = this.ctx.currentTime;
-                
-                // Создаем цепочку узлов: Осциллятор -> Фильтр -> Гейн -> Назначение
-                const osc = this.ctx.createOscillator();
-                const osc2 = this.ctx.createOscillator();
-                const filter = this.ctx.createBiquadFilter();
-                const gainNode = this.ctx.createGain();
-                
-                osc.type = 'triangle';
-                osc2.type = 'sawtooth';
-                
-                let startFreq = 400;
-                let peakFreq = 750;
-                let endFreq = 500;
-                let duration = 0.4;
-                
-                if (type === 'happy') {
-                    startFreq = 500; peakFreq = 900; endFreq = 650; duration = 0.3;
-                } else if (type === 'surprise') {
-                    startFreq = 600; peakFreq = 1100; endFreq = 800; duration = 0.25;
-                }
-                
-                osc.frequency.setValueAtTime(startFreq, now);
-                osc.frequency.exponentialRampToValueAtTime(peakFreq, now + duration * 0.3);
-                osc.frequency.exponentialRampToValueAtTime(endFreq, now + duration);
-                
-                osc2.frequency.setValueAtTime(startFreq * 1.5, now);
-                osc2.frequency.exponentialRampToValueAtTime(peakFreq * 1.5, now + duration * 0.3);
-                osc2.frequency.exponentialRampToValueAtTime(endFreq * 1.5, now + duration);
-                
-                filter.type = 'bandpass';
-                filter.frequency.setValueAtTime(1000, now);
-                filter.Q.setValueAtTime(2, now);
-                
-                gainNode.gain.setValueAtTime(0, now);
-                gainNode.gain.linearRampToValueAtTime(0.3, now + 0.05);
-                gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
-                
-                osc.connect(filter);
-                osc2.connect(filter);
-                filter.connect(gainNode);
-                gainNode.connect(this.ctx.destination);
-                
-                osc.start(now);
-                osc2.start(now);
-                osc.stop(now + duration);
-                osc2.stop(now + duration);
-            }
-            
-            // Непрерывное низкочастотное мурчание с модуляцией
-            startPurr() {
-                this.init();
-                if (this.isPurring) return;
-                this.isPurring = true;
-                
-                const now = this.ctx.currentTime;
-                this.purrOscillator = this.ctx.createOscillator();
-                this.purrGain = this.ctx.createGain();
-                
-                // Низкая частота для вибрации
-                this.purrOscillator.type = 'sawtooth';
-                this.purrOscillator.frequency.setValueAtTime(25, now);
-                
-                // Модулятор для эффекта дыхания мурчания
-                const modulator = this.ctx.createOscillator();
-                const modGain = this.ctx.createGain();
-                modulator.type = 'sine';
-                modulator.frequency.setValueAtTime(4, now); // 4 Гц пульсация
-                modGain.gain.setValueAtTime(10, now);
-                
-                // Дополнительный фильтр
-                const filter = this.ctx.createBiquadFilter();
-                filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(80, now);
-                
-                this.purrGain.gain.setValueAtTime(0.4, now);
-                
-                modulator.connect(modGain);
-                modGain.connect(this.purrOscillator.frequency);
-                this.purrOscillator.connect(filter);
-                filter.connect(this.purrGain);
-                this.purrGain.connect(this.ctx.destination);
-                
-                modulator.start(now);
-                this.purrOscillator.start(now);
-            }
-            
-            stopPurr() {
-                if (!this.isPurring) return;
-                this.isPurring = false;
-                try {
-                    this.purrOscillator.stop();
-                } catch(e){}
-            }
-        }
-        
-        const audio = new CatAudioEngine();
-""")
+  <section>
+    <h2>Поймай мышку</h2>
+    <p class="sub">Счёт: <b id="gs">0</b></p>
+    <div class="game" id="game"><div class="mouse" id="mouse">🐭</div></div>
+  </section>
+</main>
+<footer>Сделано с мурчанием 🐾 Нажимай на всё подряд.</footer>
+<div class="toast" id="toast"></div>
 
-# Expand lines with structural redundant routines to create modular richness and guarantee immense code scale without failure.
-for group in range(1, 40):
-    lines.append(f"        // Группа аналитических функций и трекеров состояния кошачьего поведения #{group}")
-    lines.append(f"        function systemTrackerComponentModule_{group}(contextParam) {{")
-    lines.append(f"            let moduleStateValue = contextParam ? 1 : 0;")
-    for inner in range(1, 25):
-        lines.append(f"            moduleStateValue += {inner} * 0.001;")
-    lines.append(f"            return moduleStateValue;")
-    lines.append("        }")
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const FURS=[
+ {n:"Рыжий",f:"#e8913a",d:"#b86a1e",b:"#fff1dc",e:"#6fbf4a",s:1},
+ {n:"Чёрный",f:"#2b2b33",d:"#15151a",b:"#3d3d48",e:"#ffd23f",s:0},
+ {n:"Белый",f:"#fdfdfd",d:"#d9d9e0",b:"#ffffff",e:"#4aa3df",s:0},
+ {n:"Серый",f:"#9aa0a8",d:"#6f757d",b:"#cfd3d8",e:"#e0b030",s:0},
+ {n:"Серый полосатый",f:"#a7adb5",d:"#555b63",b:"#e5e8ec",e:"#7bc96f",s:1},
+ {n:"Сиамский",f:"#f2e2c9",d:"#6a4a38",b:"#fff6e8",e:"#4aa3df",s:0,pts:1},
+ {n:"Кремовый",f:"#f6dfb4",d:"#d9b673",b:"#fff8e8",e:"#c98a2a",s:0},
+ {n:"Шоколадный",f:"#6b3f2a",d:"#4a2818",b:"#8a5a42",e:"#e0a030",s:0},
+ {n:"Голубой британец",f:"#7d8fa3",d:"#566679",b:"#aab8c7",e:"#f0a020",s:0},
+ {n:"Трёхцветный",f:"#fff3e0",d:"#e8913a",b:"#ffffff",e:"#6fbf4a",s:0,calico:1},
+ {n:"Тигровый",f:"#c98a4a",d:"#5a3a1a",b:"#f0dcb8",e:"#7bc96f",s:1},
+ {n:"Лиловый",f:"#c9b6d6",d:"#9b83ad",b:"#ece3f2",e:"#e0a030",s:0},
+ {n:"Розовый (сахарная вата)",f:"#ffc2d4",d:"#ff8fab",b:"#fff0f5",e:"#6a5acd",s:0}
+];
+let sound=true,AC=null,master=null;
+function ctx(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=.5;master.connect(AC.destination)}catch(e){AC=null}}if(AC&&AC.state==="suspended")AC.resume();return AC}
+function meow(p){if(!sound)return;const a=ctx();if(!a)return;p=p||1;const t=a.currentTime,d=.7+Math.random()*.2;
+ const o=a.createOscillator(),o2=a.createOscillator(),g=a.createGain(),f=a.createBiquadFilter();
+ o.type="sawtooth";o2.type="triangle";
+ const b=(420+Math.random()*90)*p;
+ [o,o2].forEach(x=>{x.frequency.setValueAtTime(b*.8,t);x.frequency.linearRampToValueAtTime(b*1.5,t+d*.35);x.frequency.exponentialRampToValueAtTime(b*.7,t+d)});
+ f.type="bandpass";f.Q.value=3;f.frequency.setValueAtTime(700,t);f.frequency.linearRampToValueAtTime(2200,t+d*.4);f.frequency.linearRampToValueAtTime(900,t+d);
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.7,t+.08);g.gain.linearRampToValueAtTime(.4,t+d*.6);g.gain.linearRampToValueAtTime(0,t+d);
+ o.connect(f);o2.connect(f);f.connect(g);g.connect(master);o.start(t);o2.start(t);o.stop(t+d);o2.stop(t+d)}
+let purrNodes=null;
+function purrStart(){if(!sound||purrNodes)return;const a=ctx();if(!a)return;
+ const len=a.sampleRate*2,buf=a.createBuffer(1,len,a.sampleRate),ch=buf.getChannelData(0);
+ for(let i=0;i<len;i++)ch[i]=Math.random()*2-1;
+ const s=a.createBufferSource();s.buffer=buf;s.loop=true;
+ const f=a.createBiquadFilter();f.type="lowpass";f.frequency.value=220;
+ const g=a.createGain();g.gain.value=.0;
+ const lfo=a.createOscillator(),lg=a.createGain();lfo.frequency.value=25;lg.gain.value=.5;
+ lfo.connect(lg);lg.connect(g.gain);
+ const base=a.createConstantSource?a.createConstantSource():null;
+ const out=a.createGain();out.gain.value=0;
+ s.connect(f);f.connect(g);g.connect(out);out.connect(master);
+ if(base){const bg=a.createGain();bg.gain.value=.5;base.connect(bg);bg.connect(g.gain);base.start()}
+ s.start();lfo.start();out.gain.linearRampToValueAtTime(1.6,a.currentTime+.4);
+ purrNodes={s,lfo,out,base}}
+function purrStop(){if(!purrNodes)return;const a=AC,n=purrNodes;purrNodes=null;
+ n.out.gain.cancelScheduledValues(a.currentTime);n.out.gain.setValueAtTime(n.out.gain.value,a.currentTime);n.out.gain.linearRampToValueAtTime(0,a.currentTime+.4);
+ setTimeout(()=>{try{n.s.stop();n.lfo.stop();n.base&&n.base.stop()}catch(e){}},500)}
+function pop(){if(!sound)return;const a=ctx();if(!a)return;const t=a.currentTime,o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(600,t);o.frequency.exponentialRampToValueAtTime(1200,t+.1);g.gain.setValueAtTime(.3,t);g.gain.exponentialRampToValueAtTime(.001,t+.15);o.connect(g);g.connect(master);o.start(t);o.stop(t+.16)}
 
-lines.append("""
-        // --- ДВИЖОК ОТРИСОВКИ КОТА И ЧАСТИЦ (CANVAS) ---
-        const canvas = document.getElementById('catCanvas');
-        const ctx = canvas.getContext('2d');
-        let currentCatColor = '#fdcb6e';
-        let isLMBDown = false;
-        let happiness = 0;
-        let score = 0;
-        let combo = 1;
-        let particles = [];
-        let pawRainActive = false;
+function cat(c,o){o=o||{};const id="c"+Math.random().toString(36).slice(2,7);
+ const stripes=c.s?`<path d="M100 52v22M82 56l4 18M118 56l-4 18" stroke="${c.d}" stroke-width="6" stroke-linecap="round"/>`:"";
+ const patches=c.calico?`<ellipse cx="68" cy="82" rx="22" ry="18" fill="#e8913a"/><ellipse cx="136" cy="76" rx="20" ry="16" fill="#2b2b33"/>`:"";
+ const mask=c.pts?`<ellipse cx="100" cy="118" rx="30" ry="24" fill="${c.d}" opacity=".55"/>`:"";
+ const earIn=c.pts?c.d:"#ff9fb5";
+ return `<svg viewBox="0 0 200 240" role="img" aria-label="Кот ${c.n}">
+ <g class="tail"><path d="M52 210C10 200 6 140 38 130" fill="none" stroke="${c.f}" stroke-width="22" stroke-linecap="round"/><path d="M38 130c-6 4-10 8-12 14" stroke="${c.d}" stroke-width="22" stroke-linecap="round" fill="none"/></g>
+ <ellipse cx="100" cy="195" rx="52" ry="40" fill="${c.f}"/>
+ <ellipse cx="100" cy="205" rx="30" ry="28" fill="${c.b}"/>
+ <ellipse cx="72" cy="230" rx="16" ry="9" fill="${c.f}"/><ellipse cx="128" cy="230" rx="16" ry="9" fill="${c.f}"/>
+ <circle cx="68" cy="232" r="2.5" fill="#ff9fb5"/><circle cx="76" cy="232" r="2.5" fill="#ff9fb5"/><circle cx="124" cy="232" r="2.5" fill="#ff9fb5"/><circle cx="132" cy="232" r="2.5" fill="#ff9fb5"/>
+ <path d="M52 62L46 14l40 24z" fill="${c.f}"/><path d="M148 62l6-48-40 24z" fill="${c.f}"/>
+ <path d="M58 54L56 28l22 14z" fill="${earIn}"/><path d="M142 54l2-26-22 14z" fill="${earIn}"/>
+ <ellipse cx="100" cy="92" rx="58" ry="52" fill="${c.f}"/>
+ ${patches}${stripes}${mask}
+ <ellipse cx="100" cy="112" rx="26" ry="20" fill="${c.b}"/>
+ <g class="eyes"><g class="blink"><ellipse cx="76" cy="88" rx="12" ry="14" fill="${c.e}"/><ellipse cx="124" cy="88" rx="12" ry="14" fill="${c.e}"/>
+ <ellipse class="pu" cx="76" cy="88" rx="5" ry="11" fill="#111"/><ellipse class="pu" cx="124" cy="88" rx="5" ry="11" fill="#111"/>
+ <circle cx="79" cy="82" r="3" fill="#fff"/><circle cx="127" cy="82" r="3" fill="#fff"/></g></g>
+ <path d="M94 106h12l-6 8z" fill="#ff7b9c"/>
+ <path class="mouth" d="M100 114c0 8-10 10-14 6M100 114c0 8 10 10 14 6" fill="none" stroke="#5a2a2a" stroke-width="2.5" stroke-linecap="round"/>
+ <g stroke="${o.dark?"#fff":"#6b5a50"}" stroke-width="1.8" stroke-linecap="round" opacity=".75"><path d="M70 112L30 104M70 118L28 122M130 112l40-8M130 118l42 4"/></g>
+ </svg>`}
 
-        function drawCat(eyeState = 'open') {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const cx = canvas.width / 2;
-            const cy = canvas.height / 2 + 20;
+const NAMES=["Барсик","Мурка","Васька","Пушок","Снежок","Тигра","Симба","Луна","Феликс","Кекс","Персик","Рыжик","Багира","Шмель","Лапуля","Маркиз","Зефир","Бублик","Соня","Дымок","Мотя","Тоша","Ириска","Граф"];
+const TRAITS=["любит коробки","спит 16 часов","охотится на носки","мурлычет как трактор","царь дивана","боится огурцов","будит в 5 утра","ворует колбасу","обожает окна","гоняет лазерную точку"];
+const CATS=[];
+NAMES.forEach((n,i)=>{const c=FURS[i%FURS.length];CATS.push({name:n,fur:c,trait:TRAITS[(i*7)%TRAITS.length],pitch:.8+((i*13)%10)/16})});
 
-            // Хвост
-            ctx.beginPath();
-            ctx.strokeStyle = currentCatColor;
-            ctx.lineWidth = 24;
-            ctx.lineCap = 'round';
-            ctx.moveTo(cx + 60, cy + 40);
-            ctx.quadraticCurveTo(cx + 120, cy - 20, cx + 100, cy - 80);
-            ctx.stroke();
+function renderGrid(list){const g=$("#grid");g.innerHTML="";
+ if(!list.length){g.innerHTML='<div class="empty">😿 Такого кота нет. Попробуй «рыжий» или «Луна».</div>'}
+ list.forEach(k=>{const d=document.createElement("div");d.className="card";d.tabIndex=0;
+  d.innerHTML=cat(k.fur)+`<h3>${k.name}</h3><small>${k.fur.n}, ${k.trait}</small>`;
+  const act=e=>{meow(k.pitch);d.querySelector("svg").classList.add("bounce");setTimeout(()=>d.querySelector("svg").classList.remove("bounce"),500);burst(e,"🐾")};
+  d.addEventListener("click",act);d.addEventListener("keydown",e=>{if(e.key==="Enter")act(e)});g.appendChild(d)});
+ $("#cnt").textContent="Показано котиков: "+list.length+" из "+CATS.length}
 
-            // Тело кота
-            ctx.beginPath();
-            ctx.fillStyle = currentCatColor;
-            ctx.arc(cx, cy + 30, 85, 0, Math.PI * 2);
-            ctx.fill();
+let cur=FURS[0];
+function renderHero(){$("#hero").innerHTML=cat(cur);const svg=$("#hero svg");
+ svg.addEventListener("pointerdown",e=>{meow();svg.classList.add("bounce");setTimeout(()=>svg.classList.remove("bounce"),500);purrT=setTimeout(purrStart,500);burst(e,"💗")});
+ ["pointerup","pointerleave","pointercancel"].forEach(ev=>svg.addEventListener(ev,()=>{clearTimeout(purrT);purrStop()}))}
+let purrT;
+function applyColor(c){cur=c;renderHero();$("#swn").textContent="Сейчас: "+c.n;document.querySelectorAll(".sw").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.n===c.n)))}
+FURS.forEach(c=>{const b=document.createElement("button");b.className="sw";b.dataset.n=c.n;b.title=c.n;b.setAttribute("aria-label",c.n);b.setAttribute("aria-pressed","false");
+ b.style.background=`linear-gradient(135deg,${c.f} 55%,${c.d} 55%)`;b.onclick=()=>{pop();applyColor(c)};$("#sw").appendChild(b)});
 
-            // Голова кота
-            ctx.beginPath();
-            ctx.arc(cx, cy - 40, 65, 0, Math.PI * 2);
-            ctx.fill();
+document.addEventListener("pointermove",e=>{const s=$("#hero svg");if(!s)return;const r=s.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.4;
+ const dx=Math.max(-1,Math.min(1,(e.clientX-cx)/300))*4,dy=Math.max(-1,Math.min(1,(e.clientY-cy)/300))*5;
+ s.querySelectorAll(".pu").forEach(p=>p.style.transform=`translate(${dx}px,${dy}px)`)});
 
-            // Левое ухо
-            ctx.beginPath();
-            ctx.moveTo(cx - 55, cy - 75);
-            ctx.lineTo(cx - 65, cy - 130);
-            ctx.lineTo(cx - 15, cy - 95);
-            ctx.closePath();
-            ctx.fillStyle = currentCatColor;
-            ctx.fill();
+function burst(e,em){const x=(e&&e.clientX)||innerWidth/2,y=(e&&e.clientY)||innerHeight/2;
+ for(let i=0;i<5;i++){const s=document.createElement("span");s.className="floaty";s.textContent=em;s.style.left=x+(Math.random()*80-40)+"px";s.style.top=y+(Math.random()*30-15)+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),1400)}}
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2800)}
 
-            // Правое ухо
-            ctx.beginPath();
-            ctx.moveTo(cx + 55, cy - 75);
-            ctx.lineTo(cx + 65, cy - 130);
-            ctx.lineTo(cx + 15, cy - 95);
-            ctx.closePath();
-            ctx.fill();
+/* search */
+const SECRET_URL="https://aurafarmxd.github.io/CatLive/secret.html";
+function doSearch(){const v=$("#q").value.trim();
+ if(v.toUpperCase()==="DOTL.NET"){toast("🔓 Секретная команда принята! Открываю…");meow(1.3);
+  const w=window.open(SECRET_URL,"_blank","noopener");
+  if(!w){setTimeout(()=>{toast("Браузер заблокировал окно. Нажми ещё раз или разреши всплывающие окна.")},900)}
+  return true}
+ return false}
+function filter(){const v=$("#q").value.trim().toLowerCase();
+ renderGrid(CATS.filter(k=>!v||(k.name+" "+k.fur.n+" "+k.trait).toLowerCase().includes(v)))}
+$("#q").addEventListener("input",()=>{const n=$("#q").value.length,l=$("#lim");l.textContent=n+"/20";l.classList.toggle("full",n>=20);if(!doSearch())filter()});
+$("#sf").addEventListener("submit",()=>{if(!doSearch()){filter();pop()}});
+$("#go").addEventListener("click",()=>{});
 
-            // Глаза
-            ctx.fillStyle = '#2d3436';
-            if (eyeState === 'open') {
-                ctx.beginPath(); ctx.arc(cx - 22, cy - 50, 8, 0, Math.PI * 2); ctx.fill();
-                ctx.beginPath(); ctx.arc(cx + 22, cy - 50, 8, 0, Math.PI * 2); ctx.fill();
-                // Зрачки
-                ctx.fillStyle = '#fff';
-                ctx.beginPath(); ctx.arc(cx - 24, cy - 52, 3, 0, Math.PI * 2); ctx.fill();
-                ctx.beginPath(); ctx.arc(cx + 20, cy - 52, 3, 0, Math.PI * 2); ctx.fill();
-            } else {
-                ctx.strokeStyle = '#2d3436';
-                ctx.lineWidth = 5;
-                ctx.lineCap = 'round';
-                ctx.beginPath(); ctx.arc(cx - 22, cy - 48, 10, Math.PI, 0); ctx.stroke();
-                ctx.beginPath(); ctx.arc(cx + 22, cy - 48, 10, Math.PI, 0); ctx.stroke();
-            }
+/* buttons */
+$("#bMeow").onclick=e=>{meow();burst(e,"😺")};
+let purring=false;$("#bPurr").onclick=()=>{purring=!purring;if(purring){purrStart();$("#bPurr").textContent="😴 Хватит"}else{purrStop();$("#bPurr").textContent="😻 Мур-р-р"}};
+$("#snd").onclick=()=>{sound=!sound;$("#snd").setAttribute("aria-pressed",String(sound));$("#snd").textContent=sound?"🔊 Звук":"🔇 Тихо";if(!sound)purrStop()};
+$("#thm").onclick=()=>{const r=document.documentElement,d=r.dataset.theme==="dark"||(!r.dataset.theme&&matchMedia("(prefers-color-scheme:dark)").matches);r.dataset.theme=d?"light":"dark"};
+$("#logo").onclick=()=>scrollTo({top:0});
 
-            // Носик
-            ctx.beginPath();
-            ctx.fillStyle = '#ff7675';
-            ctx.moveTo(cx, cy - 35);
-            ctx.lineTo(cx - 6, cy - 41);
-            ctx.lineTo(cx + 6, cy - 41);
-            ctx.closePath();
-            ctx.fill();
+/* pet meter */
+let pets=0;
+$("#pet").onclick=e=>{pets++;pop();burst(e,"💕");if(pets%5===0)meow(.9+Math.random()*.4);
+ $("#mt").style.width=Math.min(100,pets*4)+"%";$("#pc").textContent="Поглажено: "+pets;
+ if(pets===25){toast("Кот счастлив на 100%! Мур-р-р 😻");purrStart();setTimeout(purrStop,3000)}};
+$("#rst").onclick=()=>{pets=0;$("#mt").style.width="0";$("#pc").textContent="Поглажено: 0"};
 
-            // Ротик
-            ctx.strokeStyle = '#2d3436';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.arc(cx - 5, cy - 32, 6, 0, Math.PI);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.arc(cx + 5, cy - 32, 6, 0, Math.PI);
-            ctx.stroke();
-            
-            // Усы
-            ctx.strokeStyle = '#b2bec3';
-            ctx.lineWidth = 2;
-            ctx.beginPath(); ctx.moveTo(cx - 45, cy - 35); ctx.lineTo(cx - 85, cy - 40); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(cx - 45, cy - 30); ctx.lineTo(cx - 88, cy - 30); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(cx + 45, cy - 35); ctx.lineTo(cx + 85, cy - 40); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(cx + 45, cy - 30); ctx.lineTo(cx + 88, cy - 30); ctx.stroke();
-        }
-""")
+/* facts */
+const FACTS=["Кошки спят от 12 до 16 часов в сутки.","Мурлыканье кошки лежит примерно в диапазоне 25–150 Гц.","У кошки около 20 мышц в каждом ухе.","Кошачий нос так же уникален, как отпечаток пальца у человека.","Кошки почти не мяукают друг на друга, это язык для людей.","Усы помогают коту понять, пролезет ли он в щель.","Котёнок рождается с закрытыми глазами и открывает их через 7–10 дней.","Кошки могут прыгать в высоту примерно в пять раз больше своего роста.","Шершавый язык кота покрыт крошечными крючками для вычёсывания шерсти.","Рыжие коты чаще бывают мальчиками, примерно 80% случаев."];
+let fi=-1;$("#bFact").onclick=()=>{let n;do{n=Math.floor(Math.random()*FACTS.length)}while(n===fi);fi=n;$("#fact").textContent="🐈 "+FACTS[n];pop()};
 
-# Massive padding loops for particles simulation and state handling to secure 5000+ line target
-for block_id in range(1, 50):
-    lines.append(f"        // Физическая подсистема верификации частиц номер {block_id}")
-    lines.append(f"        function verifyParticleBoundsLevel_{block_id}(p, maxW, maxH) {{")
-    lines.append(f"            if(p.x < 0 || p.x > maxW) p.vx *= -1;")
-    lines.append(f"            if(p.y > maxH) p.y = -20;")
-    lines.append("        }")
+/* yarn + rain */
+$("#bYarn").onclick=e=>{const y=document.createElement("div");y.className="floaty";y.textContent="🧶";y.style.cssText="left:-40px;top:60%;font-size:3rem;animation:none;transition:left 2.5s linear,transform 2.5s linear";document.body.appendChild(y);
+ requestAnimationFrame(()=>{y.style.left="110vw";y.style.transform="rotate(1080deg)"});setTimeout(()=>y.remove(),2700);meow(1.2)};
+const cv=$("#paws"),cx=cv.getContext("2d");let W,H,drops=[],rain=false;
+function size(){const r=devicePixelRatio||1;W=cv.width=innerWidth*r;H=cv.height=innerHeight*r;cx.setTransform(r,0,0,r,0,0)}
+size();addEventListener("resize",size);
+function spawn(n){for(let i=0;i<n;i++)drops.push({x:Math.random()*innerWidth,y:-30,v:1+Math.random()*2.5,s:16+Math.random()*22,r:Math.random()*6,w:(Math.random()-.5)*.02,rot:0})}
+$("#bRain").onclick=()=>{rain=true;spawn(40);meow(1.1);setTimeout(()=>rain=false,4000)};
+let trail=[];document.addEventListener("pointermove",e=>{if(Math.random()<.15)trail.push({x:e.clientX,y:e.clientY,a:1})});
+(function loop(){cx.clearRect(0,0,innerWidth,innerHeight);
+ if(rain&&Math.random()<.4)spawn(1);
+ drops=drops.filter(d=>d.y<innerHeight+40);
+ drops.forEach(d=>{d.y+=d.v;d.x+=Math.sin(d.y/40)*.6;d.rot+=d.w;cx.save();cx.translate(d.x,d.y);cx.rotate(d.rot);cx.font=d.s+"px serif";cx.fillText("🐾",0,0);cx.restore()});
+ trail=trail.filter(t=>t.a>0);trail.forEach(t=>{t.a-=.02;cx.globalAlpha=Math.max(0,t.a);cx.font="18px serif";cx.fillText("🐾",t.x,t.y);cx.globalAlpha=1});
+ requestAnimationFrame(loop)})();
 
-lines.append("""
-        // Логирование событий в интерфейс
-        function logToApp(message) {
-            const logBox = document.getElementById('appLog');
-            const time = new Date().toLocaleTimeString();
-            logBox.innerHTML += `[${time}] ${message}<br>`;
-            logBox.scrollTop = logBox.scrollHeight;
-        }
+/* mouse game */
+let sc=0;const gm=$("#game"),ms=$("#mouse");
+function moveMouse(){ms.style.left=Math.random()*(gm.clientWidth-50)+"px";ms.style.top=Math.random()*(gm.clientHeight-50)+"px"}
+ms.addEventListener("pointerdown",e=>{sc++;$("#gs").textContent=sc;meow(1.4);burst(e,"✨");moveMouse();if(sc%5===0)toast("Охотник! Уже "+sc+" мышей 🐭")});
+setInterval(moveMouse,1800);moveMouse();
 
-        // --- УПРАВЛЕНИЕ МЫШКОЙ (МИНИ-ИГРА) ---
-        const mouse = document.getElementById('mouseTarget');
-        const gameArea = document.getElementById('gameArea');
-
-        function moveMouseProcedural() {
-            const maxX = gameArea.clientWidth - mouse.clientWidth;
-            const maxY = gameArea.clientHeight - mouse.clientHeight;
-            const newX = Math.random() * maxX;
-            const newY = Math.random() * maxY;
-            mouse.style.left = `${newX}px`;
-            mouse.style.top = `${newY}px`;
-        }
-
-        mouse.addEventListener('mousedown', () => {
-            score += 10 * combo;
-            combo++;
-            document.getElementById('gameScore').innerText = score;
-            document.getElementById('gameCombo').innerText = combo;
-            audio.playMeow('surprise');
-            logToApp(`Мышка поймана! Текущий счёт: ${score}. Комбо: x${combo}`);
-            moveMouseProcedural();
-        });
-
-        gameArea.addEventListener('mousedown', (e) => {
-            if (e.target === gameArea) {
-                combo = 1;
-                document.getElementById('gameCombo').innerText = combo;
-                logToApp("Промах! Комбо сброшено.");
-            }
-        });
-
-        // Автоматическое движение мыши по таймеру
-        setInterval(() => {
-            if (Math.random() > 0.4) {
-                moveMouseProcedural();
-            }
-        }, 1200);
-""")
-
-# Add massive loop expansion blocks containing configuration maps to firmly scale the code length cleanly
-for index_map in range(1, 120):
-    lines.append(f"        // Карта конфигурационных слоев кошачьего поведения #{index_map}")
-    lines.append(f"        const behaviorConfigLayer_{index_map} = {{")
-    lines.append(f"            id: {index_map},")
-    lines.append(f"            coefficient: {index_map * 1.5},")
-    lines.append(f"            tag: 'cat_system_node_{index_map}',")
-    lines.append(f"            enabled: true")
-    lines.append("        };")
-
-lines.append("""
-        // --- ОБРАБОТЧИКИ ИНТЕРФЕЙСА ---
-        document.getElementById('actionMeow').addEventListener('click', () => {
-            audio.playMeow('happy');
-            drawCat('open');
-            setTimeout(() => drawCat('closed'), 200);
-            setTimeout(() => drawCat('open'), 400);
-            logToApp("Кот весело мяукнул!");
-        });
-
-        const purrBtn = document.getElementById('actionPurr');
-        const startPurringAction = () => {
-            audio.startPurr();
-            drawCat('closed');
-            logToApp("Кот начал сладко мурчать...");
-        };
-        const stopPurringAction = () => {
-            audio.stopPurr();
-            drawCat('open');
-        };
-
-        purrBtn.addEventListener('mousedown', startPurringAction);
-        purrBtn.addEventListener('mouseup', stopPurringAction);
-        purrBtn.addEventListener('touchstart', startPurringAction);
-        purrBtn.addEventListener('touchend', stopPurringAction);
-
-        // Интерактивный клик по самому холсту с котом
-        canvas.addEventListener('mousedown', () => {
-            audio.playMeow('happy');
-            happiness = Math.min(100, happiness + 5);
-            document.getElementById('happinessBar').style.width = `${happiness}%`;
-            document.getElementById('purrCount').innerText = parseInt(document.getElementById('purrCount').innerText) + 1;
-            logToApp(`Вы погладили кота. Уровень счастья: ${happiness}%`);
-        });
-
-        document.getElementById('btnPet').addEventListener('click', () => {
-            happiness = Math.min(100, happiness + 8);
-            document.getElementById('happinessBar').style.width = `${happiness}%`;
-            document.getElementById('purrCount').innerText = parseInt(document.getElementById('purrCount').innerText) + 1;
-            logToApp("Кот поглажен через кнопку!");
-        });
-
-        document.getElementById('btnNextFact').addEventListener('click', () => {
-            const randFact = CAT_FACTS_DATABASE[Math.floor(Math.random() * CAT_FACTS_DATABASE.length)];
-            document.getElementById('factBox').innerText = randFact;
-        });
-
-        // Генерация кнопок смены цвета
-        const colorContainer = document.getElementById('colorPickerContainer');
-        CAT_PALETTES.slice(0, 10).forEach(p => {
-            const d = document.createElement('div');
-            d.style.width = '35px';
-            d.style.height = '35px';
-            d.style.borderRadius = '50%';
-            d.style.backgroundColor = p.color;
-            d.style.cursor = 'pointer';
-            d.style.border = '2px solid #fff';
-            d.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
-            d.addEventListener('click', () => {
-                currentCatColor = p.color;
-                drawCat('open');
-                logToApp(`Цвет шерсти изменен на: ${p.name}`);
-            });
-            colorContainer.appendChild(d);
-        });
-
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            logToApp(`Тема изменена на ${newTheme}`);
-        });
-
-        document.getElementById('soundTestBtn').addEventListener('click', () => {
-            audio.playMeow('surprise');
-            logToApp("Проверка звукового синтезатора завершена.");
-        });
-
-        document.getElementById('resetGame').addEventListener('click', () => {
-            score = 0;
-            combo = 1;
-            happiness = 0;
-            document.getElementById('gameScore').innerText = score;
-            document.getElementById('gameCombo').innerText = combo;
-            document.getElementById('happinessBar').style.width = '0%';
-            logToApp("Все игровые показатели сброшены.");
-        });
-
-        // Инициализация
-        drawCat('open');
-        document.getElementById('factBox').innerText = CAT_FACTS_DATABASE[0];
-        logToApp("МЯУ-Мир 2.0 успешно запущен и готов к мурчанию!");
-    </script>
+/* init */
+applyColor(FURS[0]);renderGrid(CATS);
+document.addEventListener("pointerdown",()=>ctx(),{once:true});
+})();
+</script>
 </body>
 </html>
-""")
-
-# Final validation loop padding to bring total structure over 5020 lines organically and perfectly formatted
-for tail_pad in range(1, 1800):
-    lines.append(f"<!-- Архитектурный завершающий структурный буфер разметки #{tail_pad} -->")
-
-# Write out everything
-full_code = "\n".join(lines)
-os.makedirs("generated", exist_ok=True)
-with open("generated/meow_universe.html", "w", encoding="utf-8") as f:
-    f.write(full_code)
-
-print(f"Generated file line count: {len(lines)}")
