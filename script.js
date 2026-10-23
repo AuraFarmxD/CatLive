@@ -1,112 +1,148 @@
-// ===== СПИСОК СТАТЕЙ =====
-// Чтобы добавить новую статью — скопируй одну строку и поменяй данные.
-var articles = [
-    {
-        title: "Как выбрать котёнка",
-        img: "https://cataas.com/cat?t=1",
-        text: "При выборе котёнка смотрите на его активность, состояние шерсти, глаз и ушей. Здоровый котёнок любопытен и не боится рук. Возьмите его на руки — он не должен вырываться. Проверьте живот — он не должен быть вздутым. Первые дни дома котёнку нужен тёплый уголок, лоток и миска с водой."
-    },
-    {
-        title: "Уход за шерстью",
-        img: "https://cataas.com/cat?t=2",
-        text: "Расчёсывайте кошку 2–3 раза в неделю. Для длинношёрстных пород — ежедневно. Используйте специальные щётки: пуходёрку, массажную щётку, гребень. Расчёсывание — это не только гигиена, но и способ укрепить связь с питомцем."
-    },
-    {
-        title: "Интересные породы",
-        img: "https://cataas.com/cat?t=3",
-        text: "Мейн-кун — самая крупная порода, до 12 кг. Сфинкс — без шерсти, требует особого ухода. Бенгальская — с пятнами как у леопарда, очень активная. Шотландская вислоухая — с загнутыми ушами. Персидская — с длинной шерстью, спокойная."
-    },
-    {
-        title: "Питание кошек",
-        img: "https://cataas.com/cat?t=4",
-        text: "Кошки — хищники. Основа рациона — мясо: курица, индейка, говядина. Нельзя давать шоколад, лук, чеснок, виноград, изюм, алкоголь. Вода должна быть в свободном доступе. Кормите 2–3 раза в день."
-    },
-    {
-        title: "Здоровье кошки",
-        img: "https://cataas.com/cat?t=5",
-        text: "Ежегодно делайте прививки. Следите за аппетитом и поведением. Тревожные симптомы: вялость, отказ от еды, рвота, понос, выделения из глаз и носа. При любых отклонениях — к ветеринару."
-    },
-    {
-        title: "Поведение кошек",
-        img: "https://cataas.com/cat?t=6",
-        text: "Мурлыканье означает удовольствие. Хвост трубой — дружелюбие. Уши прижаты — страх или агрессия. Кошка трётся о ноги — метит территорию. Приносит игрушку — приглашает играть."
-    },
-    {
-        title: "Кошки и сон",
-        img: "https://cataas.com/cat?t=7",
-        text: "Кошки спят 12–16 часов в сутки. Это норма — они восстанавливают энергию для охоты. Пожилые кошки спят больше. Любят спать на тёплых местах: подоконник, ноутбук, кровать хозяина."
-    },
-    {
-        title: "Игры с кошкой",
-        img: "https://cataas.com/cat?t=8",
-        text: "Игрушки с перьями, лазерные указки, мячики — лучший выбор. Играйте 10–15 минут в день. Не используйте руки как игрушку — кошка привыкнет кусаться. Меняйте игрушки, чтобы не надоедали."
-    },
-    {
-        title: "Кошачий язык",
-        img: "https://cataas.com/cat?t=9",
-        text: "Кошки издают около 100 разных звуков. Мяу — привлекает внимание. Мурр — удовольствие. Шипение — угроза. Трели — приветствие. Каждый звук имеет значение."
-    },
-    {
-        title: "Воспитание котёнка",
-        img: "https://cataas.com/cat?t=10",
-        text: "Приучайте к лотку и когтеточке с первых дней. Никогда не бейте — только ласка и лакомства. Хвалите за правильные действия. Игнорируйте плохое поведение. Терпение — главное."
-    },
-    {
-        title: "Породы сфинксов",
-        img: "https://cataas.com/cat?t=11",
-        text: "Канадский сфинкс — самый популярный. Донской сфинкс — с волнистой шерстью. Петербургский сфинкс — с пуховым покровом. Все требуют тёплого ухода: купание, увлажнение кожи, тёплые места."
-    },
-    {
-        title: "Мейн-куны",
-        img: "https://cataas.com/cat?t=12",
-        text: "Крупные, ласковые, с кисточками на ушах. Вырастают до 12 кг. Отличные компаньоны для семьи. Любят играть, хорошо ладят с детьми. Требуют много места."
-    }
+/* =========================================
+   🐱 МУРЧАЩИЙ МИР — main script
+   ========================================= */
+
+/* ---------- ЗВУК (Web Audio API) ---------- */
+let soundEnabled = true;
+let audioCtx = null;
+
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+// Генерируем "мяу" через осцилляторы
+function playMeow(pitch = 1) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    // Скользящий тон — похоже на "мяу"
+    osc.frequency.setValueAtTime(500 * pitch, now);
+    osc.frequency.linearRampToValueAtTime(900 * pitch, now + 0.15);
+    osc.frequency.linearRampToValueAtTime(400 * pitch, now + 0.45);
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.3, now + 0.05);
+    gain.gain.linearRampToValueAtTime(0.0001, now + 0.5);
+
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.5);
+  } catch (e) { /* ignore */ }
+}
+
+// Короткий "пик" при клике
+function playPop() {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.setValueAtTime(800, now);
+    osc.frequency.exponentialRampToValueAtTime(200, now + 0.1);
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.1);
+  } catch (e) {}
+}
+
+document.getElementById('sound-toggle').addEventListener('click', (e) => {
+  soundEnabled = !soundEnabled;
+  e.target.textContent = soundEnabled ? '🔊 Звук вкл' : '🔇 Звук выкл';
+  if (soundEnabled) playPop();
+});
+
+/* ---------- КОТЫ ---------- */
+const cats = [
+  { emoji: '🐱', name: 'Мурзик',    desc: 'Любит спать на клавиатуре' },
+  { emoji: '🐈', name: 'Барсик',    desc: 'Царь дивана' },
+  { emoji: '🐈‍⬛', name: 'Пушок',   desc: 'Ночной охотник' },
+  { emoji: '😺', name: 'Соня',      desc: 'Спит 20 часов в сутки' },
+  { emoji: '😸', name: 'Рыжик',     desc: 'Профессиональный попрошайка' },
+  { emoji: '😻', name: 'Ласка',     desc: 'Любит обнимашки' },
+  { emoji: '😼', name: 'Хитрец',    desc: 'Знает, где лежит еда' },
+  { emoji: '😽', name: 'Неженка',   desc: 'Мурчит громче пылесоса' },
+  { emoji: '🙀', name: 'Трусишка',  desc: 'Боится огурцов' },
+  { emoji: '😿', name: 'Грустик',   desc: 'Хочет ещё вкусняшку' },
+  { emoji: '😾', name: 'Ворчун',    desc: 'Не доволен всем' },
+  { emoji: '🐾', name: 'Следопыт',  desc: 'Оставляет следы везде' },
 ];
 
-// ===== ГЕНЕРАЦИЯ КАРТОЧЕК =====
-var cardsBox = document.getElementById("cards");
-for (var i = 0; i < articles.length; i++) {
-    (function(index) {
-        var a = articles[index];
-        var card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML =
-            '<img src="' + a.img + '" alt="' + a.title + '">' +
-            '<h3>' + a.title + '</h3>' +
-            '<p>Подробнее о котиках — читайте статью.</p>' +
-            '<span class="read">Читать статью</span>';
-        card.onclick = function() { openModal(index); };
-        cardsBox.appendChild(card);
-    })(i);
+const grid = document.getElementById('cats-grid');
+cats.forEach((cat, i) => {
+  const card = document.createElement('div');
+  card.className = 'cat-card';
+  card.innerHTML = `
+    <span class="cat-emoji">${cat.emoji}</span>
+    <div class="cat-name">${cat.name}</div>
+    <div class="cat-desc">${cat.desc}</div>
+  `;
+  card.addEventListener('click', (e) => {
+    playMeow(0.7 + Math.random() * 0.7);
+    spawnConfetti(e.clientX, e.clientY, ['🐾', '❤️', '✨', '🐟']);
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- КОНФЕТТИ ---------- */
+function spawnConfetti(x, y, symbols = ['✨']) {
+  for (let i = 0; i < 8; i++) {
+    const el = document.createElement('span');
+    el.className = 'confetti';
+    el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.transform = `translate(${Math.random() * 100 - 50}px, 0)`;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1000);
+  }
 }
 
-// ===== МОДАЛЬНОЕ ОКНО =====
-function openModal(index) {
-    var a = articles[index];
-    document.getElementById("modalImg").src = a.img;
-    document.getElementById("modalTitle").innerText = a.title;
-    document.getElementById("modalText").innerText = a.text;
-    document.getElementById("modal").style.display = "flex";
-}
+/* ---------- ФАКТЫ ---------- */
+const facts = [
+  'Коты спят 12–16 часов в сутки — почти 70% жизни! 😴',
+  'У кошек 32 мышцы в каждом ухе. Они могут поворачивать уши на 180°. 👂',
+  'Мурлыканье (25–150 Гц) помогает котам восстанавливаться после травм. 🎵',
+  'Коты не чувствуют сладкий вкус — у них нет нужного рецептора. 🍬',
+  'Нос кота уникален, как отпечаток пальца у человека. 👃',
+  'Кошки могут издавать около 100 разных звуков, собаки — только 10. 🗣️',
+  'У взрослых котов 30 зубов, у котят — 26 молочных. 🦷',
+  'Кот не потеет — охлаждается через подушечки лап. 🐾',
+  'Сердце кота бьётся в 2 раза быстрее человеческого — 150–220 уд/мин. ❤️',
+  'Кошки видят в темноте в 6 раз лучше людей. 🌙',
+  'Кот трётся о ноги не из любви, а чтобы пометить тебя своим запахом. 😼',
+  'Самый старый кот прожил 38 лет и 3 дня — Creme Puff из Техаса. 🎂',
+  'Коты не любят воду, но некоторые породы (турецкий ван) обожают плавать. 🏊',
+  'Мурчание может ускорять заживление костей. 🦴',
+  'Кошки различают красный и зелёный цвета хуже, чем синий и жёлтый. 🎨',
+];
 
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
-}
+const factText = document.getElementById('fact-text');
+let lastFact = -1;
 
-// Закрытие по клику вне окна
-document.getElementById("modal").onclick = function(e) {
-    if (e.target.id === "modal") closeModal();
-};
+document.getElementById('new-fact').addEventListener('click', () => {
+  let idx;
+  do { idx = Math.floor(Math.random() * facts.length); } while (idx === lastFact);
+  lastFact = idx;
+  factText.textContent = facts[idx];
+  playPop();
+});
 
-// ===== ПОИСК =====
-function checkCode() {
-    var input = document.getElementById("searchInput").value.trim();
-    var secretCode = "DOTL.NET";
-    if (input === secretCode) {
-        window.location.href = "secret.html";
-    } else if (input === "") {
-        alert("Введите запрос.");
-    } else {
-        alert("По запросу \"" + input + "\" ничего не найдено.");
-    }
-}
+/* ---------- ИГРА 1: ПОЙМАЙ КОТА ---------- */
+const catchArea = document.getElementById('catch-area');
+const catchTimerEl = document.getElementById('catch-timer');
+const catchScoreEl = document.getElementById('catch-score');
+const catchStartBtn = document.getElementById('catch-start');
+
+let catchScore = 0;
+let catchTimeLeft = 20;
+let catchInterval = null;
+let catchS
