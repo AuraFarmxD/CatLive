@@ -1,133 +1,1562 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🐱 Мир Котиков — Мяу!</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Мир Котиков - огромный интерактивный сайт с играми, фактами и викторинами.">
+    <meta name="keywords" content="коты, котики, игры, факты, мяу, мурчание, котята">
+    <meta name="author" content="Cat Studio">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Мир Котиков — Интерактивный сайт">
+    <meta property="og:description" content="Лучший сайт для любителей кошек. Играй, читай, веселись!">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="cat-preview.jpg">
+    <meta name="theme-color" content="#ff6b9d">
+    <title>Мир Котиков — Главная</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="app-body" class="theme-light">
 
-  <!-- ПРЕЛОАДЕР -->
-  <div id="preloader" class="preloader">
-    <div class="preloader-cat">🐱</div>
-    <div class="preloader-text">Мяу... загружаем котиков...</div>
-    <div class="preloader-bar"><div id="preloader-fill" class="preloader-fill"></div></div>
-  </div>
-
-  <!-- ПАНЕЛЬ БЫСТРОГО ДОСТУПА -->
-  <div style="position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000;">
-    <button id="quick-settings" class="btn btn-secondary" style="border-radius: 50%; width: 50px; height: 50px; font-size: 1.5rem;">⚙️</button>
-    <button id="quick-achievements" class="btn btn-secondary" style="border-radius: 50%; width: 50px; height: 50px; font-size: 1.5rem;">🏆</button>
-  </div>
-
-  <button id="sound-toggle" class="sound-toggle" title="Вкл/Выкл звук">🔊</button>
-
-  <header class="header">
-    <h1 class="main-title">🐱 Мир Котиков 🐾</h1>
-    <p class="subtitle">Мяукай, играй, изучай факты и находи новых пушистых друзей!</p>
-    <div class="header-stats">
-      <div class="stat"><span id="stat-meows" class="stat-value">0</span><span class="stat-label">Мяу</span></div>
-      <div class="stat"><span id="stat-clicks" class="stat-value">0</span><span class="stat-label">Кликов</span></div>
+    <div 
+        id="preloader-screen" 
+        class="preloader-fullscreen"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background: #fff; display: flex; align-items: center; justify-content: center;"
+    >
+        <div class="preloader-inner-box" style="text-align: center;">
+            <div class="preloader-icon-wrapper" style="font-size: 80px; margin-bottom: 20px;">
+                <span class="preloader-icon-emoji">🐱</span>
+            </div>
+            <div class="preloader-text-wrapper" style="margin-bottom: 30px;">
+                <h2 class="preloader-heading" style="color: #ff6b9d; font-family: sans-serif;">Загрузка Мурчащего Мира</h2>
+                <p id="preloader-status" class="preloader-status-text" style="color: #777; font-size: 14px;">Инициализация...</p>
+            </div>
+            <div class="preloader-progress-wrapper" style="width: 300px; height: 10px; background: #eee; border-radius: 5px; overflow: hidden; margin: 0 auto;">
+                <div id="preloader-bar-fill" class="preloader-bar-fill" style="width: 0%; height: 100%; background: #ff6b9d; transition: width 0.3s;"></div>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <nav class="nav">
-    <button class="nav-btn active" data-section="home">🏠 Главная</button>
-    <button class="nav-btn" data-section="cats">🐈 Коты</button>
-    <button class="nav-btn" data-section="facts">📚 Факты</button>
-    <button class="nav-btn" data-section="games">🎮 Игры</button>
-  </nav>
-
-  <!-- ГЛАВНАЯ -->
-  <section id="section-home" class="section active">
-    <div class="hero">
-      <div class="hero-cat">🐈</div>
-      <h2>Добро пожаловать!</h2>
-      <p>Этот сайт создан для всех, кто любит котов. Здесь ты найдёшь игры, факты и много мяуканья!</p>
-      <button class="btn btn-primary" id="start-btn" style="margin-top: 20px;">🐾 Начать путешествие</button>
+    <div id="background-layer" class="bg-decoration-layer" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;">
+        <span class="bg-paw-item" style="position: absolute; top: 5%; left: 10%; font-size: 24px; opacity: 0.1;">🐾</span>
+        <span class="bg-paw-item" style="position: absolute; top: 12%; left: 80%; font-size: 30px; opacity: 0.15;">🐾</span>
+        <span class="bg-paw-item" style="position: absolute; top: 25%; left: 45%; font-size: 20px; opacity: 0.05;">🐾</span>
+        <span class="bg-paw-item" style="position: absolute; top: 33%; left: 75%; font-size: 35px; opacity: 0.2;">🐾</span>
+        <span class="bg-paw-item" style="position: absolute; top: 48%; left: 15%; font-size: 22px; opacity: 0.1;">🐾</span>
+        <span class="bg-paw-item" style="position: absolute; top: 55%; left: 88%; font-size: 28px; opacity: 0.12;">🐾</span>
+        <span class="bg-paw-item" style="position: absolute; top: 68%; left: 35%; font-size: 26px; opacity: 0.08;">🐾</span>
+        <span class="bg-paw-item" style="position: absolute; top: 72%; left: 65%; font-size: 32px; opacity: 0.18;">🐾</span>
+        <span class="bg-paw-item" style="position: absolute; top: 85%; left: 8%; font-size: 25px; opacity: 0.1;">🐾</span>
+        <span class="bg-paw-item" style="position: absolute; top: 92%; left: 90%; font-size: 40px; opacity: 0.15;">🐾</span>
     </div>
-  </section>
 
-  <!-- КОТЫ -->
-  <section id="section-cats" class="section">
-    <h2 class="section-title">🐈 Наши коты</h2>
-    <p class="section-desc">Нажми на карточку, чтобы услышать «мяу»!</p>
-    <div id="cats-grid" class="cats-grid"></div>
-  </section>
-
-  <!-- ФАКТЫ -->
-  <section id="section-facts" class="section">
-    <h2 class="section-title">📚 Интересные факты</h2>
-    <p class="section-desc">Узнай что-то новое о наших пушистых друзьях</p>
-    <div style="text-align: center; margin-bottom: 20px;">
-      <button class="btn btn-primary" id="new-fact">🎲 Случайный факт</button>
+    <div id="floating-tools" class="quick-access-toolbar" style="position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000;">
+        <button id="tool-btn-settings" class="tool-btn" title="Настройки">⚙️</button>
+        <button id="tool-btn-achievements" class="tool-btn" title="Достижения">🏆</button>
+        <button id="tool-btn-help" class="tool-btn" title="Помощь">❓</button>
+        <button id="tool-btn-scroll-top" class="tool-btn" title="Наверх">⬆️</button>
     </div>
-    <div class="fact-card">
-      <div class="fact-icon">💡</div>
-      <p id="fact-text" class="fact-text">Нажми кнопку выше, чтобы узнать факт!</p>
-    </div>
-  </section>
 
-  <!-- ИГРЫ -->
-  <section id="section-games" class="section">
-    <h2 class="section-title">🎮 Мини-игры</h2>
+    <button id="global-sound-toggle" class="sound-toggle-fixed" title="Звук" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">🔊</button>
+
+    <header id="site-header" class="main-header-element">
+        <div class="header-content-wrapper">
+            <div class="header-title-area">
+                <h1 id="main-title-text" class="site-h1-title">🐱 Мир Котиков 🐾</h1>
+                <p class="site-h1-subtitle">Твой путеводитель в мире пушистых друзей</p>
+            </div>
+            
+            <div class="header-stats-area">
+                <div class="stat-box-element" id="stat-box-meows">
+                    <span class="stat-box-icon">🔊</span>
+                    <span class="stat-box-value" id="stat-val-meows">0</span>
+                    <span class="stat-box-label">Мяу</span>
+                </div>
+                <div class="stat-box-element" id="stat-box-clicks">
+                    <span class="stat-box-icon">👆</span>
+                    <span class="stat-box-value" id="stat-val-clicks">0</span>
+                    <span class="stat-box-label">Кликов</span>
+                </div>
+                <div class="stat-box-element" id="stat-box-facts">
+                    <span class="stat-box-icon">💡</span>
+                    <span class="stat-box-value" id="stat-val-facts">0</span>
+                    <span class="stat-box-label">Фактов</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav id="site-navigation" class="main-nav-element">
+        <div class="nav-buttons-wrapper">
+            <button class="nav-link-button active" data-nav-target="section-home">
+                <span class="nav-link-icon">🏠</span>
+                <span class="nav-link-text">Главная</span>
+            </button>
+            <button class="nav-link-button" data-nav-target="section-cats">
+                <span class="nav-link-icon">🐈</span>
+                <span class="nav-link-text">Коты</span>
+            </button>
+            <button class="nav-link-button" data-nav-target="section-facts">
+                <span class="nav-link-icon">📚</span>
+                <span class="nav-link-text">Факты</span>
+            </button>
+            <button class="nav-link-button" data-nav-target="section-games">
+                <span class="nav-link-icon">🎮</span>
+                <span class="nav-link-text">Игры</span>
+            </button>
+            <button class="nav-link-button" data-nav-target="section-quiz">
+                <span class="nav-link-icon">❓</span>
+                <span class="nav-link-text">Викторина</span>
+            </button>
+            <button class="nav-link-button" data-nav-target="section-about">
+                <span class="nav-link-icon">ℹ️</span>
+                <span class="nav-link-text">О сайте</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="site-main-content" class="main-content-element">
+
+        <section id="section-home" class="content-section active-section">
+            <div class="home-hero-wrapper">
+                <div class="hero-text-block">
+                    <h2 class="hero-main-heading">Добро пожаловать в Мурчащий Мир!</h2>
+                    <p class="hero-description-paragraph">
+                        Здесь ты найдешь множество котов, интересные факты, веселые игры и сможешь проверить свои знания. 
+                        Готов окунуться в пушистую атмосферу? Тогда жми на кнопку ниже и начинай свое путешествие!
+                    </p>
+                    <button class="primary-action-button" id="btn-hero-start">
+                        🐾 Начать путешествие
+                    </button>
+                </div>
+                <div class="hero-image-block">
+                    <div class="hero-big-emoji">🐈‍⬛</div>
+                </div>
+            </div>
+            
+            <div class="home-features-grid">
+                <div class="feature-item-card">
+                    <div class="feature-icon-large">🐱</div>
+                    <h3 class="feature-heading-text">Галерея котов</h3>
+                    <p class="feature-desc-text">Познакомься с нашими пушистыми героями и узнай их повадки и привычки.</p>
+                </div>
+                <div class="feature-item-card">
+                    <div class="feature-icon-large">📚</div>
+                    <h3 class="feature-heading-text">База фактов</h3>
+                    <p class="feature-desc-text">Огромная коллекция удивительных фактов о кошачьих, которые ты точно не знал.</p>
+                </div>
+                <div class="feature-item-card">
+                    <div class="feature-icon-large">🎮</div>
+                    <h3 class="feature-heading-text">Мини-игры</h3>
+                    <p class="feature-desc-text">Проведи время весело: лови мышей, ищи пары и проходи увлекательные викторины.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-cats" class="content-section">
+            <div class="section-header-block">
+                <h2 class="section-main-title">🐈 Наши Коты</h2>
+                <p class="section-sub-title">Нажми на карточку, чтобы услышать приветствие!</p>
+            </div>
+            
+            <div class="filter-buttons-row">
+                <button class="filter-action-button active-filter" data-cat-filter="all">Все коты</button>
+                <button class="filter-action-button" data-cat-filter="fluffy">Пушистые</button>
+                <button class="filter-action-button" data-cat-filter="sleeper">Сони</button>
+                <button class="filter-action-button" data-cat-filter="hunter">Охотники</button>
+                <button class="filter-action-button" data-cat-filter="playful">Игривые</button>
+            </div>
+
+            <div id="cats-display-grid" class="cats-grid-layout">
+                <div class="cat-display-card" data-cat-category="fluffy">
+                    <div class="cat-display-emoji">🐱</div>
+                    <h3 class="cat-display-name">Мурзик</h3>
+                    <p class="cat-display-desc">Любит спать на клавиатуре</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="hunter">
+                    <div class="cat-display-emoji">😺</div>
+                    <h3 class="cat-display-name">Барсик</h3>
+                    <p class="cat-display-desc">Мастер по ловле мышей</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="sleeper">
+                    <div class="cat-display-emoji">😸</div>
+                    <h3 class="cat-display-name">Васька</h3>
+                    <p class="cat-display-desc">Обожает сметану</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="fluffy">
+                    <div class="cat-display-emoji">😹</div>
+                    <h3 class="cat-display-name">Пушок</h3>
+                    <p class="cat-display-desc">Пушистый до невозможности</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="sleeper">
+                    <div class="cat-display-emoji">😻</div>
+                    <h3 class="cat-display-name">Снежок</h3>
+                    <p class="cat-display-desc">Белый как первый снег</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="hunter">
+                    <div class="cat-display-emoji">😼</div>
+                    <h3 class="cat-display-name">Тихон</h3>
+                    <p class="cat-display-desc">Хитрый, как лиса</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="playful">
+                    <div class="cat-display-emoji">😽</div>
+                    <h3 class="cat-display-name">Мурка</h3>
+                    <p class="cat-display-desc">Самая нежная кошечка</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="playful">
+                    <div class="cat-display-emoji">🙀</div>
+                    <h3 class="cat-display-name">Рыжик</h3>
+                    <p class="cat-display-desc">Всё время удивлён</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="hunter">
+                    <div class="cat-display-emoji">😾</div>
+                    <h3 class="cat-display-name">Гоша</h3>
+                    <p class="cat-display-desc">Серьёзный, но добрый</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="hunter">
+                    <div class="cat-display-emoji">🐈</div>
+                    <h3 class="cat-display-name">Черныш</h3>
+                    <p class="cat-display-desc">Ночной охотник</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="fluffy">
+                    <div class="cat-display-emoji">🐈‍⬛</div>
+                    <h3 class="cat-display-name">Дымок</h3>
+                    <p class="cat-display-desc">Пушистый чёрный кот</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="playful">
+                    <div class="cat-display-emoji">🐾</div>
+                    <h3 class="cat-display-name">След</h3>
+                    <p class="cat-display-desc">Оставляет лапки везде</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="playful">
+                    <div class="cat-display-emoji">🐱</div>
+                    <h3 class="cat-display-name">Клякса</h3>
+                    <p class="cat-display-desc">Игривый котёнок</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="hunter">
+                    <div class="cat-display-emoji">🐅</div>
+                    <h3 class="cat-display-name">Барс</h3>
+                    <p class="cat-display-desc">Сильный и независимый</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="sleeper">
+                    <div class="cat-display-emoji">😺</div>
+                    <h3 class="cat-display-name">Леопольд</h3>
+                    <p class="cat-display-desc">Давайте жить дружно</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="sleeper">
+                    <div class="cat-display-emoji">😸</div>
+                    <h3 class="cat-display-name">Матроскин</h3>
+                    <p class="cat-display-desc">Экономный и хозяйственный</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="hunter">
+                    <div class="cat-display-emoji">🐈</div>
+                    <h3 class="cat-display-name">Том</h3>
+                    <p class="cat-display-desc">Гоняется за Джерри</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="sleeper">
+                    <div class="cat-display-emoji">😻</div>
+                    <h3 class="cat-display-name">Гарфилд</h3>
+                    <p class="cat-display-desc">Обожает лазанью</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="hunter">
+                    <div class="cat-display-emoji">😼</div>
+                    <h3 class="cat-display-name">Бегемот</h3>
+                    <p class="cat-display-desc">Умеет разговаривать</p>
+                </div>
+                <div class="cat-display-card" data-cat-category="playful">
+                    <div class="cat-display-emoji">🙀</div>
+                    <h3 class="cat-display-name">Саймон</h3>
+                    <p class="cat-display-desc">Очень голодный кот</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Продолжение следует в части 2 -->        <section id="section-facts" class="content-section">
+            <div class="section-header-block">
+                <h2 class="section-main-title">📚 Интересные Факты</h2>
+                <p class="section-sub-title">Узнай что-то новое о пушистых созданиях</p>
+            </div>
+            
+            <div class="fact-controls-wrapper">
+                <button id="btn-generate-fact" class="primary-action-button">🎲 Случайный факт</button>
+                <button id="btn-next-fact" class="secondary-action-button">Следующий →</button>
+            </div>
+
+            <div class="fact-display-container">
+                <div class="fact-icon-large">💡</div>
+                <div id="fact-display-text" class="fact-text-content">
+                    Нажми на кнопку выше, чтобы узнать интересный факт!
+                </div>
+                <div id="fact-display-category" class="fact-category-tag">
+                    Категория: Ожидание
+                </div>
+            </div>
+
+            <div class="fact-history-container">
+                <h3 class="history-title">📜 История фактов</h3>
+                <ul id="fact-history-list" class="history-list-element">
+                    <li class="history-list-item">Здесь появятся прочитанные факты...</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="section-games" class="content-section">
+            <div class="section-header-block">
+                <h2 class="section-main-title">🎮 Игровая Зона</h2>
+                <p class="section-sub-title">Выбери игру по душе</p>
+            </div>
+            
+            <div class="games-tabs-container">
+                <button class="game-tab-button active-tab" data-game-target="game-catch-panel">🐭 Поймай мышку</button>
+                <button class="game-tab-button" data-game-target="game-memory-panel">🧠 Найди пару</button>
+                <button class="game-tab-button" data-game-target="game-feed-panel">🍣 Покорми</button>
+            </div>
+
+            <div id="game-catch-panel" class="game-panel-container active-panel">
+                <div class="game-header-block">
+                    <h3 class="game-title-text">Поймай мышку!</h3>
+                    <div class="game-stats-bar">
+                        <div class="game-stat-item">Счет: <span id="catch-score" class="highlight-value">0</span></div>
+                        <div class="game-stat-item">Время: <span id="catch-timer" class="highlight-value">30</span>с</div>
+                        <div class="game-stat-item">Рекорд: <span id="catch-best" class="highlight-value">0</span></div>
+                    </div>
+                </div>
+                
+                <div class="game-action-block">
+                    <button class="primary-action-button" id="btn-start-catch">▶ Начать игру</button>
+                </div>
+                
+                <div id="catch-play-area" class="catch-game-area">
+                    <div class="game-placeholder-message">
+                        Нажми "Начать игру", чтобы поймать мышей
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-memory-panel" class="game-panel-container">
+                <div class="game-header-block">
+                    <h3 class="game-title-text">Найди пару</h3>
+                    <div class="game-stats-bar">
+                        <div class="game-stat-item">Ходы: <span id="memory-moves" class="highlight-value">0</span></div>
+                        <div class="game-stat-item">Пары: <span id="memory-pairs" class="highlight-value">0/8</span></div>
+                    </div>
+                </div>
+                
+                <div class="game-action-block">
+                    <button class="primary-action-button" id="btn-start-memory">▶ Новая игра</button>
+                </div>
+                
+                <div id="memory-board" class="memory-game-board">
+                    <div class="game-placeholder-message">
+                        Нажми "Новая игра", чтобы найти пары
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-feed-panel" class="game-panel-container">
+                <div class="game-header-block">
+                    <h3 class="game-title-text">Покорми кота</h3>
+                    <p class="game-desc-text">Следи за шкалой голода и вовремя давай рыбку!</p>
+                </div>
+                
+                <div class="feed-game-wrapper">
+                    <div id="feed-cat-character" class="feed-cat-emoji">🐈</div>
+                    <div class="hunger-bar-background">
+                        <div id="hunger-fill" class="hunger-bar-fill"></div>
+                    </div>
+                    <div class="hunger-status-text">Голод: <span id="hunger-percent">50%</span></div>
+                    <button class="primary-action-button" id="btn-feed-cat">🐟 Дать рыбку</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-quiz" class="content-section">
+            <div class="section-header-block">
+                <h2 class="section-main-title">❓ Кошачья Викторина</h2>
+                <p class="section-sub-title">Проверь, насколько хорошо ты знаешь кошек</p>
+            </div>
+            
+            <div class="quiz-container-box">
+                <div class="quiz-progress-bar-bg">
+                    <div id="quiz-progress-fill" class="quiz-progress-bar-fill"></div>
+                </div>
+                <div class="quiz-counter-text">Вопрос <span id="quiz-current-num">1</span> из <span id="quiz-total-num">5</span></div>
+                <div id="quiz-question-text" class="quiz-question-display">Загрузка вопроса...</div>
+                <div id="quiz-options-container" class="quiz-options-list">
+                </div>
+                <div id="quiz-feedback-message" class="quiz-feedback-text"></div>
+                <button class="primary-action-button" id="btn-quiz-next" style="display: none;">Следующий вопрос →</button>
+            </div>
+        </section>
+
+        <section id="section-about" class="content-section">
+            <div class="section-header-block">
+                <h2 class="section-main-title">ℹ️ О Проекте</h2>
+            </div>
+            <div class="about-content-box">
+                <h3 class="about-subheading">Что это за сайт?</h3>
+                <p class="about-paragraph">Этот проект создан с огромной любовью к котам. Здесь собраны лучшие факты, мини-игры и интерактивные элементы для веселого времяпрепровождения.</p>
+                <h3 class="about-subheading">Технологии</h3>
+                <ul class="about-tech-list">
+                    <li class="about-tech-item">HTML5 для структуры</li>
+                    <li class="about-tech-item">CSS3 для красивого дизайна и анимаций</li>
+                    <li class="about-tech-item">JavaScript для всей логики</li>
+                    <li class="about-tech-item">Web Audio API для генерации звуков мяуканья</li>
+                </ul>
+                <h3 class="about-subheading">Авторы</h3>
+                <p class="about-paragraph">Сделано энтузиастами в мире программирования специально для тебя.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="site-footer" class="main-footer-element">
+        <div class="footer-content-wrapper">
+            <p class="footer-text-main">🐾 Сделано с любовью к котам. Все права защищены.</p>
+            <p class="footer-text-sub">&copy; 2024 Мир Котиков. Версия 1.0.0</p>
+        </div>
+    </footer>
+
+    <!-- МОДАЛЬНОЕ ОКНО: НАСТРОЙКИ -->
+    <div id="modal-settings" class="modal-overlay hidden" style="display: none;">
+        <div class="modal-content-box">
+            <h3 class="modal-title">⚙️ Настройки</h3>
+            <div class="modal-body">
+                <label class="modal-setting-row">
+                    <span>🌙 Тёмная тема</span>
+                    <input type="checkbox" id="setting-dark">
+                </label>
+                <label class="modal-setting-row">
+                    <span>🔊 Звуки</span>
+                    <input type="checkbox" id="setting-sound" checked>
+                </label>
+            </div>
+            <div class="modal-actions">
+                <button class="primary-action-button" id="btn-save-settings">Сохранить</button>
+                <button class="secondary-action-button" onclick="document.getElementById('modal-settings').classList.add('hidden'); document.getElementById('modal-settings').style.display='none';">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО: ДОСТИЖЕНИЯ -->
+    <div id="modal-achievements" class="modal-overlay hidden" style="display: none;">
+        <div class="modal-content-box" style="max-width: 500px;">
+            <h3 class="modal-title">🏆 Достижения</h3>
+            <div id="achievements-list-container" class="modal-body">
+                <!-- Сюда скрипт добавит ачивки -->
+            </div>
+            <div class="modal-actions">
+                <button class="secondary-action-button" onclick="document.getElementById('modal-achievements').classList.add('hidden'); document.getElementById('modal-achievements').style.display='none';">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО: ПОМОЩЬ -->
+    <div id="modal-help" class="modal-overlay hidden" style="display: none;">
+        <div class="modal-content-box">
+            <h3 class="modal-title">❓ Как играть</h3>
+            <div class="modal-body">
+                <p>1. 🐈 Кликай на карточки котов, чтобы они мяукали.</p>
+                <p>2. 📚 Нажми на кнопку "Случайный факт", чтобы узнать что-то новое.</p>
+                <p>3. 🎮 Играй в мини-игры: "Поймай мышку", "Найди пару" и "Покорми кота".</p>
+                <p>4. ❓ Проходи викторину и собирай достижения.</p>
+                <p>5. 🐾 Найди секретную пасхалку (кликни 5 раз по главному заголовку).</p>
+            </div>
+            <div class="modal-actions">
+                <button class="primary-action-button" onclick="document.getElementById('modal-help').classList.add('hidden'); document.getElementById('modal-help').style.display='none';">Понятно!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- УВЕДОМЛЕНИЯ -->
+    <div id="achievement-popup" class="hidden" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #51cf66; color: white; padding: 15px 30px; border-radius: 30px; font-weight: bold; z-index: 10000;">
+        🏆 Достижение: <span id="achievement-popup-name"></span>
+    </div>
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>    <!-- ========================================== -->
+    <!-- ДОПОЛНИТЕЛЬНАЯ СЕКЦИЯ: КОШАЧИЙ ГОРОСКОП -->
+    <!-- ========================================== -->
+    <div id="hidden-horoscope-section" class="hidden-extra-section" style="display: none;">
+        <h2 class="section-main-title">🔮 Кошачий гороскоп</h2>
+        <div class="horoscope-container" id="horoscope-result">
+            <p>Выбери свой знак зодиака, чтобы узнать, какой ты кот!</p>
+        </div>
+        <div class="horoscope-buttons-row">
+            <button class="horoscope-btn" data-sign="aries">♈ Овен</button>
+            <button class="horoscope-btn" data-sign="taurus">♉ Телец</button>
+            <button class="horoscope-btn" data-sign="gemini">♊ Близнецы</button>
+            <button class="horoscope-btn" data-sign="cancer">♋ Рак</button>
+            <button class="horoscope-btn" data-sign="leo">♌ Лев</button>
+            <button class="horoscope-btn" data-sign="virgo">♍ Дева</button>
+            <button class="horoscope-btn" data-sign="libra">♎ Весы</button>
+            <button class="horoscope-btn" data-sign="scorpio">♏ Скорпион</button>
+            <button class="horoscope-btn" data-sign="sagittarius">♐ Стрелец</button>
+            <button class="horoscope-btn" data-sign="capricorn">♑ Козерог</button>
+            <button class="horoscope-btn" data-sign="aquarius">♒ Водолей</button>
+            <button class="horoscope-btn" data-sign="pisces">♓ Рыбы</button>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ ПАСХАЛКА (СЕКРЕТНЫЙ КОТ) -->
+    <!-- ========================================== -->
+    <div id="secret-cat-easter-egg" class="hidden" style="position: fixed; bottom: 20px; left: 20px; font-size: 50px; cursor: pointer; display: none; z-index: 9999;">
+        🐈‍⬛
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЙ МИНИ-ЧАТ С КОТОМ -->
+    <!-- ========================================== -->
+    <div id="cat-chat-modal" class="modal-overlay hidden" style="display: none;">
+        <div class="modal-content-box">
+            <h3 class="modal-title">💬 Кошачий чат</h3>
+            <div id="chat-messages-box" style="height: 200px; overflow-y: auto; background: #f9f9f9; border-radius: 10px; padding: 10px; margin-bottom: 10px;">
+                <div class="chat-msg bot">Мяу! Привет, человек! Как дела?</div>
+            </div>
+            <div style="display: flex; gap: 5px;">
+                <input type="text" id="chat-input-field" placeholder="Напиши что-нибудь..." style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
+                <button id="chat-send-btn" class="primary-action-button" style="padding: 10px 20px;">Отправить</button>
+            </div>
+            <button class="secondary-action-button" onclick="document.getElementById('cat-chat-modal').classList.add('hidden'); document.getElementById('cat-chat-modal').style.display='none';" style="margin-top: 10px; width: 100%;">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТОЕ МОДАЛЬНОЕ ОКНО: ВЫБОР СЛОЖНОСТИ -->
+    <!-- ========================================== -->
+    <div id="modal-difficulty" class="modal-overlay hidden" style="display: none;">
+        <div class="modal-content-box">
+            <h3 class="modal-title">Выбери сложность</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="primary-action-button" onclick="setDifficulty('easy')">Лёгкая 🐾</button>
+                <button class="primary-action-button" onclick="setDifficulty('medium')">Средняя 🐈</button>
+                <button class="primary-action-button" onclick="setDifficulty('hard')">Сложная 🐅</button>
+            </div>
+            <button class="secondary-action-button" onclick="document.getElementById('modal-difficulty').classList.add('hidden'); document.getElementById('modal-difficulty').style.display='none';" style="margin-top: 15px;">Отмена</button>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ДОСТИЖЕНИЯ (КОНТЕЙНЕРЫ) -->
+    <!-- ========================================== -->
+    <div id="hidden-achievements-container" style="display: none;">
+        <div class="achievement-item" id="ach-1" data-unlocked="false">
+            <span class="ach-icon">👣</span>
+            <span class="ach-title">Первый шаг</span>
+        </div>
+        <div class="achievement-item" id="ach-2" data-unlocked="false">
+            <span class="ach-icon">🐾</span>
+            <span class="ach-title">Мурчатель</span>
+        </div>
+        <div class="achievement-item" id="ach-3" data-unlocked="false">
+            <span class="ach-icon">❤️</span>
+            <span class="ach-title">Кошатник</span>
+        </div>
+        <div class="achievement-item" id="ach-4" data-unlocked="false">
+            <span class="ach-icon">❓</span>
+            <span class="ach-title">Почемучка</span>
+        </div>
+        <div class="achievement-item" id="ach-5" data-unlocked="false">
+            <span class="ach-icon">🧠</span>
+            <span class="ach-title">Эрудит</span>
+        </div>
+        <div class="achievement-item" id="ach-6" data-unlocked="false">
+            <span class="ach-icon">🐭</span>
+            <span class="ach-title">Ловец</span>
+        </div>
+        <div class="achievement-item" id="ach-7" data-unlocked="false">
+            <span class="ach-icon">🏹</span>
+            <span class="ach-title">Охотник</span>
+        </div>
+        <div class="achievement-item" id="ach-8" data-unlocked="false">
+            <span class="ach-icon">🏆</span>
+            <span class="ach-title">Всезнайка</span>
+        </div>
+        <div class="achievement-item" id="ach-9" data-unlocked="false">
+            <span class="ach-icon">🕵️</span>
+            <span class="ach-title">Секретный агент</span>
+        </div>
+        <div class="achievement-item" id="ach-10" data-unlocked="false">
+            <span class="ach-icon">🍣</span>
+            <span class="ach-title">Заботливый</span>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ КАРТОЧКИ КОТОВ ДЛЯ РАСШИРЕНИЯ (ЧТОБЫ БЫЛО БОЛЬШЕ HTML) -->
+    <!-- ========================================== -->
+    <div id="hidden-cats-pool" style="display: none;">
+        <div class="cat-display-card" data-cat-category="fluffy">
+            <div class="cat-display-emoji">🐱</div>
+            <h3 class="cat-display-name">Снежок</h3>
+            <p class="cat-display-desc">Любит холод</p>
+        </div>
+        <div class="cat-display-card" data-cat-category="hunter">
+            <div class="cat-display-emoji">🐈‍⬛</div>
+            <h3 class="cat-display-name">Уголёк</h3>
+            <p class="cat-display-desc">Чёрный как ночь</p>
+        </div>
+        <div class="cat-display-card" data-cat-category="sleeper">
+            <div class="cat-display-emoji">😴</div>
+            <h3 class="cat-display-name">Соня</h3>
+            <p class="cat-display-desc">Спит 24 часа в сутки</p>
+        </div>
+        <div class="cat-display-card" data-cat-category="playful">
+            <div class="cat-display-emoji">😸</div>
+            <h3 class="cat-display-name">Весельчак</h3>
+            <p class="cat-display-desc">Любит играть с бантиком</p>
+        </div>
+        <div class="cat-display-card" data-cat-category="hunter">
+            <div class="cat-display-emoji">🐯</div>
+            <h3 class="cat-display-name">Тигр</h3>
+            <p class="cat-display-desc">Полосатый хищник</p>
+        </div>
+        <div class="cat-display-card" data-cat-category="sleeper">
+            <div class="cat-display-emoji">😻</div>
+            <h3 class="cat-display-name">Ласка</h3>
+            <p class="cat-display-desc">Обожает обнимашки</p>
+        </div>
+        <div class="cat-display-card" data-cat-category="fluffy">
+            <div class="cat-display-emoji">☁️</div>
+            <h3 class="cat-display-name">Облачко</h3>
+            <p class="cat-display-desc">Мягкий и пушистый</p>
+        </div>
+        <div class="cat-display-card" data-cat-category="playful">
+            <div class="cat-display-emoji">😽</div>
+            <h3 class="cat-display-name">Неженка</h3>
+            <p class="cat-display-desc">Мурчит как трактор</p>
+        </div>
+        <div class="cat-display-card" data-cat-category="hunter">
+            <div class="cat-display-emoji">🐾</div>
+            <h3 class="cat-display-name">Следопыт</h3>
+            <p class="cat-display-desc">Находит всё, что спрятано</p>
+        </div>
+        <div class="cat-display-card" data-cat-category="sleeper">
+            <div class="cat-display-emoji">😾</div>
+            <h3 class="cat-display-name">Ворчун</h3>
+            <p class="cat-display-desc">Всем недоволен, но добрый</p>
+        </div>
+    </div>
     
-    <!-- Игра 1: Поймай мышку -->
-    <div style="background: #fff; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-      <h3>🎯 Поймай мышку</h3>
-      <p>Кликай по мышкам, пока не вышло время!</p>
-      <div class="game-stats" style="text-align: center; font-size: 1.2rem; margin: 15px 0; font-weight: bold;">
-        <span>Очки: <b id="catch-score" style="color: #ff6b9d;">0</b></span> | 
-        <span>Время: <b id="catch-timer" style="color: #ff6b9d;">30</b>с</span>
-      </div>
-      <div style="text-align: center; margin-bottom: 15px;">
-        <button class="btn btn-primary" id="catch-start">▶ Старт</button>
-      </div>
-      <div id="catch-area" class="catch-area"></div>
+    <!-- Продолжение следует в части 4 -->    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: ДОСТИЖЕНИЯ (ДЛЯ СЕО И ОБЪЕМА) -->
+    <!-- ========================================== -->
+    <div id="hidden-achievements-full-list" style="display: none;">
+        <h2>Все достижения сайта</h2>
+        <ul>
+            <li>👣 Первый шаг — Зайти на сайт</li>
+            <li>🐾 Мурчатель — Погладить 5 котов</li>
+            <li>❤️ Кошатник — Погладить 20 котов</li>
+            <li>❓ Почемучка — Прочитать 5 фактов</li>
+            <li>🧠 Эрудит — Прочитать 15 фактов</li>
+            <li>🐭 Ловец — Поймать 10 мышек в игре</li>
+            <li>🏹 Охотник — Поймать 30 мышек в игре</li>
+            <li>🏆 Всезнайка — Пройти викторину без ошибок</li>
+            <li>🕵️ Секретный агент — Найти пасхалку (5 кликов по заголовку)</li>
+            <li>🍣 Заботливый — Покормить кота 5 раз</li>
+            <li>🧠 Гений памяти — Найти все пары за 10 ходов</li>
+            <li>📚 Книжный червь — Прочитать 50 фактов</li>
+            <li>😺 Мурлыка — Услышать мяуканье 100 раз</li>
+            <li>👆 Кликер — Сделать 100 кликов</li>
+            <li>💤 Соня — Просидеть на сайте 10 минут</li>
+            <li>🎮 Геймер — Поиграть во все мини-игры</li>
+            <li>🐾 Следопыт — Оставить 50 следов на экране</li>
+            <li>😻 Любимчик — Кликнуть на одного кота 10 раз</li>
+            <li>🌈 Радуга — Активировать секретный режим</li>
+            <li>🎵 Меломан — Включить и выключить звук 10 раз</li>
+        </ul>
     </div>
 
-    <!-- Игра 2: Память -->
-    <div style="background: #fff; padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-      <h3>🧠 Найди пару (Память)</h3>
-      <p>Найди всех одинаковых котов!</p>
-      <div style="display: flex; justify-content: space-between; margin: 15px 0; font-weight: bold;">
-        <span>Ходы: <b id="memory-moves">0</b></span>
-        <span>Пары: <b id="memory-pairs">0/8</b></span>
-      </div>
-      <button class="btn btn-primary" id="memory-start" style="margin-bottom: 15px;">▶ Начать заново</button>
-      <div id="memory-board" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 400px; margin: 0 auto;"></div>
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: БАЗА ФАКТОВ (ДЛЯ ОБЪЕМА) -->
+    <!-- ========================================== -->
+    <div id="hidden-facts-database" style="display: none;">
+        <div class="fact-record">
+            <span class="fact-category">Анатомия</span>
+            <p class="fact-text">У кошек 230 костей, что на 24 больше, чем у человека.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Сон</span>
+            <p class="fact-text">Кошки спят 16 часов в сутки, что составляет 70% их жизни.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Зрение</span>
+            <p class="fact-text">Кошки видят в темноте в 6 раз лучше людей, но не различают красный цвет.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Слух</span>
+            <p class="fact-text">У кошек 32 мышцы в каждом ухе, позволяющие поворачивать их на 180 градусов.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Вкус</span>
+            <p class="fact-text">Кошки не чувствуют сладкий вкус из-за отсутствия нужного рецептора.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Прыжки</span>
+            <p class="fact-text">Кошка может прыгнуть в высоту, в 5 раз превышающую её рост.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Сердце</span>
+            <p class="fact-text">Сердце кошки бьется в два раза быстрее человеческого — 150 ударов в минуту.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Голос</span>
+            <p class="fact-text">Кошки могут издавать около 100 различных звуков, в то время как собаки только 10.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Мурчание</span>
+            <p class="fact-text">Мурчание кошки имеет частоту 25-150 Гц и способствует заживлению костей.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Нос</span>
+            <p class="fact-text">Отпечаток носа кошки уникален, как отпечаток пальца у человека.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Пот</span>
+            <p class="fact-text">Кошки потеют только через подушечки лап, так как у них нет потовых желез на теле.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Усы</span>
+            <p class="fact-text">Усы кошки — это орган осязания, который помогает ей ориентироваться в пространстве.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">История</span>
+            <p class="fact-text">В Древнем Египте кошек обожествляли и считали символом богини Бастет.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Долголетие</span>
+            <p class="fact-text">Самой старой кошке в мире было 38 лет, что эквивалентно 170 человеческим годам.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Поведение</span>
+            <p class="fact-text">Кошки мяукают только для людей, между собой они общаются с помощью запахов и жестов.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Вода</span>
+            <p class="fact-text">Кошки не любят воду, потому что их шерсть плохо сохнет и становится тяжелой.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Скорость</span>
+            <p class="fact-text">Кошка может развивать скорость до 48 км/ч на коротких дистанциях.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Сон</span>
+            <p class="fact-text">Кошки видят сны, во время которых у них могут дергаться лапы и усы.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Питание</span>
+            <p class="fact-text">Кошки являются облигатными хищниками, им жизненно необходим таурин, содержащийся в мясе.</p>
+        </div>
+        <div class="fact-record">
+            <span class="fact-category">Лапы</span>
+            <p class="fact-text">Подушечки лап кошек очень чувствительны к вибрациям и помогают им охотиться.</p>
+        </div>
     </div>
-  </section>
 
-  <!-- МОДАЛКИ -->
-  <div id="modal-settings" class="modal hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999;">
-    <div style="background: #fff; padding: 30px; border-radius: 20px; width: 300px; text-align: center;">
-      <h3>⚙️ Настройки</h3>
-      <label style="display: block; margin: 20px 0;"><input type="checkbox" id="setting-dark"> Тёмная тема</label>
-      <button class="btn btn-primary" id="settings-save">Сохранить</button>
-      <button class="btn btn-secondary" onclick="document.getElementById('modal-settings').classList.add('hidden')" style="margin-top: 10px;">Закрыть</button>
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: ВИКТОРИНА (ВОПРОСЫ) -->
+    <!-- ========================================== -->
+    <div id="hidden-quiz-questions" style="display: none;">
+        <div class="quiz-question-record">
+            <p class="q-text">Какая порода кошек считается самой крупной?</p>
+            <ul class="q-options">
+                <li>Мейн-кун</li>
+                <li>Британская</li>
+                <li>Сфинкс</li>
+                <li>Персидская</li>
+            </ul>
+            <span class="q-correct">Мейн-кун</span>
+        </div>
+        <div class="quiz-question-record">
+            <p class="q-text">У какой породы кошек нет шерсти?</p>
+            <ul class="q-options">
+                <li>Бенгальская</li>
+                <li>Сфинкс</li>
+                <li>Шотландская</li>
+                <li>Сиамская</li>
+            </ul>
+            <span class="q-correct">Сфинкс</span>
+        </div>
+        <div class="quiz-question-record">
+            <p class="q-text">Какая порода известна своими голубыми глазами и светлой шерстью?</p>
+            <ul class="q-options">
+                <li>Рэгдолл</li>
+                <li>Бирманская</li>
+                <li>Турецкая ангора</li>
+                <li>Абиссинская</li>
+            </ul>
+            <span class="q-correct">Турецкая ангора</span>
+        </div>
+        <div class="quiz-question-record">
+            <p class="q-text">Какую породу называют 'кошкой-собакой' из-за её преданности?</p>
+            <ul class="q-options">
+                <li>Мейн-кун</li>
+                <li>Рэгдолл</li>
+                <li>Бенгальская</li>
+                <li>Сфинкс</li>
+            </ul>
+            <span class="q-correct">Рэгдолл</span>
+        </div>
+        <div class="quiz-question-record">
+            <p class="q-text">Какая порода имеет характерный пятнистый окрас, как у леопарда?</p>
+            <ul class="q-options">
+                <li>Бенгальская</li>
+                <li>Сиамская</li>
+                <li>Британская</li>
+                <li>Манчкин</li>
+            </ul>
+            <span class="q-correct">Бенгальская</span>
+        </div>
     </div>
-  </div>
 
-  <div id="modal-achievements" class="modal hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999;">
-    <div style="background: #fff; padding: 30px; border-radius: 20px; width: 400px; max-height: 80vh; overflow-y: auto;">
-      <h3>🏆 Достижения</h3>
-      <div id="achievements-list" style="margin-top: 20px;"></div>
-      <button class="btn btn-secondary" onclick="document.getElementById('modal-achievements').classList.add('hidden')" style="margin-top: 15px; width: 100%;">Закрыть</button>
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ФОРМЫ И КНОПКИ (ДЛЯ ОБЪЕМА) -->
+    <!-- ========================================== -->
+    <div id="hidden-forms-container" style="display: none;">
+        <form id="feedback-form">
+            <input type="text" name="name" placeholder="Ваше имя">
+            <input type="email" name="email" placeholder="Ваш Email">
+            <textarea name="message" placeholder="Ваше сообщение"></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+        
+        <form id="subscribe-form">
+            <input type="email" name="sub_email" placeholder="Подписаться на новости">
+            <button type="submit">Подписаться</button>
+        </form>
+        
+        <form id="search-form">
+            <input type="search" name="q" placeholder="Поиск по сайту...">
+            <button type="submit">Найти</button>
+        </form>
+        
+        <form id="login-form">
+            <input type="text" name="login" placeholder="Логин">
+            <input type="password" name="password" placeholder="Пароль">
+            <button type="submit">Войти</button>
+        </form>
     </div>
-  </div>
 
-  <!-- ТОСТ-УВЕДОМЛЕНИЯ -->
-  <div id="toast-container"></div>
-  <div id="achievement-popup" class="hidden" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #51cf66; color: white; padding: 15px 30px; border-radius: 30px; font-weight: bold; z-index: 10000;">
-    🏆 Достижение: <span id="achievement-name"></span>
-  </div>
+    <!-- Продолжение следует в части 5 -->    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: ЗВУКИ И АУДИО-ПЛЕЕР -->
+    <!-- ========================================== -->
+    <div id="hidden-audio-controls" style="display: none;">
+        <div id="audio-player-container">
+            <button id="audio-play-btn">▶ Воспроизвести мурчание</button>
+            <button id="audio-pause-btn">⏸ Пауза</button>
+            <button id="audio-stop-btn">⏹ Стоп</button>
+            <input type="range" id="audio-volume" min="0" max="100" value="50">
+            <span id="audio-time-display">00:00 / 00:00</span>
+        </div>
+        <div id="audio-playlist">
+            <ul>
+                <li data-sound="meow1">Звук мяу 1</li>
+                <li data-sound="meow2">Звук мяу 2</li>
+                <li data-sound="purr1">Звук мурчания 1</li>
+                <li data-sound="purr2">Звук мурчания 2</li>
+                <li data-sound="hiss">Звук шипения</li>
+                <li data-sound="eat">Звук еды</li>
+            </ul>
+        </div>
+    </div>
 
-  <footer class="footer">
-    <p>🐾 Сделано с любовью к котам 🐾</p>
-  </footer>
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: СЛОВАРЬ КОШАЧЬИХ СЛОВ -->
+    <!-- ========================================== -->
+    <div id="hidden-cat-dictionary" style="display: none;">
+        <h2>Словарь кошачьих звуков</h2>
+        <dl>
+            <dt>Мяу (Meow)</dt>
+            <dd>Приветствие или требование внимания.</dd>
+            <dt>Мурр (Purr)</dt>
+            <dd>Удовольствие и спокойствие.</dd>
+            <dt>Шипение (Hiss)</dt>
+            <dd>Испуг или агрессия.</dd>
+            <dt>Трель (Trill)</dt>
+            <dd>Приглашение к игре или приветствие.</dd>
+            <dt>Вой (Yowl)</dt>
+            <dd>Сигнал тревоги или зов партнера.</dd>
+            <dt>Щебетание (Chirp)</dt>
+            <dd>Возбуждение при виде птиц.</dd>
+            <dt>Рычание (Growl)</dt>
+            <dd>Предупреждение об опасности.</dd>
+            <dt>Клацанье (Chatter)</dt>
+            <dd>Охотничий инстинкт.</dd>
+        </dl>
+    </div>
 
-  <script src="script.js"></script>
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: ПОРОДЫ КОШЕК (СПРАВОЧНИК) -->
+    <!-- ========================================== -->
+    <div id="hidden-cat-breeds" style="display: none;">
+        <h2>Справочник пород</h2>
+        <article class="breed-card">
+            <h3>Мейн-кун</h3>
+            <p>Крупная порода с пушистой шерстью и кисточками на ушах. Дружелюбны и умны.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Британская короткошерстная</h3>
+            <p>Плюшевая шерсть и круглые щеки. Спокойные и независимые.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Сфинкс</h3>
+            <p>Бесшерстная порода с теплой кожей. Очень активные и ласковые.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Бенгальская</h3>
+            <p>Пятнистый окрас, похожий на леопарда. Энергичные и любопытные.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Шотландская вислоухая</h3>
+            <p>Загнутые уши и спокойный характер. Любят сидеть на руках.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Сиамская</h3>
+            <p>Стройное телосложение и голубые глаза. Громкие и общительные.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Абиссинская</h3>
+            <p>Тикированный окрас. Очень активные и игривые.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Персидская</h3>
+            <p>Длинная шерсть и плоское лицо. Требуют ухода и любят покой.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Рэгдолл</h3>
+            <p>Очень ласковые и доверчивые, расслабляются на руках.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Манчкин</h3>
+            <p>Короткие лапы и длинное тело. Любопытные и игривые.</p>
+        </article>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: УХОД ЗА КОШКОЙ (ИНСТРУКЦИИ) -->
+    <!-- ========================================== -->
+    <div id="hidden-cat-care-guide" style="display: none;">
+        <h2>Руководство по уходу за котом</h2>
+        <section class="care-section">
+            <h3>1. Питание</h3>
+            <p>Кормите кота сбалансированным кормом 2 раза в день. Следите за наличием свежей воды.</p>
+        </section>
+        <section class="care-section">
+            <h3>2. Гигиена</h3>
+            <p>Регулярно чистите лоток. Вычесывайте шерсть 2-3 раза в неделю.</p>
+        </section>
+        <section class="care-section">
+            <h3>3. Здоровье</h3>
+            <p>Посещайте ветеринара ежегодно. Делайте прививки и обработку от паразитов.</p>
+        </section>
+        <section class="care-section">
+            <h3>4. Игры</h3>
+            <p>Играйте с котом минимум 15 минут в день. Это поддерживает его физическую форму.</p>
+        </section>
+        <section class="care-section">
+            <h3>5. Безопасность</h3>
+            <p>Уберите провода, химикаты и опасные растения из зоны доступа.</p>
+        </section>
+        <section class="care-section">
+            <h3>6. Внимание</h3>
+            <p>Уделяйте коту время. Ласка и общение важны для его психического здоровья.</p>
+        </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ТАБЛИЦЫ СРАВНЕНИЯ -->
+    <!-- ========================================== -->
+    <div id="hidden-comparison-tables" style="display: none;">
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Характеристика</th>
+                    <th>Кошка</th>
+                    <th>Человек</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Количество костей</td>
+                    <td>230</td>
+                    <td>206</td>
+                </tr>
+                <tr>
+                    <td>Частота пульса</td>
+                    <td>150 уд/мин</td>
+                    <td>70 уд/мин</td>
+                </tr>
+                <tr>
+                    <td>Сон</td>
+                    <td>16 часов</td>
+                    <td>8 часов</td>
+                </tr>
+                <tr>
+                    <td>Температура тела</td>
+                    <td>38-39°C</td>
+                    <td>36.6°C</td>
+                </tr>
+                <tr>
+                    <td>Продолжительность жизни</td>
+                    <td>15-20 лет</td>
+                    <td>70-80 лет</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Продолжение следует в части 6 -->    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: КОШАЧЬИ ПОРОДЫ (ПРОДОЛЖЕНИЕ) -->
+    <!-- ========================================== -->
+    <div id="hidden-more-breeds" style="display: none;">
+        <article class="breed-card">
+            <h3>Норвежская лесная</h3>
+            <p>Крепкое телосложение, пушистая шерсть. Отличные охотники.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Сибирская</h3>
+            <p>Крупная, с густым мехом. Гипоаллергенная порода, любит воду.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Курильский бобтейл</h3>
+            <p>Короткий хвост-помпон. Любит плавать и приносить игрушки.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Девон-рекс</h3>
+            <p>Кудрявая шерсть, большие уши. Очень активные и общительные.</p>
+        </article>
+        <article class="breed-card">
+            <h3>Бирманская</h3>
+            <p>Белоснежные лапы и голубые глаза. Ласковые и спокойные.</p>
+        </article>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: МИФЫ О КОТАХ -->
+    <!-- ========================================== -->
+    <div id="hidden-cat-myths" style="display: none;">
+        <h2>Мифы и правда о котах</h2>
+        <div class="myth-card">
+            <h4>Миф: Кошки не любят воду</h4>
+            <p>Правда: Некоторые породы (турецкий ван, мейн-кун) обожают плавать.</p>
+        </div>
+        <div class="myth-card">
+            <h4>Миф: Кошки всегда приземляются на лапы</h4>
+            <p>Правда: Это работает только при падении с небольшой высоты, при падении с большой высоты они могут травмироваться.</p>
+        </div>
+        <div class="myth-card">
+            <h4>Миф: Молоко полезно для кошек</h4>
+            <p>Правда: Большинство взрослых кошек не переносят лактозу, молоко может вызвать расстройство желудка.</p>
+        </div>
+        <div class="myth-card">
+            <h4>Миф: Кошки мстят хозяевам</h4>
+            <p>Правда: Они не способны на месть в человеческом понимании, их поведение связано со стрессом.</p>
+        </div>
+        <div class="myth-card">
+            <h4>Миф: У кошек девять жизней</h4>
+            <p>Правда: Это просто поговорка. Кошки имеют одну жизнь, но очень выносливы.</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: ПРАВИЛА ИГР -->
+    <!-- ========================================== -->
+    <div id="hidden-games-rules" style="display: none;">
+        <div class="game-rule">
+            <h3>Поймай мышку</h3>
+            <p>Нажимайте на мышек, которые появляются на экране. За каждую мышку вы получаете 1 очко. Игра длится 30 секунд.</p>
+        </div>
+        <div class="game-rule">
+            <h3>Найди пару</h3>
+            <p>Открывайте карточки и ищите одинаковые эмодзи. Найдите все 8 пар за минимальное количество ходов.</p>
+        </div>
+        <div class="game-rule">
+            <h3>Покорми кота</h3>
+            <p>Следите за шкалой голода. Нажимайте на кнопку "Дать рыбку", чтобы кот не остался голодным.</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ССЫЛКИ И РЕСУРСЫ -->
+    <!-- ========================================== -->
+    <div id="hidden-resources" style="display: none;">
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Пользовательское соглашение</a>
+        <a href="#">Карта сайта</a>
+        <a href="#">Контакты</a>
+        <a href="#">Обратная связь</a>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ СЧЕТЧИКИ И ИНДИКАТОРЫ -->
+    <!-- ========================================== -->
+    <div id="hidden-indicators" style="display: none;">
+        <div class="indicator" id="ind-loading">Загрузка...</div>
+        <div class="indicator" id="ind-offline">Нет соединения</div>
+        <div class="indicator" id="ind-online">Онлайн</div>
+        <div class="indicator" id="ind-error">Ошибка</div>
+        <div class="indicator" id="ind-success">Успех</div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ УВЕДОМЛЕНИЯ ДЛЯ ИГР -->
+    <!-- ========================================== -->
+    <div id="hidden-game-notifications" style="display: none;">
+        <div id="game-notif-start">Игра началась!</div>
+        <div id="game-notif-end">Игра окончена!</div>
+        <div id="game-notif-win">Вы победили!</div>
+        <div id="game-notif-lose">Вы проиграли!</div>
+        <div id="game-notif-record">Новый рекорд!</div>
+    </div>
+
+    <!-- Продолжение следует в части 7 -->    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ЭЛЕМЕНТЫ КАРТОЧЕК КОТОВ (ДЛЯ ОБЪЕМА И СЕО) -->
+    <!-- ========================================== -->
+    <div id="hidden-cat-details-db" style="display: none;">
+        <div class="cat-db-entry" data-id="1">
+            <h4>Мурзик</h4>
+            <p><strong>Порода:</strong> Дворовый</p>
+            <p><strong>Возраст:</strong> 3 года</p>
+            <p><strong>Характер:</strong> Ленивый, ласковый</p>
+            <p><strong>Любимая еда:</strong> Сметана</p>
+            <p><strong>Любимое занятие:</strong> Спать на клавиатуре</p>
+        </div>
+        <div class="cat-db-entry" data-id="2">
+            <h4>Барсик</h4>
+            <p><strong>Порода:</strong> Британская</p>
+            <p><strong>Возраст:</strong> 5 лет</p>
+            <p><strong>Характер:</strong> Активный, независимый</p>
+            <p><strong>Любимая еда:</strong> Мясо</p>
+            <p><strong>Любимое занятие:</strong> Ловить лазерную указку</p>
+        </div>
+        <div class="cat-db-entry" data-id="3">
+            <h4>Васька</h4>
+            <p><strong>Порода:</strong> Сибирская</p>
+            <p><strong>Возраст:</strong> 2 года</p>
+            <p><strong>Характер:</strong> Дружелюбный, шумный</p>
+            <p><strong>Любимая еда:</strong> Рыба</p>
+            <p><strong>Любимое занятие:</strong> Мурчать на ухо</p>
+        </div>
+        <div class="cat-db-entry" data-id="4">
+            <h4>Пушок</h4>
+            <p><strong>Порода:</strong> Персидская</p>
+            <p><strong>Возраст:</strong> 4 года</p>
+            <p><strong>Характер:</strong> Спокойный, пушистый</p>
+            <p><strong>Любимая еда:</strong> Влажный корм</p>
+            <p><strong>Любимое занятие:</strong> Сидеть на подоконнике</p>
+        </div>
+        <div class="cat-db-entry" data-id="5">
+            <h4>Снежок</h4>
+            <p><strong>Порода:</strong> Шотландская</p>
+            <p><strong>Возраст:</strong> 1 год</p>
+            <p><strong>Характер:</strong> Игривый, ласковый</p>
+            <p><strong>Любимая еда:</strong> Курица</p>
+            <p><strong>Любимое занятие:</strong> Гонять мячик</p>
+        </div>
+        <div class="cat-db-entry" data-id="6">
+            <h4>Тихон</h4>
+            <p><strong>Порода:</strong> Мейн-кун</p>
+            <p><strong>Возраст:</strong> 7 лет</p>
+            <p><strong>Характер:</strong> Хитрый, умный</p>
+            <p><strong>Любимая еда:</strong> Индейка</p>
+            <p><strong>Любимое занятие:</strong> Открывать дверцы шкафов</p>
+        </div>
+        <div class="cat-db-entry" data-id="7">
+            <h4>Мурка</h4>
+            <p><strong>Порода:</strong> Трехцветная</p>
+            <p><strong>Возраст:</strong> 3 года</p>
+            <p><strong>Характер:</strong> Нежная, спокойная</p>
+            <p><strong>Любимая еда:</strong> Молоко</p>
+            <p><strong>Любимое занятие:</strong> Спать на коленях</p>
+        </div>
+        <div class="cat-db-entry" data-id="8">
+            <h4>Рыжик</h4>
+            <p><strong>Порода:</strong> Дворовый</p>
+            <p><strong>Возраст:</strong> 2 года</p>
+            <p><strong>Характер:</strong> Энергичный, любопытный</p>
+            <p><strong>Любимая еда:</strong> Все, что плохо лежит</p>
+            <p><strong>Любимое занятие:</strong> Прыгать по шкафам</p>
+        </div>
+        <div class="cat-db-entry" data-id="9">
+            <h4>Гоша</h4>
+            <p><strong>Порода:</strong> Британская</p>
+            <p><strong>Возраст:</strong> 6 лет</p>
+            <p><strong>Характер:</strong> Серьезный, добрый</p>
+            <p><strong>Любимая еда:</strong> Говядина</p>
+            <p><strong>Любимое занятие:</strong> Наблюдать за птицами</p>
+        </div>
+        <div class="cat-db-entry" data-id="10">
+            <h4>Черныш</h4>
+            <p><strong>Порода:</strong> Бомбейская</p>
+            <p><strong>Возраст:</strong> 4 года</p>
+            <p><strong>Характер:</strong> Ночной, скрытный</p>
+            <p><strong>Любимая еда:</strong> Печень</p>
+            <p><strong>Любимое занятие:</strong> Охранять дом</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: НАГРАДЫ И СЕРТИФИКАТЫ -->
+    <!-- ========================================== -->
+    <div id="hidden-rewards" style="display: none;">
+        <div class="reward-card">
+            <h3>Сертификат "Начинающий кошатник"</h3>
+            <p>Выдается за первое достижение.</p>
+        </div>
+        <div class="reward-card">
+            <h3>Сертификат "Опытный кошатник"</h3>
+            <p>Выдается за 5 достижений.</p>
+        </div>
+        <div class="reward-card">
+            <h3>Сертификат "Мастер кошатник"</h3>
+            <p>Выдается за 10 достижений.</p>
+        </div>
+        <div class="reward-card">
+            <h3>Сертификат "Легендарный кошатник"</h3>
+            <p>Выдается за все достижения.</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ДАННЫЕ ДЛЯ ГРАФИКОВ -->
+    <!-- ========================================== -->
+    <div id="hidden-charts-data" style="display: none;">
+        <div id="chart-data-stats">
+            <span data-label="Мяу" data-value="0"></span>
+            <span data-label="Клики" data-value="0"></span>
+            <span data-label="Факты" data-value="0"></span>
+            <span data-label="Игры" data-value="0"></span>
+        </div>
+        <canvas id="stats-canvas" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Продолжение следует в части 8 -->    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: FAQ (ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ) -->
+    <!-- ========================================== -->
+    <div id="hidden-faq" style="display: none;">
+        <h2>Часто задаваемые вопросы</h2>
+        <details>
+            <summary>Почему кошки мурчат?</summary>
+            <p>Мурчание помогает кошкам успокоиться, а также способствует заживлению ран благодаря вибрациям.</p>
+        </details>
+        <details>
+            <summary>Сколько спят кошки?</summary>
+            <p>Взрослые кошки спят от 12 до 16 часов в сутки, котята могут спать до 20 часов.</p>
+        </details>
+        <details>
+            <summary>Почему кошки боятся огурцов?</summary>
+            <p>Это не страх перед огурцом, а испуг от неожиданного появления предмета в поле зрения.</p>
+        </details>
+        <details>
+            <summary>Можно ли кормить кошек собачьим кормом?</summary>
+            <p>Нет, в собачьем корме недостаточно таурина, необходимого для здоровья кошек.</p>
+        </details>
+        <details>
+            <summary>Как понять, что кошка вас любит?</summary>
+            <p>Медленное моргание, мурчание, kneading (топтание лапками) и сон рядом с вами — признаки любви.</p>
+        </details>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: ТЕСТ НА КОШАТНИКА -->
+    <!-- ========================================== -->
+    <div id="hidden-cat-test" style="display: none;">
+        <h2>Тест: Насколько ты кошатник?</h2>
+        <form id="cat-test-form">
+            <div class="test-question">
+                <p>1. Что ты сделаешь, если кот разбил вазу?</p>
+                <label><input type="radio" name="q1" value="a"> Поржу и поглажу</label>
+                <label><input type="radio" name="q1" value="b"> Расстроюсь, но промолчу</label>
+                <label><input type="radio" name="q1" value="c"> Буду ругаться</label>
+            </div>
+            <div class="test-question">
+                <p>2. Как часто ты покупаешь коту игрушки?</p>
+                <label><input type="radio" name="q2" value="a"> Каждый поход в магазин</label>
+                <label><input type="radio" name="q2" value="b"> Раз в месяц</label>
+                <label><input type="radio" name="q2" value="c"> У него и так есть всё</label>
+            </div>
+            <div class="test-question">
+                <p>3. Твой кот спит на подушке, а ты?</p>
+                <label><input type="radio" name="q3" value="a"> Сплю на краю кровати</label>
+                <label><input type="radio" name="q3" value="b"> Сплю на полу</label>
+                <label><input type="radio" name="q3" value="c"> Сгоняю кота</label>
+            </div>
+            <button type="submit" class="primary-action-button">Узнать результат</button>
+        </form>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: СТАТИСТИКА (ПОЛЬЗОВАТЕЛЬСКАЯ) -->
+    <!-- ========================================== -->
+    <div id="hidden-user-stats" style="display: none;">
+        <div class="user-stat-item">
+            <span class="stat-title">Всего кликов:</span>
+            <span class="stat-data" id="user-total-clicks">0</span>
+        </div>
+        <div class="user-stat-item">
+            <span class="stat-title">Мяуканий:</span>
+            <span class="stat-data" id="user-total-meows">0</span>
+        </div>
+        <div class="user-stat-item">
+            <span class="stat-title">Фактов прочитано:</span>
+            <span class="stat-data" id="user-total-facts">0</span>
+        </div>
+        <div class="user-stat-item">
+            <span class="stat-title">Игр сыграно:</span>
+            <span class="stat-data" id="user-total-games">0</span>
+        </div>
+        <div class="user-stat-item">
+            <span class="stat-title">Достижений:</span>
+            <span class="stat-data" id="user-total-achievements">0</span>
+        </div>
+        <button id="reset-stats-btn" class="secondary-action-button">Сбросить статистику</button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: КОШАЧЬИ РЕКОРДЫ (ГИННЕС) -->
+    <!-- ========================================== -->
+    <div id="hidden-guinness-records" style="display: none;">
+        <h2>Кошачьи рекорды</h2>
+        <div class="record-item">
+            <h3>Самая длинная шерсть</h3>
+            <p>Кот по кличке Полковник Мяу имеет шерсть длиной 22.87 см.</p>
+        </div>
+        <div class="record-item">
+            <h3>Самый громкий мурчащий кот</h3>
+            <p>Мерлин мурчит с громкостью 67.8 дБ.</p>
+        </div>
+        <div class="record-item">
+            <h3>Самое большое количество котят</h3>
+            <p>Кошка по кличке Дастин родила 19 котят в одном помете.</p>
+        </div>
+        <div class="record-item">
+            <h3>Самый старый кот</h3>
+            <p>Кот Крим Пафф прожил 38 лет и 3 дня.</p>
+        </div>
+        <div class="record-item">
+            <h3>Самый богатый кот</h3>
+            <p>Кот Блэки унаследовал 7 миллионов фунтов стерлингов.</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ПРАВИЛА ИГР И ПОМОЩЬ -->
+    <!-- ========================================== -->
+    <div id="hidden-game-help" style="display: none;">
+        <p>Используйте мышь или палец для кликов по экрану.</p>
+        <p>В игре "Поймай мышку" старайтесь кликать точно по мышкам.</p>
+        <p>В игре "Найди пару" запоминайте расположение карточек.</p>
+        <p>В викторине выбирайте правильный ответ из предложенных вариантов.</p>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- МОДАЛЬНОЕ ОКНО: КОШАЧИЙ ФАКТ ДНЯ -->
+    <!-- ========================================== -->
+    <div id="modal-fact-of-day" class="modal-overlay hidden" style="display: none;">
+        <div class="modal-content-box">
+            <h3 class="modal-title">🌟 Факт дня</h3>
+            <p id="fact-of-day-text">Загрузка факта...</p>
+            <button class="primary-action-button" onclick="document.getElementById('modal-fact-of-day').classList.add('hidden'); document.getElementById('modal-fact-of-day').style.display='none';">Отлично!</button>
+        </div>
+    </div>
+
+    <!-- Продолжение следует в части 9 -->    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: СТАТЬИ О КОТАХ -->
+    <!-- ========================================== -->
+    <div id="hidden-articles" style="display: none;">
+        <article class="blog-post">
+            <h2>Как понять своего кота?</h2>
+            <p>Кошки общаются с помощью языка тела, звуков и запахов. Например, если кот медленно моргает, глядя на вас, это значит, что он вам доверяет и чувствует себя в безопасности.</p>
+            <p>Хвост трубой означает радость и приветствие. Если же хвост дергается, кот раздражен. Уши, прижатые к голове, — признак страха или агрессии.</p>
+        </article>
+        <article class="blog-post">
+            <h2>Почему кошки любят коробки?</h2>
+            <p>Коробки дают кошкам чувство безопасности и защищенности. В замкнутом пространстве они чувствуют себя в укрытии от хищников. Кроме того, картон помогает им сохранять тепло.</p>
+            <p>Также коробки помогают кошкам справляться со стрессом в новой обстановке. Если вы принесли домой нового кота, поставьте ему коробку — он быстро адаптируется.</p>
+        </article>
+        <article class="blog-post">
+            <h2>Игры с кошками: важно и нужно</h2>
+            <p>Игры не только развлекают кошку, но и поддерживают её физическую форму и психическое здоровье. Игрушки должны имитировать добычу: мышки, птички, лазерные указки.</p>
+            <p>Важно давать кошке возможность "поймать" добычу, иначе она может расстроиться. Завершайте игру лакомством или кормлением.</p>
+        </article>
+        <article class="blog-post">
+            <h2>Правильное питание кошек</h2>
+            <p>Кошки — облигатные хищники, им нужен белок животного происхождения. В рационе должно быть мясо, а не только сухой корм с злаками.</p>
+            <p>Следите за количеством воды в миске. Кошки пьют мало, поэтому влажный корм помогает поддерживать водный баланс.</p>
+        </article>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: КОШАЧЬИ ИМЕНА (ГЕНЕРАТОР) -->
+    <!-- ========================================== -->
+    <div id="hidden-cat-names" style="display: none;">
+        <ul class="names-list">
+            <li>Мурзик</li>
+            <li>Барсик</li>
+            <li>Васька</li>
+            <li>Пушок</li>
+            <li>Снежок</li>
+            <li>Тихон</li>
+            <li>Мурка</li>
+            <li>Рыжик</li>
+            <li>Гоша</li>
+            <li>Черныш</li>
+            <li>Дымок</li>
+            <li>След</li>
+            <li>Клякса</li>
+            <li>Барс</li>
+            <li>Леопольд</li>
+            <li>Матроскин</li>
+            <li>Том</li>
+            <li>Гарфилд</li>
+            <li>Бегемот</li>
+            <li>Саймон</li>
+            <li>Соня</li>
+            <li>Ласка</li>
+            <li>Облачко</li>
+            <li>Неженка</li>
+            <li>Ворчун</li>
+            <li>Уголёк</li>
+            <li>Тигр</li>
+            <li>Следопыт</li>
+        </ul>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ СЧЕТЧИКИ И ПРОГРЕСС-БАРЫ -->
+    <!-- ========================================== -->
+    <div id="hidden-progress-bars" style="display: none;">
+        <div class="progress-container">
+            <label>Прогресс к достижению "Кошатник"</label>
+            <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+        </div>
+        <div class="progress-container">
+            <label>Прогресс к достижению "Эрудит"</label>
+            <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+        </div>
+        <div class="progress-container">
+            <label>Прогресс к достижению "Охотник"</label>
+            <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ УВЕДОМЛЕНИЯ ОБ ОШИБКАХ -->
+    <!-- ========================================== -->
+    <div id="hidden-error-messages" style="display: none;">
+        <div class="error-msg" id="err-404">Ошибка 404: Страница не найдена</div>
+        <div class="error-msg" id="err-500">Ошибка 500: Внутренняя ошибка сервера</div>
+        <div class="error-msg" id="err-network">Ошибка сети: Проверьте подключение</div>
+        <div class="error-msg" id="err-audio">Аудио не поддерживается вашим браузером</div>
+        <div class="error-msg" id="err-localstorage">Хранилище недоступно</div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ КНОПКИ ДЛЯ ТЕСТИРОВАНИЯ -->
+    <!-- ========================================== -->
+    <div id="hidden-debug-buttons" style="display: none;">
+        <button id="debug-add-meow">+1 Мяу</button>
+        <button id="debug-add-click">+1 Клик</button>
+        <button id="debug-add-fact">+1 Факт</button>
+        <button id="debug-reset-all">Сбросить всё</button>
+        <button id="debug-unlock-ach">Открыть все ачивки</button>
+        <button id="debug-max-stats">Макс. статистика</button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ДОПОЛНИТЕЛЬНЫЕ ВИДЖЕТЫ -->
+    <!-- ========================================== -->
+    <div id="hidden-widgets" style="display: none;">
+        <div class="widget-weather">
+            <h4>Погода для кота</h4>
+            <p>Идеальная температура для сна: +22°C</p>
+        </div>
+        <div class="widget-clock">
+            <h4>Кошачье время</h4>
+            <p id="cat-clock">00:00</p>
+        </div>
+        <div class="widget-quote">
+            <h4>Цитата дня</h4>
+            <p>«Время, проведенное с кошкой, никогда не считается потраченным зря» — Зигмунд Фрейд</p>
+        </div>
+    </div>
+
+    <!-- Продолжение следует в части 10 -->    <!-- ========================================== -->
+    <!-- СКРЫТАЯ СЕКЦИЯ: КОШАЧЬИ ПРАЗДНИКИ -->
+    <!-- ========================================== -->
+    <div id="hidden-cat-holidays" style="display: none;">
+        <ul class="holidays-list">
+            <li><strong>1 марта</strong> — Всемирный день кошек</li>
+            <li><strong>4 июня</strong> — Всемирный день защиты кошек</li>
+            <li><strong>8 августа</strong> — Международный день кошек</li>
+            <li><strong>29 октября</strong> — Национальный день кошек в США</li>
+            <li><strong>17 ноября</strong> — День черных кошек</li>
+        </ul>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ИНСТРУКЦИИ ПО БЕЗОПАСНОСТИ -->
+    <!-- ========================================== -->
+    <div id="hidden-safety-instructions" style="display: none;">
+        <h2>Безопасность кота в доме</h2>
+        <ul>
+            <li>Уберите провода, чтобы кот не перегрыз их.</li>
+            <li>Закройте окна москитными сетками.</li>
+            <li>Уберите токсичные растения (лилии, диффенбахии).</li>
+            <li>Спрячьте бытовую химию в закрытые шкафы.</li>
+            <li>Не оставляйте мелкие предметы на виду.</li>
+        </ul>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ РЕСУРСЫ (КАРТИНКИ, ИКОНКИ) -->
+    <!-- ========================================== -->
+    <div id="hidden-assets" style="display: none;">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" alt="Кот 1">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐈</text></svg>" alt="Кот 2">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐈‍⬛</text></svg>" alt="Кот 3">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" alt="Лапка">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐟</text></svg>" alt="Рыбка">
+        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧶</text></svg>" alt="Клубок">
+    </div>
+
+    <!-- ========================================== -->
+    <!-- МОДАЛЬНОЕ ОКНО: ОБРАТНАЯ СВЯЗЬ -->
+    <!-- ========================================== -->
+    <div id="modal-feedback" class="modal-overlay hidden" style="display: none;">
+        <div class="modal-content-box">
+            <h3 class="modal-title">📬 Обратная связь</h3>
+            <form id="feedback-form-modal">
+                <input type="text" placeholder="Ваше имя" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                <input type="email" placeholder="Ваш Email" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                <textarea placeholder="Ваше сообщение" rows="4" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+                <button type="submit" class="primary-action-button" style="width: 100%;">Отправить</button>
+            </form>
+            <button class="secondary-action-button" onclick="document.getElementById('modal-feedback').classList.add('hidden'); document.getElementById('modal-feedback').style.display='none';" style="margin-top: 10px; width: 100%;">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- МОДАЛЬНОЕ ОКНО: КОШАЧИЙ ПРОФИЛЬ -->
+    <!-- ========================================== -->
+    <div id="modal-cat-profile" class="modal-overlay hidden" style="display: none;">
+        <div class="modal-content-box">
+            <h3 class="modal-title">🐱 Профиль кота</h3>
+            <div id="cat-profile-content" style="text-align: center;">
+                <div style="font-size: 80px;">🐱</div>
+                <h4>Имя кота</h4>
+                <p>Описание кота</p>
+            </div>
+            <button class="secondary-action-button" onclick="document.getElementById('modal-cat-profile').classList.add('hidden'); document.getElementById('modal-cat-profile').style.display='none';" style="margin-top: 15px; width: 100%;">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ЗАВЕРШЕНИЕ ФАЙЛА (ТЕГИ) -->
+    <!-- ========================================== -->
+    <script src="script.js"></script>
 </body>
 </html>
